@@ -1,0 +1,21 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base{
+
+  @font-face {
+    font-family: 'poppins';
+    src: url(../fonts/Poppins-Regular.ttf) format(truetype);
+  }
+  @font-face {
+    font-family: 'poppins_bold';
+    src: url(../fonts/Poppins-Bold.ttf) format(truetype);
+  }
+  @font-face {
+    font-family: 'mona';
+    src: url(../fonts/Mona-Sans-Regular.ttf) format(truetype);
+  }
+
+}
