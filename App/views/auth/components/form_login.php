@@ -21,7 +21,7 @@
                 <input type="password" required id="password" name="password" placeholder="****"
                     class=" w-11/12 md:w-4/5 border px-3 py-1 rounded  border-slate-500 pw max-sm:text-sm ">
                 <button type="button" class=" border-slate-700 border  px-2 rounded viewPass ">
-                    <img src="<?= BASEURL; ?>/icons/view.png" width="20" height="20" alt="">
+                    <img src="<?= BASEURL; ?>/icons/icons-view.png" width="20" height="20" alt="">
                 </button>
             </div>
         </section>

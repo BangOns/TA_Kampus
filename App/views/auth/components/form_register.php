@@ -40,7 +40,7 @@
                     <input type="password" id="password" required name="password" placeholder="****"
                         class="  border px-3 py-1 rounded  border-slate-500 pw max-sm:text-sm w-11/12">
                     <button type="button" class="viewPass border-slate-700 border  px-2 rounded ">
-                        <img src="<?= BASEURL; ?>/icons/view.png" width="20" height="20" alt="">
+                        <img src="<?= BASEURL; ?>/icons/icons-view.png" width="20" height="20" alt="">
                     </button>
                 </div>
                 <p class="text-xs md:text-[8px] lg:text-xs text-slate-500"><span class="text-red-500">*</span>Mengandung
@@ -54,7 +54,7 @@
                     <input type="password" id="repassword" required name="repassword" placeholder="****"
                         class="  border px-3 py-1 rounded  border-slate-500 repw max-sm:text-sm w-11/12">
                     <button type="button" class="viewRePass border-slate-700 border  px-2 rounded ">
-                        <img src="<?= BASEURL; ?>/icons/view.png" class="" width="20" height="20" alt="">
+                        <img src="<?= BASEURL; ?>/icons/icons-view.png" class="" width="20" height="20" alt="">
                     </button>
                 </div>
             </section>
