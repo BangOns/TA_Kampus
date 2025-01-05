@@ -13,17 +13,17 @@ class Dashboard extends Controller
             [
                 'title' => 'Data Santri',
                 'icon' => 'icons-santri.svg',
-                'link' => BASEURL . '/dashboard'
+                'link' => BASEURL . '/data-santri'
             ],
             [
                 'title' => 'Data Pelanggaran',
                 'icon' => 'icons-pelanggaran.svg',
-                'link' => BASEURL . '/dashboard'
+                'link' => BASEURL . '/data-pelanggaran'
             ],
             [
                 'title' => 'Data Sanksi',
                 'icon' => 'icons-sanksi.svg',
-                'link' => BASEURL . '/dashboard'
+                'link' => BASEURL . '/data-sanksi'
             ],
 
 
