@@ -61,29 +61,29 @@ $list_settings_navbar = [
         </figure>
     </section>
     <nav class=" w-full basis-5/6 flex flex-col justify-between">
-        <ul class=" flex flex-col gap-3 basis-4/5  md:px-2 ">
+        <ul class=" flex flex-col gap-4 basis-4/5  md:px-2 ">
             <?php foreach ($list_navbar as $list) : ?>
-            <li class="basis-[11%] w-full h-full ">
-                <a href="<?= $list['link'] ?>"
-                    class="hover:text-white max-lg:text-sm text-black hover:bg-slate-600 transition-all  h-full rounded-full px-2 items-center flex gap-3  <?= str_contains($list['title'], $data['title']) ? 'text-white bg-black' : "text-black bg-transparent" ?> ">
-                    <?php include dirname(__DIR__, 4)  . '/public/icons/' . $list['icon']; ?>
-                    <?= $list['title'] ?></a>
-            </li>
+                <li class=" w-full h-fit  ">
+                    <a href="<?= $list['link'] ?>"
+                        class="hover:text-white max-lg:text-sm text-black hover:bg-slate-600 transition-all  h-full rounded-full p-3 items-center flex gap-3  <?= str_contains($list['title'], $data['title']) ? 'text-white bg-black' : "text-black bg-transparent" ?> ">
+                        <?php include dirname(__DIR__, 4)  . '/public/icons/' . $list['icon']; ?>
+                        <?= $list['title'] ?></a>
+                </li>
             <?php endforeach; ?>
         </ul>
 
         <section class="flex flex-col w-full basis-2/12 gap-3 px-2">
             <?php foreach ($list_settings_navbar as $list) : ?>
 
-            <a href="<?= $list['link'] ?>/2" class="flex  gap-3 items-center  text-black text-sm py-2 px-2 rounded-lg  
+                <a href="<?= $list['link'] ?>/2" class="flex  gap-3 items-center  text-black text-sm py-2 px-2 rounded-lg  
             hover:text-white 
             transition-all  
              <?= str_contains($list['title'], $data['title']) ? ($list['title'] === 'Logout' ? "bg-red-600 text-white" : "bg-sky-600 text-white") : "text-black bg-transparent" ?> 
             <?= $list['title'] === 'Logout' ? "hover:bg-red-600" : "hover:bg-sky-600" ?> "
-                onclick=" <?= $list['title'] === 'Logout' ? ' confirm(\'Are you sure want to logout?\')' : '' ?>">
-                <?php include dirname(__DIR__, 4)  . '/public/icons/' . $list['icon']; ?>
-                <?= $list['title'] ?>
-            </a>
+                    onclick=" <?= $list['title'] === 'Logout' ? ' confirm(\'Are you sure want to logout?\')' : '' ?>">
+                    <?php include dirname(__DIR__, 4)  . '/public/icons/' . $list['icon']; ?>
+                    <?= $list['title'] ?>
+                </a>
             <?php endforeach; ?>
 
 
@@ -92,13 +92,13 @@ $list_settings_navbar = [
 </header>
 
 <script>
-const ContainerNavbar = document.querySelector('.container-navbar');
+    const ContainerNavbar = document.querySelector('.container-navbar');
 
-function handleMenuCloseNavbar() {
-    ContainerNavbar.classList.add('max-md:-translate-x-full');
-}
+    function handleMenuCloseNavbar() {
+        ContainerNavbar.classList.add('max-md:-translate-x-full');
+    }
 
-function handleMenuOpenNavbar() {
-    ContainerNavbar.classList.remove('max-md:-translate-x-full');
-}
+    function handleMenuOpenNavbar() {
+        ContainerNavbar.classList.remove('max-md:-translate-x-full');
+    }
 </script>
