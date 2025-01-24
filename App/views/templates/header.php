@@ -8,4 +8,4 @@
     <title><?= $data['title']; ?></title>
 </head>
 
-<body class="bg-slate-100">
+<body class="bg-white">

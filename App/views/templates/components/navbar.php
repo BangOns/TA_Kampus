@@ -36,8 +36,8 @@ $list_settings_navbar = [
 ];
 ?>
 <header
-    class=" max-md:w-full transition-all max-md:pr-2 max-md:-translate-x-full  lg:w-64 bg-slate-300  fixed h-screen  font-poppins pl-5 lg:pl-8 pt-6 pb-3 flex flex-col justify-between container-navbar ">
-    <section class="w-full flex items-center">
+    class=" max-md:w-full transition-all max-md:pr-2 max-md:-translate-x-full  lg:w-64 bg-slate-300  fixed h-screen  font-poppins pl-3 pt-6 pb-3 flex flex-col justify-between container-navbar ">
+    <section class="w-full flex items-center md:pl-2">
         <a href="<?= BASEURL ?>/dashboard" class="w-full flex gap-2 items-center">
             <img src="<?= BASEURL; ?>/icons/icons-logo.svg" width="40" height="40  alt="">
             <figcaption class=" font-semibold">Logo Test</figcaption>
@@ -61,9 +61,9 @@ $list_settings_navbar = [
         </figure>
     </section>
     <nav class=" w-full basis-5/6 flex flex-col justify-between">
-        <ul class=" flex flex-col gap-4 basis-4/5  md:px-2 ">
+        <ul class=" flex flex-col gap-4 basis-4/5  md:pl-2 md:pr-6 ">
             <?php foreach ($list_navbar as $list) : ?>
-                <li class=" w-full h-fit  ">
+                <li class=" w-fit md:w-full h-fit  ">
                     <a href="<?= $list['link'] ?>"
                         class="hover:text-white max-lg:text-sm text-black hover:bg-slate-600 transition-all  h-full rounded-full p-3 items-center flex gap-3  <?= str_contains($list['title'], $data['title']) ? 'text-white bg-black' : "text-black bg-transparent" ?> ">
                         <?php include dirname(__DIR__, 4)  . '/public/icons/' . $list['icon']; ?>

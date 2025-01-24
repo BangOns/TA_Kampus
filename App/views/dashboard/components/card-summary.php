@@ -1,7 +1,7 @@
 <article
-    class="w-full flex gap-3 mt-5 justify-around md:justify-center lg:justify-between items-center font-poppins max-lg:flex-wrap ">
+    class="w-full flex gap-5 md:gap-3 mt-5 justify-around md:justify-center lg:justify-between items-center font-poppins max-lg:flex-wrap ">
     <section
-        class=" basis-full sm:basis-2/5 md:basis-2/5 lg:basis-1/4 w-full lg:w-full bg-slate-50 p-4 rounded-lg shadow-lg">
+        class=" basis-full sm:basis-2/5 md:basis-2/5 lg:basis-1/4 w-full lg:w-full bg-slate-50 p-4 rounded-lg shadow-lg border">
         <header class="w-full ">
             <h1 class="max-lg:text-sm">Card 1</h1>
         </header>
@@ -13,7 +13,7 @@
         </section>
     </section>
     <section
-        class=" basis-full sm:basis-2/5 md:basis-2/5 lg:basis-1/4 w-full lg:w-full bg-slate-50 p-4 rounded-lg shadow-lg">
+        class=" basis-full sm:basis-2/5 md:basis-2/5 lg:basis-1/4 w-full lg:w-full bg-slate-50 p-4 rounded-lg shadow-lg border">
         <header class="w-full ">
             <h1 class="max-lg:text-sm">Card 1</h1>
         </header>
@@ -25,7 +25,7 @@
         </section>
     </section>
     <section
-        class=" basis-full sm:basis-2/5 md:basis-2/5 lg:basis-1/4 w-full lg:w-full bg-slate-50 p-4 rounded-lg shadow-lg">
+        class=" basis-full sm:basis-2/5 md:basis-2/5 lg:basis-1/4 w-full lg:w-full bg-slate-50 p-4 rounded-lg shadow-lg border">
         <header class="w-full ">
             <h1 class="max-lg:text-sm">Card 1</h1>
         </header>
@@ -37,7 +37,7 @@
         </section>
     </section>
     <section
-        class=" basis-full sm:basis-2/5 md:basis-2/5 lg:basis-1/4 w-full lg:w-full bg-slate-50 p-4 rounded-lg shadow-lg">
+        class=" basis-full sm:basis-2/5 md:basis-2/5 lg:basis-1/4 w-full lg:w-full bg-slate-50 p-4 rounded-lg shadow-lg border">
         <header class="w-full ">
             <h1 class="max-lg:text-sm">Card 1</h1>
         </header>
@@ -48,4 +48,5 @@
             <p class="text-sm">Murid</p>
         </section>
     </section>
+
 </article>
