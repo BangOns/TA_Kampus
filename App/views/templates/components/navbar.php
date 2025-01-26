@@ -35,53 +35,58 @@ $list_settings_navbar = [
 
 ];
 ?>
+<?php include __DIR__ . '/navbar-top.php'; ?>
 <header
-    class=" max-md:w-full transition-all max-md:pr-2 max-md:-translate-x-full  lg:w-64 bg-slate-300  fixed h-screen  font-poppins pl-3 pt-6 pb-3 flex flex-col justify-between container-navbar ">
-    <section class="w-full flex items-center md:pl-2">
+    class=" top-0 max-md:w-full transition-all max-md:pr-2 max-md:-translate-x-full  lg:w-64   fixed h-screen  font-poppins pl-3 pt-6 pb-3 md:mt-10 flex flex-col gap-3 container-navbar md:bg-white bg-slate-300">
+    <section class="w-full flex md:hidden items-center ">
         <a href="<?= BASEURL ?>/dashboard" class="w-full flex gap-2 items-center">
-            <img src="<?= BASEURL; ?>/icons/icons-logo.svg" width="40" height="40  alt="">
-            <figcaption class=" font-semibold">Logo Test</figcaption>
+            <img src="<?= BASEURL; ?>/icons/icons-logo.svg" width="30" height="30" alt="">
+            <figcaption class="text-sm font-semibold">Logo Test</figcaption>
         </a>
         <button onclick="handleMenuCloseNavbar()"
             class="block md:hidden w-fit bg-slate-50 h-fit p-1  rounded-full hover:shadow-lg ">
-            <div class="w-5 h-5 ">
-
+            <div class="size-4 ">
                 <?php include_once dirname(__DIR__, 4) . '/public/icons/icons-close.svg'; ?>
             </div>
         </button>
     </section>
-    <section class="w-full md:hidden block">
+    <section class="w-full  block">
         <figure class="w-full   flex gap-2 ">
-            <img src="<?= BASEURL  ?>/img/image-profile.png" alt="profile" width="40" height="40"
-                class="object-cover size-10">
+            <img src="<?= BASEURL  ?>/img/image-profile.png" alt="profile" width="30" height="30"
+                class="object-cover size-9 md:size-10">
             <figcaption class="font-poppins ">
-                <h2 class="text-sm">Syahroni </h2>
+                <h2 class="text-sm font-semibold">Syahroni </h2>
                 <p class="text-xs font-light text-slate-400">admin</p>
             </figcaption>
         </figure>
     </section>
-    <nav class=" w-full basis-5/6 flex flex-col justify-between">
-        <ul class=" flex flex-col gap-4 basis-4/5  md:pl-2 md:pr-6 ">
+    <nav class=" w-full basis-5/6 flex flex-col gap-2">
+        <ul class=" flex flex-col gap-3  md:pl-2 md:pr-6 ">
             <?php foreach ($list_navbar as $list) : ?>
-                <li class=" w-fit md:w-full h-fit  ">
+                <li class=" w-full h-fit  ">
                     <a href="<?= $list['link'] ?>"
-                        class="hover:text-white max-lg:text-sm text-black hover:bg-slate-600 transition-all  h-full rounded-full p-3 items-center flex gap-3  <?= str_contains($list['title'], $data['title']) ? 'text-white bg-black' : "text-black bg-transparent" ?> ">
-                        <?php include dirname(__DIR__, 4)  . '/public/icons/' . $list['icon']; ?>
-                        <?= $list['title'] ?></a>
+                        class=" group text-xs sm:text-sm text-black hover:bg-slate-200 transition-all  h-full rounded p-2  items-center flex gap-2 font-semibold <?= str_contains($list['title'], $data['title']) ? ' bg-slate-200' : " bg-transparent" ?> ">
+                        <div class="size-5 group-hover:font-bold">
+                            <?php include dirname(__DIR__, 4)  . '/public/icons/' . $list['icon']; ?>
+                        </div>
+                        <?= $list['title'] ?>
+                    </a>
                 </li>
             <?php endforeach; ?>
         </ul>
 
-        <section class="flex flex-col w-full basis-2/12 gap-3 px-2">
+        <section class=" flex flex-col w-full gap-2 md:pl-2 ">
             <?php foreach ($list_settings_navbar as $list) : ?>
 
-                <a href="<?= $list['link'] ?>/2" class="flex  gap-3 items-center  text-black text-sm py-2 px-2 rounded-lg  
+                <a href="<?= $list['link'] ?>/2" class="flex  gap-2 items-center  text-black text-xs sm:text-sm py-2 px-2 rounded font-semibold
             hover:text-white 
             transition-all  
              <?= str_contains($list['title'], $data['title']) ? ($list['title'] === 'Logout' ? "bg-red-600 text-white" : "bg-sky-600 text-white") : "text-black bg-transparent" ?> 
             <?= $list['title'] === 'Logout' ? "hover:bg-red-600" : "hover:bg-sky-600" ?> "
                     onclick=" <?= $list['title'] === 'Logout' ? ' confirm(\'Are you sure want to logout?\')' : '' ?>">
-                    <?php include dirname(__DIR__, 4)  . '/public/icons/' . $list['icon']; ?>
+                    <div class="size-5 group-hover:font-bold">
+                        <?php include dirname(__DIR__, 4)  . '/public/icons/' . $list['icon']; ?>
+                    </div>
                     <?= $list['title'] ?>
                 </a>
             <?php endforeach; ?>
