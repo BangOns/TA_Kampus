@@ -572,50 +572,40 @@ video {
   src: url(../fonts/Mona-Sans-Regular.ttf) format(truetype);
 }
 
-.container {
-  width: 100%;
+.visible {
+  visibility: visible;
 }
 
-@media (min-width: 640px) {
-  .container {
-    max-width: 640px;
-  }
-}
-
-@media (min-width: 768px) {
-  .container {
-    max-width: 768px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .container {
-    max-width: 1024px;
-  }
-}
-
-@media (min-width: 1280px) {
-  .container {
-    max-width: 1280px;
-  }
-}
-
-@media (min-width: 1536px) {
-  .container {
-    max-width: 1536px;
-  }
+.invisible {
+  visibility: hidden;
 }
 
 .fixed {
   position: fixed;
 }
 
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
+}
+
 .top-0 {
   top: 0px;
 }
 
+.left-0 {
+  left: 0px;
+}
+
 .z-\[1\] {
   z-index: 1;
+}
+
+.z-10 {
+  z-index: 10;
 }
 
 .my-3 {
@@ -638,14 +628,6 @@ video {
 
 .mt-5 {
   margin-top: 1.25rem;
-}
-
-.mt-9 {
-  margin-top: 2.25rem;
-}
-
-.mt-2 {
-  margin-top: 0.5rem;
 }
 
 .block {
@@ -689,10 +671,6 @@ video {
   height: 2.25rem;
 }
 
-.h-5 {
-  height: 1.25rem;
-}
-
 .h-\[1px\] {
   height: 1px;
 }
@@ -726,8 +704,8 @@ video {
   width: 91.666667%;
 }
 
-.w-5 {
-  width: 1.25rem;
+.w-20 {
+  width: 5rem;
 }
 
 .w-fit {
@@ -751,18 +729,6 @@ video {
   flex-basis: 50%;
 }
 
-.basis-1\/3 {
-  flex-basis: 33.333333%;
-}
-
-.basis-2\/12 {
-  flex-basis: 16.666667%;
-}
-
-.basis-4\/5 {
-  flex-basis: 80%;
-}
-
 .basis-5\/6 {
   flex-basis: 83.333333%;
 }
@@ -773,6 +739,18 @@ video {
 
 .table-auto {
   table-layout: auto;
+}
+
+.scale-0 {
+  --tw-scale-x: 0;
+  --tw-scale-y: 0;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.scale-100 {
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .flex-row-reverse {
@@ -964,6 +942,10 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
 }
 
+.bg-black\/50 {
+  background-color: rgb(0 0 0 / 0.5);
+}
+
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
@@ -981,8 +963,9 @@ video {
   padding: 1rem;
 }
 
-.p-3 {
-  padding: 0.75rem;
+.px-1 {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
 }
 
 .px-2 {
@@ -1116,6 +1099,11 @@ video {
   color: rgb(0 0 0 / var(--tw-text-opacity, 1));
 }
 
+.text-orange-300 {
+  --tw-text-opacity: 1;
+  color: rgb(253 186 116 / var(--tw-text-opacity, 1));
+}
+
 .text-red-500 {
   --tw-text-opacity: 1;
   color: rgb(239 68 68 / var(--tw-text-opacity, 1));
@@ -1156,6 +1144,26 @@ video {
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
 }
 
+.text-orange-500 {
+  --tw-text-opacity: 1;
+  color: rgb(249 115 22 / var(--tw-text-opacity, 1));
+}
+
+.text-sky-500 {
+  --tw-text-opacity: 1;
+  color: rgb(14 165 233 / var(--tw-text-opacity, 1));
+}
+
+.text-orange-400 {
+  --tw-text-opacity: 1;
+  color: rgb(251 146 60 / var(--tw-text-opacity, 1));
+}
+
+.text-yellow-500 {
+  --tw-text-opacity: 1;
+  color: rgb(234 179 8 / var(--tw-text-opacity, 1));
+}
+
 .underline {
   text-decoration-line: underline;
 }
@@ -1193,6 +1201,10 @@ video {
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
+}
+
+.duration-300 {
+  transition-duration: 300ms;
 }
 
 .duration-500 {
@@ -1307,10 +1319,6 @@ video {
     flex-wrap: wrap;
   }
 
-  .max-lg\:justify-between {
-    justify-content: space-between;
-  }
-
   .max-lg\:px-5 {
     padding-left: 1.25rem;
     padding-right: 1.25rem;
@@ -1389,6 +1397,10 @@ video {
 }
 
 @media (min-width: 640px) {
+  .sm\:right-7 {
+    right: 1.75rem;
+  }
+
   .sm\:h-3\/4 {
     height: 75%;
   }
@@ -1442,20 +1454,16 @@ video {
 }
 
 @media (min-width: 768px) {
+  .md\:top-6 {
+    top: 1.5rem;
+  }
+
   .md\:ml-56 {
     margin-left: 14rem;
   }
 
-  .md\:mt-9 {
-    margin-top: 2.25rem;
-  }
-
   .md\:mt-10 {
     margin-top: 2.5rem;
-  }
-
-  .md\:ml-52 {
-    margin-left: 13rem;
   }
 
   .md\:flex {
@@ -1548,6 +1556,10 @@ video {
 }
 
 @media (min-width: 1024px) {
+  .lg\:right-9 {
+    right: 2.25rem;
+  }
+
   .lg\:ml-64 {
     margin-left: 16rem;
   }

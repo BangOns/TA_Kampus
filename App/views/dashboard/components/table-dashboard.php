@@ -1,3 +1,30 @@
+<?php
+
+$dataPelanggar = [
+    [
+        'No' => 1,
+        'Nama Santri' => 'The Sliding Mr. Bones (Next Stop, Pottersville)',
+        'Pelanggaran' => 'Malcolm Lockyer',
+        'Kategori' => '1961',
+    ],
+    [
+        'No' => 2,
+        'Nama Santri' => 'The Bones (Next Stop, Pottersville)',
+        'Pelanggaran' => 'Malcolm ',
+        'Kategori' => '1961',
+    ],
+    [
+        'No' => 3,
+        'Nama Santri' => 'The Sliding Bones (Next Stop, Pottersville)',
+        'Pelanggaran' => 'Lockyer',
+        'Kategori' => '1961',
+    ],
+
+];
+
+
+?>
+
 <article class="w-full mt-10 font-poppins max-md:space-y-3 ">
     <header class="w-full flex items-center ">
         <section class="w-full md:basis-1/2">
@@ -58,21 +85,48 @@
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
-                    <tr class="bg-white">
-                        <td class="pl-2 py-3 w-">1</td>
-                        <td class="font-semibold">The Sliding Mr. Bones (Next Stop, Pottersville)</td>
-                        <td>Malcolm Lockyer</td>
-                        <td>1961</td>
-                        <td class="pr-1">
-                            <button class="size-5">
-                                <?php include dirname(__DIR__, 4) . '/public/icons/icons-menu-table.svg'; ?>
-                            </button>
+                    <?php foreach ($dataPelanggar as $index => $pelanggar) : ?>
 
-                        </td>
-                    </tr>
+                        <tr class="bg-white">
+                            <td class="pl-2 py-3 w-"> <?= $index + 1 ?> </td>
+                            <td class="font-semibold"><?= $pelanggar['Nama Santri'] ?></td>
+                            <td><?= $pelanggar['Pelanggaran'] ?></td>
+                            <td><?= $pelanggar['Kategori'] ?></td>
+                            <td class="pr-1 relative ">
+                                <div onclick="buttonToggleMenu('#menu-<?= $index ?>')" class="size-5 hover:cursor-pointer">
+                                    <?php include dirname(__DIR__, 4) . '/public/icons/icons-menu-table.svg'; ?>
+                                </div>
+                                <div id="menu-<?= $index ?>"
+                                    class="absolute invisible  scale-0 transition-all ease-in-out duration-300  w-20 sm:right-7 lg:right-9 md:top-6 space-y-2  border shadow bg-white rounded ">
+                                    <button
+                                        class="w-full text-sm px-1 py-2 text-sky-500 flex  items-center gap-2 hover:bg-slate-200">
+                                        <div class="size-4">
+                                            <?php include dirname(__DIR__, 4) . '/public/icons/icons-detail.svg'; ?>
+                                        </div>
+                                        Details
+                                    </button>
+                                    <button
+                                        class="w-full text-sm px-1 py-2 text-yellow-500 flex  items-center gap-2 hover:bg-slate-200">
+                                        <div class="size-4">
+                                            <?php include dirname(__DIR__, 4) . '/public/icons/icons-edit.svg'; ?>
+                                        </div>
+                                        Edit
+                                    </button>
+                                    <button
+                                        class="w-full text-sm px-1 py-2 text-red-500 flex  items-center gap-2 hover:bg-slate-200">
+                                        <div class="size-4">
+                                            <?php include dirname(__DIR__, 4) . '/public/icons/icons-delete.svg'; ?>
+                                        </div>
+                                        Delete
+                                    </button>
+
+
+                                </div>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
-            <!-- Pagination -->
 
             <!-- Card Pelanggar -->
             <section class=" w-full flex flex-col gap-4 sm:flex-row md:hidden">
@@ -98,6 +152,8 @@
 
     </section>
 </article>
+<!-- Pagination -->
+
 <section class=" my-3 font-poppins font-semibold ">
     <ul class="flex w-full justify-center  ">
         <!-- Cursor Left -->
@@ -123,7 +179,6 @@
                 class="flex w-full h-full items-center gap-2 text-xs md:text-sm px-3 py-2 hover:bg-slate-200 bg-white hover:cursor-pointer">
                 Next
                 <div class="size-4">
-
                     <?php include_once dirname(__DIR__, 4) . '/public/icons/icons-right.svg'; ?>
                 </div>
             </a>
