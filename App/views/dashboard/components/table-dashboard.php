@@ -1,24 +1,29 @@
 <?php
-
 $dataPelanggar = [
     [
         'No' => 1,
         'Nama Santri' => 'The Sliding Mr. Bones (Next Stop, Pottersville)',
         'Pelanggaran' => 'Malcolm Lockyer',
         'Kategori' => '1961',
+        'Sanksi' => 'Dicukur rambutnya'
     ],
     [
         'No' => 2,
         'Nama Santri' => 'The Bones (Next Stop, Pottersville)',
         'Pelanggaran' => 'Malcolm ',
         'Kategori' => '1961',
+        'Sanksi' => 'Dicukur rambutnya'
+
     ],
     [
         'No' => 3,
         'Nama Santri' => 'The Sliding Bones (Next Stop, Pottersville)',
         'Pelanggaran' => 'Lockyer',
         'Kategori' => '1961',
+        'Sanksi' => 'Dicukur rambutnya'
+
     ],
+
 
 ];
 
@@ -88,7 +93,7 @@ $dataPelanggar = [
                     <?php foreach ($dataPelanggar as $index => $pelanggar) : ?>
 
                         <tr class="bg-white">
-                            <td class="pl-2 py-3 w-"> <?= $index + 1 ?> </td>
+                            <td class="pl-2 py-3 "> <?= $index + 1 ?> </td>
                             <td class="font-semibold"><?= $pelanggar['Nama Santri'] ?></td>
                             <td><?= $pelanggar['Pelanggaran'] ?></td>
                             <td><?= $pelanggar['Kategori'] ?></td>
@@ -98,20 +103,20 @@ $dataPelanggar = [
                                 </div>
                                 <div id="menu-<?= $index ?>"
                                     class="absolute invisible  scale-0 transition-all ease-in-out duration-300  w-20 sm:right-7 lg:right-9 md:top-6 space-y-2  border shadow bg-white rounded ">
-                                    <button
-                                        class="w-full text-sm px-1 py-2 text-sky-500 flex  items-center gap-2 hover:bg-slate-200">
+                                    <a href="<?= BASEURL; ?>/dashboard/detail-data-pelanggaran-santri/<?= $pelanggar['No'] ?>"
+                                        class=" open-modals w-full text-sm px-1 py-2 text-sky-500 flex  items-center gap-2 hover:bg-slate-200">
                                         <div class="size-4">
                                             <?php include dirname(__DIR__, 4) . '/public/icons/icons-detail.svg'; ?>
                                         </div>
                                         Details
-                                    </button>
-                                    <button
+                                    </a>
+                                    <a href="<?= BASEURL; ?>/dashboard/edit-data-pelanggaran-santri/<?= $pelanggar['No'] ?>"
                                         class="w-full text-sm px-1 py-2 text-yellow-500 flex  items-center gap-2 hover:bg-slate-200">
                                         <div class="size-4">
                                             <?php include dirname(__DIR__, 4) . '/public/icons/icons-edit.svg'; ?>
                                         </div>
                                         Edit
-                                    </button>
+                                    </a>
                                     <button
                                         class="w-full text-sm px-1 py-2 text-red-500 flex  items-center gap-2 hover:bg-slate-200">
                                         <div class="size-4">
@@ -130,22 +135,64 @@ $dataPelanggar = [
 
             <!-- Card Pelanggar -->
             <section class=" w-full flex flex-col gap-4 sm:flex-row md:hidden">
+                <?php foreach ($dataPelanggar as $index => $pelanggar) : ?>
 
-                <article class="w-full  divide-y divide-gray-200 border border-slate-300 rounded shadow">
-                    <div class="py-2"></div>
-                    <div class="py-2"></div>
-                    <div class="py-2"></div>
-                </article>
-                <article class="w-full  divide-y divide-gray-200 border border-slate-300 rounded shadow">
-                    <div class="py-2"></div>
-                    <div class="py-2"></div>
-                    <div class="py-2"></div>
-                </article>
-                <article class="w-full  divide-y divide-gray-200 border border-slate-300 rounded shadow">
-                    <div class="py-2"></div>
-                    <div class="py-2"></div>
-                    <div class="py-2"></div>
-                </article>
+                    <article class="w-full h-auto  border border-slate-300 rounded shadow px-3">
+                        <section class="py-2 ">
+                            <h1 class="font-semibold text-sm sm:text-base "><?= $pelanggar['Nama Santri'] ?></h1>
+                            <p class="text-xs text-slate-600">Kelas 3B | Tahun Ajaran 2023</p>
+                        </section>
+                        <section class="py-2 text-xs sm:text-sm">
+                            <table class="w-full table-collapse">
+                                <tbody class="divide-y divide-gray-200 w-full">
+                                    <tr>
+                                        <td class=" py-2">Kategori</td>
+                                        <td class="text-red-500 font-semibold"><?= $pelanggar['Pelanggaran'] ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2">Sanksi</td>
+                                        <td class="text-red-500 font-semibold">Dicukur rambutnya</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </section>
+                        <section class="py-2 h-auto">
+                            <button onclick="buttonToggleMenuMobile('#menu-mobile-<?= $index ?>')"
+                                class="w-full flex items-center justify-center gap-2  text-white py-2 text-xs sm:text-sm bg-black rounded ">View
+                                More Option
+                                <div class="size-4 text-white">
+
+                                    <?php include_once dirname(__DIR__, 4) . '/public/icons/icons-dropdown.svg'; ?>
+                                </div>
+                            </button>
+                            <section id="menu-mobile-<?= $index ?>"
+                                class="w-full hidden flex-col gap-2 p-2 border border-gray-300 rounded">
+                                <a href="<?= BASEURL; ?>/dashboard/detail-data-pelanggaran-santri/<?= $pelanggar['No'] ?>"
+                                    class="w-full text-sm px-1 py-2 text-sky-500 flex justify-center items-center gap-2 hover:bg-slate-200">
+                                    <div class="size-4">
+                                        <?php include dirname(__DIR__, 4) . '/public/icons/icons-detail.svg'; ?>
+                                    </div>
+                                    Details
+                                </a>
+                                <a href="<?= BASEURL; ?>/dashboard/edit-data-pelanggaran-santri/<?= $pelanggar['No'] ?>"
+                                    class="w-full text-sm px-1 py-2 text-yellow-500 flex justify-center items-center gap-2 hover:bg-slate-200">
+                                    <div class="size-4">
+                                        <?php include dirname(__DIR__, 4) . '/public/icons/icons-edit.svg'; ?>
+                                    </div>
+                                    Edit
+                                </a>
+                                <a href="<?= BASEURL; ?>/dashboard/detail-data-pelanggaran-santri/<?= $pelanggar['No'] ?>"
+                                    class="w-full text-sm px-1 py-2 text-red-500 flex justify-center items-center gap-2 hover:bg-slate-200">
+                                    <div class="size-4">
+                                        <?php include dirname(__DIR__, 4) . '/public/icons/icons-delete.svg'; ?>
+                                    </div>
+                                    Delete
+                                </a>
+                            </section>
+                        </section>
+                    </article>
+                <?php endforeach; ?>
+
             </section>
 
         </article>

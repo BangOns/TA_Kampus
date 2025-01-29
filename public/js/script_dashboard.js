@@ -16,6 +16,17 @@ function buttonToggleMenu(menu){
     }
     
 }
+function buttonToggleMenuMobile(menu){
+    
+    const menuElement = getElementExist(menu);
+    if(menuElement.classList.contains('hidden')){
+        menuElement.classList.remove('hidden');
+        menuElement.classList.add('flex');
+    }else{
+        menuElement.classList.remove('flex');
+        menuElement.classList.add('hidden');
+    }
+}
 
 
 //  get Element exist by table menu
