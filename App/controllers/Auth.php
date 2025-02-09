@@ -15,4 +15,26 @@ class Auth extends Controller
         $this->view('Auth/register');
         $this->view('templates/footer');
     }
+    public function login()
+    {
+        $result =  $this->model('Auth_Model')->login($_POST);
+        if ($result['status'] == '200') {
+            header('Location: ' . BASEURL . '/dashboard');
+            exit;
+        } else {
+            header('Location: ' . BASEURL . '/auth');
+            exit;
+        }
+    }
+    public function addAdmin()
+    {
+        $result =  $this->model('Auth_Model')->register($_POST);
+        if ($result['status'] == '200') {
+            header('Location: ' . BASEURL . '/auth');
+            exit;
+        } else {
+            header('Location: ' . BASEURL . '/auth/register');
+            exit;
+        }
+    }
 }

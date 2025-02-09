@@ -7,7 +7,7 @@
         </h1>
         <p class="text-xs text-slate-400 font-poppins"> Harap isi data dengan benar</p>
     </section>
-    <form action="" method="post" class="w-full h-auto sm:h-full    space-y-3 font-poppins">
+    <form action="<?= BASEURL ?>/auth/login" method="post" class="w-full h-auto sm:h-full    space-y-3 font-poppins">
         <!-- Id Admin -->
         <section class="flex flex-col gap-1 w-full ">
             <label for="id_admin" class="  text-slate-700 max-sm:text-sm ">ID Admin</label>
@@ -28,7 +28,7 @@
         <!-- Action Login -->
         <section class="max-sm:w-full w-11/12 md:w-4/5  flex justify-between  items-center">
             <section class="flex items-center gap-1">
-                <input type="checkbox">
+                <input type="checkbox" name="remember" id="remember">
                 <label class="text-xs sm:text-sm  ">remember me </label>
             </section>
             <section class="">

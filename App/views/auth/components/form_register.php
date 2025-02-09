@@ -4,7 +4,8 @@
         </h1>
         <p class="text-xs text-slate-400 font-poppins"> Harap isi data dengan benar</p>
     </header>
-    <form action="" method="post" class="w-full h-auto sm:h-full space-y-5 sm:space-y-3 font-poppins">
+    <form action="<?= BASEURL ?>/auth/addAdmin" method="post"
+        class="w-full h-auto sm:h-full space-y-5 sm:space-y-3 font-poppins">
         <!-- Id and Name -->
         <div class="w-full flex gap-4 max-sm:flex-col ">
             <!-- Id Admin -->
@@ -13,8 +14,17 @@
                 <div class="flex gap-2 w-full">
                     <input type="text" name="id_admin" id="id_admin" required placeholder="your'e id"
                         class=" w-11/12  border px-3 py-1 rounded  border-slate-500 max-sm:text-sm ">
-                    <button type="button" class=" border-slate-700 border  px-2 rounded randomId">
-                        <img src="<?= BASEURL; ?>/icons/view.png" width="20" height="20" alt="">
+                    <button type="button" class=" border-slate-700  border  px-2 rounded randomId">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" class="size-5" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-dices">
+                            <rect width="12" height="12" x="2" y="10" rx="2" ry="2" />
+                            <path d="m17.92 14 3.5-3.5a2.24 2.24 0 0 0 0-3l-5-4.92a2.24 2.24 0 0 0-3 0L10 6" />
+                            <path d="M6 18h.01" />
+                            <path d="M10 14h.01" />
+                            <path d="M15 6h.01" />
+                            <path d="M18 9h.01" />
+                        </svg>
                     </button>
                 </div>
                 <p class="text-xs md:text-[8px] lg:text-xs text-slate-500"><span class="text-red-500">*</span>Mengandung
@@ -61,13 +71,15 @@
         </div>
         <!-- Select Option Hint -->
         <section class="flex flex-col gap-1 w-full">
-            <label for="hint" class=" text-slate-700 max-sm:text-sm ">Pilih Pertanyaan</label>
+            <label for="pertanyaan" class=" text-slate-700 max-sm:text-sm ">Pilih Pertanyaan</label>
             <div class="flex   gap-2 w-full">
-                <select name="hint" id="" class="  border px-3 py-1 rounded  border-slate-500 pw max-sm:text-sm w-full">
-                    <option value="1">Siapa nama ibu anda ?</option>
-                    <option value="2">Siapa nama ayah anda ?</option>
-                    <option value="3">Apa nama hewan peliharaan anda ?</option>
-                    <option value="4">Apa nama sekolah dasar anda ?</option>
+                <select name="pertanyaan" id="pertanyaan"
+                    class="  border px-3 py-1 rounded  border-slate-500 pw max-sm:text-sm w-full" required>
+                    <option value="">Pilih Pertanyaan</option>
+                    <option value="Siapa nama ibu anda ?">Siapa nama ibu anda ?</option>
+                    <option value="Siapa nama ayah anda ?">Siapa nama ayah anda ?</option>
+                    <option value="Apa nama hewan peliharaan anda ?">Apa nama hewan peliharaan anda ?</option>
+                    <option value="Apa nama sekolah dasar anda ?">Apa nama sekolah dasar anda ?</option>
                 </select>
             </div>
         </section>
@@ -75,7 +87,7 @@
         <section class="flex flex-col gap-1 w-full">
             <label for="answer_hint" class=" text-slate-700 max-sm:text-sm ">Jawaban anda </label>
             <div class="flex   gap-2 w-full">
-                <input type="text" required id="answer_hint" name="answer_hint" placeholder="jawaban..."
+                <input type="text" required id="jawaban" name="jawaban" placeholder="jawaban..."
                     class="  border px-3 py-1 rounded  border-slate-500 pw max-sm:text-sm w-full">
             </div>
             <p class="text-xs text-slate-500"><span class="text-red-500">*</span>Mohon diingat pilihan dan
