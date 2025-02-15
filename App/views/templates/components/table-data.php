@@ -22,7 +22,7 @@ function renderTable($data, $columns, $menu)
         <div id='menu-$index' class='absolute invisible scale-0 transition-all ease-in-out duration-300 w-24 sm:right-7 lg:right-9 md:top-6 space-y-2 border shadow bg-white rounded p-2 max-lg:text-xs'>";
         foreach ($menu as $mn) {
 
-            echo "<a href='{$mn['href']}/{$row['No']}'  class='{$mn['class']}'>
+            echo "<a href='{$mn['href']}/{$row['id']}'  class='{$mn['class']}'>
                      <div class='size-4'>
                          ";
             include($mn['icon']);

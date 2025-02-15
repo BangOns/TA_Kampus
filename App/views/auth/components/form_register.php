@@ -5,7 +5,7 @@
         <p class="text-xs text-slate-400 font-poppins"> Harap isi data dengan benar</p>
     </header>
     <form action="<?= BASEURL ?>/auth/addAdmin" method="post"
-        class="w-full h-auto sm:h-full space-y-5 sm:space-y-3 font-poppins">
+        class="w-full h-auto sm:h-full space-y-5 sm:space-y-3 font-poppins register">
         <!-- Id and Name -->
         <div class="w-full flex gap-4 max-sm:flex-col ">
             <!-- Id Admin -->
@@ -74,12 +74,13 @@
             <label for="pertanyaan" class=" text-slate-700 max-sm:text-sm ">Pilih Pertanyaan</label>
             <div class="flex   gap-2 w-full">
                 <select name="pertanyaan" id="pertanyaan"
-                    class="  border px-3 py-1 rounded  border-slate-500 pw max-sm:text-sm w-full" required>
+                    class="  border px-3 py-1 rounded  border-slate-500 pw max-sm:text-sm w-full hover:cursor-pointer"
+                    required>
                     <option value="">Pilih Pertanyaan</option>
-                    <option value="Siapa nama ibu anda ?">Siapa nama ibu anda ?</option>
-                    <option value="Siapa nama ayah anda ?">Siapa nama ayah anda ?</option>
-                    <option value="Apa nama hewan peliharaan anda ?">Apa nama hewan peliharaan anda ?</option>
-                    <option value="Apa nama sekolah dasar anda ?">Apa nama sekolah dasar anda ?</option>
+                    <?php foreach ($data['pertanyaan'] as $pertanyaan) : ?>
+                        <option value="<?= $pertanyaan ?>"><?= $pertanyaan ?></option>
+                    <?php endforeach; ?>
+
                 </select>
             </div>
         </section>

@@ -15,19 +15,23 @@ class Auth_Model
             try {
                 $id_admin = htmlspecialchars($data['id_admin']);
                 $password = htmlspecialchars($data['password']);
-                $query = "SELECT * FROM $this->table WHERE id_admin = :id_admin AND password = :password";
+                $query = "SELECT * FROM $this->table WHERE id_admin = :id_admin ";
                 $this->db->query($query);
                 $this->db->bind('id_admin', $id_admin);
-                $this->db->bind('password', $password);
                 $user = $this->db->single();
                 if (!$user) {
                     throw new Exception('ID Admin atau Password tidak ditemukan!');
                 }
-
-
+                if (!password_verify($password, $user['password'])) {
+                    throw new Exception('Password tidak ditemukan! ' . $password . '');
+                }
                 return [
                     'status' => '200',
-                    'message' => 'Berhasil Login'
+                    'message' => 'Berhasil Login',
+                    'user' => [
+                        $user['id_admin'],
+                        $user['name']
+                    ]
                 ];
             } catch (\Throwable $e) {
                 return [
@@ -47,6 +51,13 @@ class Auth_Model
             $repassword = htmlspecialchars($data['repassword']);
             $pertanyaan = htmlspecialchars($data['pertanyaan']);
             $jawaban = htmlspecialchars($data['jawaban']);
+            // if (preg_match('/^(?=(.*[A-Za-z]){3})(?=(.*[0-9]){3})[A-Za-z0-9]{6}$/', $id_admin, $matches)) {
+
+            //     print_r($matches);
+            // } else {
+            //     echo "any matvhs";
+            // }
+
 
             if ($password !== $repassword) {
                 throw new Exception('Password dan Re-Password tidak sama!');

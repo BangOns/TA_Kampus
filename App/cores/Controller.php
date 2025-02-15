@@ -12,7 +12,7 @@ class Controller
         $file = dirname(__DIR__, 1) . '/models/' . $model . '.php';
 
         if (file_exists($file)) {
-            require $file;
+            require_once $file;
             return new $model(); // Mengembalikan instance dari model
         } else {
             die("File model '$model.php' tidak ditemukan di App/models/");

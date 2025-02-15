@@ -5,15 +5,15 @@
 
                 <tr>
                     <td class="py-4 pr-4 text-slate-600">Kategori</td>
-                    <td>Ringan</td>
+                    <td> <?= $data['detail-sanksi']['jenis_sanksi'] ?></td>
                 </tr>
                 <tr>
                     <td class="py-4 pr-4 text-slate-600">Nilai Akhir</td>
-                    <td>0.00 - 0.20</td>
+                    <td><?= $data['detail-sanksi']['min_skor'] ?> - <?= $data['detail-sanksi']['max_skor'] ?></td>
                 </tr>
                 <tr>
                     <td class="py-4 pr-4 text-slate-600">Keterangan</td>
-                    <td>Nasehat + Menghafal 10 kosa kata B. Inggris dan B. Arab</td>
+                    <td><?= $data['detail-sanksi']['deskripsi_sanksi'] ?></td>
                 </tr>
 
             </tbody>

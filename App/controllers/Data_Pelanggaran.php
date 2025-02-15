@@ -3,37 +3,38 @@ class Data_Pelanggaran extends Controller
 {
     public function index($type = "", $action = "", $id = '')
     {
+        if (!$_SESSION['user']) {
+            header('Location: ' . BASEURL . '/auth');
+            exit;
+        }
         $data['list-table'] = [
             'No',
             'Nama Pelanggaran',
             'Jenis Pelanggaran',
-
             'Bobot',
         ];
-        $data['data-pelanggar'] = [
-            [
-                'No' => 1,
-                'Jenis Pelanggaran' => 'Berat',
-                'Nama Pelanggaran' => 'Kabur',
-                'Bobot' => '1961',
-            ],
-            [
-                'No' => 2,
-                'Jenis Pelanggaran' => 'Sedang',
-                'Nama Pelanggaran' => 'Kabur',
+        $data['detail-pelanggar'] = [];
+        $data['data-pelanggar'] = [];
+        $results = $this->model('Data_Pelanggaran_Model')->getDataAll();
+        if ($results['status'] === 200 && !empty($results['data'])) {
+            foreach ($results['data'] as $index => $rslt) {
+                $newData = [
+                    'No' => $index += 1,
+                    'id' => $rslt['id_pelanggaran'],
+                    'Jenis Pelanggaran' => $rslt['jenis_pelanggaran'],
+                    'Nama Pelanggaran' => $rslt['nama_pelanggaran'],
+                    'Bobot' => $rslt['bobot_pelanggaran'],
 
-                'Bobot' => '1961',
-
-            ],
-            [
-                'No' => 3,
-                'Jenis Pelanggaran' => 'Ringan',
-                'Nama Pelanggaran' => 'Kabur',
-                'Bobot' => '1961',
-
-
-            ],
-        ];
+                ];
+                array_push($data['data-pelanggar'], $newData);
+            }
+        }
+        if ($id !== '') {
+            $resultDetailPelanggaran = $this->model('Data_Pelanggaran_Model')->getDataById($id);
+            if ($resultDetailPelanggaran['status'] === 200 && !empty($resultDetailPelanggaran['data'])) {
+                $data['detail-pelanggar'] = $resultDetailPelanggaran['data'];
+            }
+        }
         $data['kategori'] = [
             'Berat',
             'Sedang',

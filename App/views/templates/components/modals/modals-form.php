@@ -16,7 +16,7 @@ $urlPost = [
             <h1 class="text-base sm:text-lg md:text-2xl font-semibold judulModal">
                 <?= ucwords(preg_replace("/-/", " ", $data['type'])) ?>
             </h1>
-            <a href="<?= BASEURL; ?>/dashboard" id="close-modals" class="text-red-500 size-5 md:size-6">
+            <a href="<?= BASEURL; ?>/<?= $data['title'] ?>" id="close-modals" class="text-red-500 size-5 md:size-6">
                 <?php include dirname(__DIR__, 5) . '/public/icons/icons-close.svg'; ?>
             </a>
         </header>

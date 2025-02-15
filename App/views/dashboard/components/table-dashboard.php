@@ -1,31 +1,4 @@
 <?php
-$dataPelanggar = [
-    [
-        'No' => 1,
-        'Nama Santri' => 'The Sliding Mr. Bones (Next Stop, Pottersville)',
-        'Tahun Masuk' => 'Malcolm Lockyer',
-        'Kategori' => '1961',
-        'Sanksi' => 'Dicukur rambutnya'
-    ],
-    [
-        'No' => 2,
-        'Nama Santri' => 'The Bones (Next Stop, Pottersville)',
-        'Tahun Masuk' => 'Malcolm ',
-        'Kategori' => '1961',
-        'Sanksi' => 'Dicukur rambutnya'
-
-    ],
-    [
-        'No' => 3,
-        'Nama Santri' => 'The Sliding Bones (Next Stop, Pottersville)',
-        'Tahun Masuk' => 'Lockyer',
-        'Kategori' => '1961',
-        'Sanksi' => 'Dicukur rambutnya'
-
-
-    ],
-
-];
 
 $link_menu = [
     [
@@ -97,8 +70,16 @@ $link_menu = [
         <!-- Table & Card Pelanggar -->
         <article class="w-full max-md:space-y-3 max-md:mt-3 ">
             <!-- Table Pelanggar -->
-            <?php include dirname(__DIR__, 3) . '/views/templates/components/table-data.php';
-            renderTable($data['data-pelanggar'], $data['list-table'], $link_menu); ?>
+            <?php if (count($data['data-pelanggar']) !== 0) {
+                include dirname(__DIR__, 3) . '/views/templates/components/table-data.php';
+                renderTable($data['data-pelanggar'], $data['list-table'], $link_menu);
+            } else {
+                echo '<section class="w-full text-center ">
+                <p class="text-2xl font-semibold">Data Not Found X</p>
+            </section>';
+            }
+            ?>
+
             <!-- Card Pelanggar -->
             <?php include dirname(__DIR__, 3) . '/views/templates/components/card-mobile/card-data-pelanggaran-santri.php';
             renderCardPelanggaranSantri($data['data-pelanggar'], $link_menu); ?>

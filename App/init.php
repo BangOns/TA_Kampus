@@ -2,6 +2,7 @@
 
 require_once 'config/config.php';
 require_once 'utils/SumPelanggaranSantri.php';
+require_once 'utils/SchemaResponse.php';
 
 spl_autoload_register(function ($class) {
 

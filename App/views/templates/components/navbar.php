@@ -1,4 +1,5 @@
 <?php
+$users = explode(',', $_SESSION['user']);
 $list_navbar = [
     [
         'title' => 'Dashboard',
@@ -55,7 +56,7 @@ $list_settings_navbar = [
             <img src="<?= BASEURL  ?>/img/image-profile.png" alt="profile" width="30" height="30"
                 class="object-cover size-9 md:size-10">
             <figcaption class="font-poppins ">
-                <h2 class="text-sm font-semibold">Syahroni </h2>
+                <h2 class="text-sm font-semibold"><?= $users[1] ?> </h2>
                 <p class="text-xs font-light text-slate-400">admin</p>
             </figcaption>
         </figure>
@@ -78,7 +79,7 @@ $list_settings_navbar = [
         <section class=" flex flex-col w-full gap-2 md:pl-2 ">
             <?php foreach ($list_settings_navbar as $list) : ?>
 
-            <a href="<?= $list['link'] ?>/2" class="flex  gap-2 items-center  text-black text-xs sm:text-sm py-2 px-2 rounded font-semibold
+            <a href="<?= $list['link'] ?>/<?= $users[0] ?>" class="flex  gap-2 items-center  text-black text-xs sm:text-sm py-2 px-2 rounded font-semibold
             hover:text-white 
             transition-all  
              <?= str_contains($list['title'], $data['title']) ? ($list['title'] === 'Logout' ? "bg-red-600 text-white" : "bg-sky-600 text-white") : "text-black bg-transparent" ?> 

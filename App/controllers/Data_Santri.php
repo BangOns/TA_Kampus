@@ -3,43 +3,39 @@ class Data_Santri extends Controller
 {
     public function index($type = "", $action = "", $id = '')
     {
+        if (!$_SESSION['user']) {
+            header('Location: ' . BASEURL . '/auth');
+            exit;
+        }
         $data['list-table'] = [
             'No',
             'Nama Santri',
-            'Tahun Masuk',
-            'Kategori'
+            'Alamat',
+            'Tahun Masuk'
         ];
-        $data['data-santri'] = [
-            [
-                'No' => 1,
-                'Nama Santri' => 'The Sliding Mr. Bones (Next Stop, Pottersville)',
-                'Tahun Masuk' => 'Malcolm Lockyer',
-                'Kategori' => '1961',
-                'Sanksi' => 'Dicukur rambutnya'
-            ],
-            [
-                'No' => 2,
-                'Nama Santri' => 'The Bones (Next Stop, Pottersville)',
-                'Tahun Masuk' => 'Malcolm ',
-                'Kategori' => '1961',
-                'Sanksi' => 'Dicukur rambutnya'
+        $data['data-santri'] = [];
+        $data['detail-santri'] = [];
+        $results = $this->model('Data_Santri_Model')->getDataAll();
+        if ($results['status'] === 200 && !empty($results['data'])) {
+            foreach ($results['data'] as $index => $rslt) {
+                $newData = [
+                    'No' => $index += 1,
+                    'id' => $rslt['id_santri'],
+                    'Nama Santri' => $rslt['nama_santri'],
+                    'Alamat' => $rslt['alamat'],
+                    'Tahun Masuk' => $rslt['tahun_ajaran'],
 
-            ],
-            [
-                'No' => 3,
-                'Nama Santri' => 'The Sliding Bones (Next Stop, Pottersville)',
-                'Tahun Masuk' => 'Lockyer',
-                'Kategori' => '1961',
-                'Sanksi' => 'Dicukur rambutnya'
+                ];
+                array_push($data['data-santri'], $newData);
+            }
+        }
+        if ($id !== '') {
+            $resultDetailSantri = $this->model('Data_Santri_Model')->getDataById($id);
+            if ($resultDetailSantri['status'] === 200 && !empty($resultDetailSantri['data'])) {
+                $data['detail-santri'] = $resultDetailSantri['data'];
+            }
+        }
 
-
-            ],
-        ];
-        $data['kategori'] = [
-            'Berat',
-            'Sedang',
-            'Ringan'
-        ];
         $data['title'] = 'data_santri';
         $data['type'] = $type;
         $data['action'] = $action;

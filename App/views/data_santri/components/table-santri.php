@@ -37,19 +37,7 @@ $link_menu = [
                     <?php include dirname(__DIR__, 4) . '/public/icons/icons-search.svg'; ?>
                 </div>
             </section>
-            <section class="lg:w-1/5 rounded flex bg-white px-2 md:px-3  items-center border border-slate-300 py-1">
-                <label for="kategori" class="size-3 md:size-5 text-slate-600">
-                    <?php include dirname(__DIR__, 4) . '/public/icons/icons-filter.svg'; ?>
-                </label>
-                <select name="kategori" id="kategori"
-                    class="w-full px-3 py-1 border-none bg-transparent text-xs sm:text-sm focus:outline-none text-slate-400 selection:text-black hover:cursor-pointer  focus:ring-0">
-                    <option value="">Kategori</option>
-                    <?php foreach ($data['kategori'] as $kategori) : ?>
-                    <option class="hover:cursor-pointer" value="<?= $kategori ?>"><?= $kategori ?></option>
-                    <?php endforeach; ?>
 
-                </select>
-            </section>
         </header>
         <!-- Button Tambah Pelanggar -->
         <section class="w-full basis-1/2 flex my-4 ">

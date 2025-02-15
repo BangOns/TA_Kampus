@@ -3,32 +3,38 @@ class Data_Sanksi extends Controller
 {
     public function index($type = "", $action = "", $id = '')
     {
+        if (!$_SESSION['user']) {
+            header('Location: ' . BASEURL . '/auth');
+            exit;
+        }
         $data['list-table'] = [
             'No',
             'Min-Max Nilai Akhir',
             'Kategori',
         ];
-        $data['data-sanksi'] = [
-            [
-                'No' => 1,
-                'Min-Max Nilai Akhir' => "0.00 - 0.20",
-                'Kategori' => 'Ringan',
-                'Keterangan' => 'Nasehat'
-            ],
-            [
-                'No' => 2,
-                'Min-Max Nilai Akhir' => "0.21 - 0.40",
-                'Kategori' => 'Ringan',
-                'Keterangan' => 'Nasehat + Menghafal 10 kosa kata B. Inggris dan B. Arab'
-            ],
-            [
-                'No' => 3,
-                'Min-Max Nilai Akhir' => "0.21 - 0.59",
-                'Kategori' => 'Ringan',
-                'Keterangan' => 'Menghafal 25 kosa kata B. Inggris dan B. Arab + Sholawat Nariyah 33×'
-            ],
-        ];
+        $data['data-sanksi'] = [];
+        $data['detail-sanksi'] = [];
 
+        $results = $this->model('Data_Sanksi_Model')->getDataAll();
+        if ($results['status'] === 200 && !empty($results['data'])) {
+            foreach ($results['data'] as $index => $rslt) {
+                $newData = [
+                    'No' => $index += 1,
+                    'id' => $rslt['id_sanksi'],
+                    'Min-Max Nilai Akhir' => $rslt['min_skor'] . " - " . $rslt['max_skor'],
+                    'Kategori' => $rslt['jenis_sanksi'],
+                    'Keterangan' => $rslt['deskripsi_sanksi']
+
+                ];
+                array_push($data['data-sanksi'], $newData);
+            }
+        }
+        if ($id !== '') {
+            $resultDetailSanksi = $this->model('Data_Sanksi_Model')->getDataById($id);
+            if ($resultDetailSanksi['status'] === 200 && !empty($resultDetailSanksi['data'])) {
+                $data['detail-sanksi'] = $resultDetailSanksi['data'];
+            }
+        }
         $data['title'] = 'data_sanksi';
         $data['type'] = $type;
         $data['action'] = $action;
