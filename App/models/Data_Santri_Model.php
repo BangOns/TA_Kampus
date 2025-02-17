@@ -32,4 +32,23 @@ class Data_Santri_Model
             return Response(200, [], "Berhasil get data Santri By Id");
         }
     }
+    public function addSantri($data)
+    {
+        try {
+            $nama_santri = htmlspecialchars($data['nama_santri']);
+            $kelas = htmlspecialchars($data['kelas']);
+            $alamat = htmlspecialchars($data['alamat']);
+            $tahun_ajaran = htmlspecialchars($data['tahun_ajaran']);
+            $query =  "INSERT INTO $this->table (id_santri,nama_santri,alamat,kelas,tahun_ajaran) VALUES ('',:nama_santri,:alamat,:kelas,:tahun_ajaran)";
+            $this->db->query($query);
+            $this->db->bind('nama_santri', $nama_santri);
+            $this->db->bind('alamat', $alamat);
+            $this->db->bind('kelas', $kelas);
+            $this->db->bind('tahun_ajaran', $tahun_ajaran);
+            $this->db->execute();
+            return Response(200, [], "Berhasil Menambah Data Santri");
+        } catch (\Throwable $e) {
+            return Response(404, [], "Gagal Menambah Data Santri " . $e->getMessage() . " ");
+        }
+    }
 }

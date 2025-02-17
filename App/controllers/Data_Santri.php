@@ -35,7 +35,6 @@ class Data_Santri extends Controller
                 $data['detail-santri'] = $resultDetailSantri['data'];
             }
         }
-
         $data['title'] = 'data_santri';
         $data['type'] = $type;
         $data['action'] = $action;
@@ -45,5 +44,16 @@ class Data_Santri extends Controller
         $this->view('templates/components/navbar', $data);
         $this->view('data_santri/index', $data);
         $this->view('templates/footer', $data);
+    }
+    public function addData()
+    {
+        $result = $this->model('Data_Santri_Model')->AddSantri($_POST);
+        if ($result['status'] === 200) {
+            header('Location: ' . BASEURL . '/data_santri');
+            exit;
+        } else {
+            header('Location: ' . BASEURL . '/data_santri');
+            exit;
+        }
     }
 }

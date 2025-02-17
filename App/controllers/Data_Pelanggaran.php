@@ -49,4 +49,15 @@ class Data_Pelanggaran extends Controller
         $this->view('data_pelanggaran/index', $data);
         $this->view('templates/footer', $data);
     }
+    public function addData()
+    {
+        $result = $this->model('Data_Pelanggaran_Model')->AddPelanggaran($_POST);
+        if ($result['status'] === 200) {
+            header('Location: ' . BASEURL . '/data_pelanggaran');
+            exit;
+        } else {
+            header('Location: ' . BASEURL . '/data_pelanggaran');
+            exit;
+        }
+    }
 }

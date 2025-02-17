@@ -31,4 +31,26 @@ class Data_Sanksi_Model
             return Response(200, [], "Berhasil get data Sanksi");
         }
     }
+    public function addSanksi($data, $dataAll)
+    {
+        try {
+            $jenis_sanksi = htmlspecialchars($data['jenis_sanksi']);
+            $deskripsi_sanksi = htmlspecialchars($data['deskripsi_sanksi']);
+            $skor = explode("-", htmlspecialchars($data['min-max']));
+            $getData =  array_search(floatval(trim($skor[0])), array_column($dataAll, 'min_skor'));
+            if (!$getData) {
+                throw new Exception('Skor Sudah digunakan!');
+            }
+            $query =  "INSERT INTO $this->table (id_sanksi,jenis_sanksi,deskripsi_sanksi,min_skor,max_skor) VALUES ('',:jenis_sanksi,:deskripsi_sanksi,:min_skor,:max_skor)";
+            $this->db->query($query);
+            $this->db->bind('jenis_sanksi', $jenis_sanksi);
+            $this->db->bind('deskripsi_sanksi', $deskripsi_sanksi);
+            $this->db->bind('min_skor', floatval(trim($skor[0])));
+            $this->db->bind('max_skor', floatval(trim($skor[1])));
+            $this->db->execute();
+            return Response(200, [], "Berhasil Menambah Data Sanksi");
+        } catch (\Throwable $e) {
+            return Response(404, [], "Gagal Menambah Data Sanksi karena " . $e->getMessage() . " ");
+        }
+    }
 }

@@ -3,9 +3,10 @@ $filepath = __DIR__ . '/form-modals/'  . $data['action'] . '.php';
 if (!file_exists($filepath)) {
     $isModal = "Data Not Found";
 }
+$getTextData = isset($data['action']) ? explode("-", $data['action']) : null;
 $urlPost = [
-    'add' => BASEURL . "/dashboard/" . $data['type'] . "/" . $data['action'] . "/",
-    'edit' => BASEURL . "/dashboard/" . $data['type'] . "/" . $data['action'] . "/" . $id
+    'add' => BASEURL . "/" . $data['title'] . "/" . $data['type'] . ucwords($getTextData[0]) . "/",
+    'edit' => BASEURL .  "/" . $data['title'] . "/" . $data['type'] . ucwords($getTextData[0]) . "/"  . $id
 ]
 ?>
 <article

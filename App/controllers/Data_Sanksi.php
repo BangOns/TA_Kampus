@@ -45,4 +45,17 @@ class Data_Sanksi extends Controller
         $this->view('data_sanksi/index', $data);
         $this->view('templates/footer', $data);
     }
+    public function addData()
+    {
+        $resultDataAll = $this->model('Data_Sanksi_Model')->getDataAll($_POST);
+        $result = $this->model('Data_Sanksi_Model')->AddSanksi($_POST, $resultDataAll['data']);
+        var_dump($result);
+        // if ($result['status'] === 200) {
+        //     header('Location: ' . BASEURL . '/data_sanksi');
+        //     exit;
+        // } else {
+        //     header('Location: ' . BASEURL . '/data_sanksi');
+        //     exit;
+        // }
+    }
 }

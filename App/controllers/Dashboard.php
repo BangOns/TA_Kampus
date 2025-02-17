@@ -15,14 +15,16 @@ class Dashboard extends Controller
             'Kategori'
         ];
         $data['kategori'] = ['Ringan', 'Sedang', 'Berat'];
-        // $results_data_sanksi = $this->model('Data_Sanksi_Model')->getDataAll();
-        // foreach ($results_data_sanksi['data'] as  $rslt) {
-        //     array_push($data['kategori'], $rslt['jenis_sanksi']);
-        // }
-        $results = $this->model('Data_Pelanggaran_Santri_Model')->getDataAll();
+
+        $resultsPelanggaranSantri = $this->model('Data_Pelanggaran_Santri_Model')->getDataAll();
+        $resultsDataSantri = $this->model('Data_Santri_Model')->getDataAll();
+        $resultsDataSanksi = $this->model('Data_Sanksi_Model')->getDataAll();
+        $resultsDataPelanggaran = $this->model('Data_Pelanggaran_Model')->getDataAll();
+        $data['data-card-summary'] = [];
         $data['data-pelanggar'] = [];
-        if ($results['status'] === 200 && !empty($results['data'])) {
-            foreach ($results['data'] as $index => $rslt) {
+        $data['data-santri'] = [];
+        if ($resultsPelanggaranSantri['status'] === 200 && !empty($resultsPelanggaranSantri['data'])) {
+            foreach ($resultsPelanggaranSantri['data'] as $index => $rslt) {
                 $data_santri = $this->model('Data_Santri_Model')->getDataById($rslt['id_santri']);
                 $data_sanksi = $this->model('Data_Sanksi_Model')->getDataById($rslt['id_sanksi']);
                 $newData = [
@@ -37,7 +39,30 @@ class Dashboard extends Controller
             };
         }
 
+        if ($resultsPelanggaranSantri['status'] === 200 && $resultsDataPelanggaran['status'] === 200 && $resultsDataSantri['status'] === 200 && $resultsDataSanksi['status'] === 200) {
+            $data['data-santri'] = $resultsDataSantri['data'];
+            $data['data-card-summary'] = [
+                [
+                    'title' => 'Santri',
+                    'jumlah' => count($resultsDataSantri['data']),
+                ],
+                [
+                    'title' => 'Pelanggaran',
+                    'jumlah' => count($resultsDataPelanggaran['data']),
+                ],
+                [
+                    'title' => 'Sanksi',
+                    'jumlah' => count($resultsDataSanksi['data']),
+                ],
+                [
+                    'title' => 'Pelanggaran Santri',
+                    'jumlah' => count($resultsPelanggaranSantri['data'])
+                ],
 
+
+
+            ];
+        }
         $data['type'] = $type;
         $data['action'] = $action;
         $data['id'] = htmlspecialchars($id);
@@ -45,5 +70,13 @@ class Dashboard extends Controller
         $this->view('templates/components/navbar', $data);
         $this->view('dashboard/index', $data);
         $this->view('templates/footer');
+    }
+
+    public function addData()
+    {
+        $resultsDataSanksi = $this->model('Data_Sanksi_Model')->getDataAll();
+
+        $result = $this->model('Data_Pelanggaran_Santri_Model')->addPelanggaranSantri($_POST, $resultsDataSanksi['data']);
+        var_dump($result);
     }
 }
