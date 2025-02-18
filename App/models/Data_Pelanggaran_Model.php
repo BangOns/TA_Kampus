@@ -42,7 +42,6 @@ class Data_Pelanggaran_Model
             $nama_pelanggaran = htmlspecialchars($data['nama_pelanggaran']);
             $jenis_pelanggaran = $jenis_map[$data['jenis_pelanggaran']];
             $bobot_pelanggaran = htmlspecialchars($data['jenis_pelanggaran']);
-            var_dump($nama_pelanggaran, $jenis_pelanggaran, $bobot_pelanggaran);
             $query =  "INSERT INTO $this->table (id_pelanggaran,nama_pelanggaran,jenis_pelanggaran,bobot_pelanggaran) VALUES ('',:nama_pelanggaran,:jenis_pelanggaran,:bobot_pelanggaran)";
             $this->db->query($query);
             $this->db->bind('nama_pelanggaran', $nama_pelanggaran);

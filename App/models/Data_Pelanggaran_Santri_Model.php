@@ -21,6 +21,18 @@ class Data_Pelanggaran_Santri_Model
             return Response(404, [], "Gagal get data pelanggaran");
         }
     }
+    public function getDataById($id)
+    {
+        try {
+            $query = "SELECT * FROM $this->table WHERE id_pelanggaran_santri = :id_pelanggaran_santri ";
+            $this->db->query($query);
+            $this->db->bind('id_pelanggaran_santri', $id);
+            $result = $this->db->single();
+            return Response(200, $result, "Berhasil get data pelanggaran");
+        } catch (\Throwable $th) {
+            return Response(200, [], "Berhasil get data pelanggaran");
+        }
+    }
     public function addPelanggaranSantri($data, $data_sanksi)
     {
 

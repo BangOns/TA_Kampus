@@ -73,6 +73,9 @@ $link_menu = [
             <?php if (count($data['data-pelanggar']) !== 0) {
                 include dirname(__DIR__, 3) . '/views/templates/components/table-data.php';
                 renderTable($data['data-pelanggar'], $data['list-table'], $link_menu);
+                // Card Pelanggar
+                include dirname(__DIR__, 3) . '/views/templates/components/card-mobile/card-data-pelanggaran-santri.php';
+                renderCardPelanggaranSantri($data['data-pelanggar'], $link_menu);
             } else {
                 echo '<section class="w-full text-center ">
                 <p class="text-2xl font-semibold">Data Not Found X</p>
@@ -80,9 +83,6 @@ $link_menu = [
             }
             ?>
 
-            <!-- Card Pelanggar -->
-            <?php include dirname(__DIR__, 3) . '/views/templates/components/card-mobile/card-data-pelanggaran-santri.php';
-            renderCardPelanggaranSantri($data['data-pelanggar'], $link_menu); ?>
         </article>
 
     </section>

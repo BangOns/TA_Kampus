@@ -2,14 +2,18 @@
 
 function renderCardSanksi($data, $menu)
 {
+    $kategoriSanksi = [
+        "Ringan" => 'text-yellow-400',
+        "Sedang" => 'text-orange-400',
+        "Berat" => 'text-red-500',
+    ];
     // Mulai dengan section utama
     echo '<section class="w-full flex flex-col gap-4 md:hidden">';
     // Looping melalui data pelanggar untuk menampilkan tiap artikel
     foreach ($data as $index => $pelanggar) {
         echo '<article class="w-full py-3 h-auto border border-slate-300 rounded shadow px-5 sm:px-7">';
-        echo '<section class="py-2">';
-        echo '<h1 class="font-semibold text-sm sm:text-base">' . $pelanggar['Nama Santri'] . '</h1>';
-        echo '<p class="text-xs text-slate-600">Kelas 3B | Tahun Ajaran 2023</p>';
+        echo '<section  >';
+        echo '<h1 class="font-semibold ' .  $kategoriSanksi[$pelanggar['Kategori']]  . '   text-lg">' . $pelanggar['Kategori'] . '</h1>';
         echo '</section>';
 
         // Menampilkan detail pelanggaran dalam tabel
@@ -17,12 +21,12 @@ function renderCardSanksi($data, $menu)
         echo '<table class="w-full table-collapse">';
         echo '<tbody class="divide-y divide-gray-200 w-full">';
         echo '<tr>';
-        echo '<td class="py-2">Kategori</td>';
-        echo '<td class="text-red-500 font-semibold">' . $pelanggar['Tahun Masuk'] . '</td>';
+        echo '<td class="py-2">Deskripsi</td>';
+        echo '<td class=" font-semibold">' . $pelanggar['Keterangan'] . '</td>';
         echo '</tr>';
         echo '<tr>';
-        echo '<td class="py-2">Sanksi</td>';
-        echo '<td class="text-red-500 font-semibold">Dicukur rambutnya</td>';
+        echo '<td class="py-2">Min - Max Nilai</td>';
+        echo '<td class=" font-semibold">' . $pelanggar['Min-Max Nilai Akhir'] . '</td>';
         echo '</tr>';
         echo '</tbody>';
         echo '</table>';

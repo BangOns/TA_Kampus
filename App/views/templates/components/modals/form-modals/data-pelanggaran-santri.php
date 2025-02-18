@@ -37,7 +37,7 @@ $permohonan_maaf = [
             class="w-full border px-2 py-1 rounded bg-transparent text-xs sm:text-sm focus:outline-none text-slate-400 selection:text-black hover:cursor-text  focus:ring-0">
             <option value="">Nama Santri</option>
             <?php foreach ($data['data-santri'] as  $ds) : ?>
-                <option value="<?= $ds['id_santri'] ?>"><?= $ds['nama_santri'] ?></option>
+            <option value="<?= $ds['id_santri'] ?>"><?= $ds['nama_santri'] ?></option>
             <?php endforeach; ?>
         </select>
     </section>
@@ -56,8 +56,8 @@ $permohonan_maaf = [
         <select name="c1" id="c1" required
             class="w-full border px-2 py-1 rounded bg-transparent text-xs sm:text-sm focus:outline-none text-slate-400 selection:text-black hover:cursor-text  focus:ring-0">
             <option value="">Kategori</option>
-            <?php foreach ($jenis_pelanggaran as $key => $jp) : ?>
-                <option value="<?= $key ?>"><?= $jp ?></option>
+            <?php foreach ($$data['kategori_pelanggaran']['jenis_pelanggaran'] as $key => $jp) : ?>
+            <option value="<?= $key ?>"><?= $jp ?></option>
             <?php endforeach; ?>
         </select>
     </section>
@@ -66,8 +66,8 @@ $permohonan_maaf = [
         <select name="c2" id="c2" required
             class="w-full border px-2 py-1 rounded bg-transparent text-xs sm:text-sm focus:outline-none text-slate-400 selection:text-black hover:cursor-text  focus:ring-0">
             <option value="">Berapa kali</option>
-            <?php foreach ($frekuensi_pelanggaran as $key => $fp) : ?>
-                <option value="<?= $key ?>"><?= $fp ?></option>
+            <?php foreach ($data['kategori_pelanggaran']['frekuensi_pelanggaran'] as $key => $fp) : ?>
+            <option value="<?= $key ?>"><?= $fp ?></option>
             <?php endforeach; ?>
         </select>
     </section>
@@ -76,8 +76,8 @@ $permohonan_maaf = [
         <select name="c3" id="c3" required
             class="w-full border px-2 py-1 rounded bg-transparent text-xs sm:text-sm focus:outline-none text-slate-400 selection:text-black hover:cursor-text  focus:ring-0">
             <option value="">Dampak</option>
-            <?php foreach ($dampak_pelanggaran as $key => $dp) : ?>
-                <option value="<?= $key ?>"><?= $dp ?></option>
+            <?php foreach ($data['kategori_pelanggaran']['dampak_pelanggaran'] as $key => $dp) : ?>
+            <option value="<?= $key ?>"><?= $dp ?></option>
             <?php endforeach; ?>
         </select>
     </section>
@@ -86,8 +86,8 @@ $permohonan_maaf = [
         <select name="c4" id="c4" required
             class="w-full border px-2 py-1 rounded bg-transparent text-xs sm:text-sm focus:outline-none text-slate-400 selection:text-black hover:cursor-text  focus:ring-0">
             <option value="">Keseriusan</option>
-            <?php foreach ($keseriusan_niat as $key => $kn) : ?>
-                <option value="<?= $key ?>"><?= $kn ?></option>
+            <?php foreach ($data['kategori_pelanggaran']['keseriusan_niat'] as $key => $kn) : ?>
+            <option value="<?= $key ?>"><?= $kn ?></option>
             <?php endforeach; ?>
         </select>
     </section>
@@ -96,8 +96,8 @@ $permohonan_maaf = [
         <select name="c5" id="c5" required
             class="w-full border px-2 py-1 rounded bg-transparent text-xs sm:text-sm focus:outline-none text-slate-400 selection:text-black hover:cursor-text  focus:ring-0">
             <option value="">Permohonan</option>
-            <?php foreach ($permohonan_maaf as $key => $pm) : ?>
-                <option value="<?= $key ?>"><?= $pm ?></option>
+            <?php foreach ($data['kategori_pelanggaran']['permohonan_maaf'] as $key => $pm) : ?>
+            <option value="<?= $key ?>"><?= $pm ?></option>
             <?php endforeach; ?>
         </select>
     </section>
