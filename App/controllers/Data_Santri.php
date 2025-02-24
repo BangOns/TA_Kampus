@@ -56,4 +56,15 @@ class Data_Santri extends Controller
             exit;
         }
     }
+    public function editData($id)
+    {
+        $result = $this->model('Data_Santri_Model')->EditSantri($_POST, $id);
+        if ($result['status'] === 200) {
+            header('Location: ' . BASEURL . '/data_santri');
+            exit;
+        } else {
+            header('Location: ' . BASEURL . '/data_santri');
+            exit;
+        }
+    }
 }

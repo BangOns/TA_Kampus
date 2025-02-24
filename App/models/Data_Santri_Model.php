@@ -51,4 +51,26 @@ class Data_Santri_Model
             return Response(404, [], "Gagal Menambah Data Santri " . $e->getMessage() . " ");
         }
     }
+    public function editSantri($data, $id)
+    {
+        try {
+            $id_santri = htmlspecialchars($id);
+            $nama_santri = htmlspecialchars($data['nama_santri']);
+            $kelas = htmlspecialchars($data['kelas']);
+            $alamat = htmlspecialchars($data['alamat']);
+            $tahun_ajaran = htmlspecialchars($data['tahun_ajaran']);
+            $query =  "UPDATE $this->table SET nama_santri = :nama_santri, alamat = :alamat, kelas = :kelas, tahun_ajaran = :tahun_ajaran WHERE id_santri = :id_santri";
+            $this->db->query($query);
+            $this->db->bind('id_santri', $id_santri);
+            $this->db->bind('nama_santri', $nama_santri);
+            $this->db->bind('alamat', $alamat);
+            $this->db->bind('kelas', $kelas);
+            $this->db->bind('tahun_ajaran', $tahun_ajaran);
+            $this->db->execute();
+            return Response(200, [], "Berhasil Mengedit Data Santri");
+        } catch (\Throwable $th) {
+            //throw $th;
+            return Response(404, [], "Gagal Mengedit Data Santri");
+        }
+    }
 }

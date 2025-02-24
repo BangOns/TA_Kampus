@@ -10,13 +10,17 @@ $tahun_ajaran = $data['detail-pelanggaran-santri']['tahun-ajaran'];
 $alamat = $data['detail-pelanggaran-santri']['alamat'];
 $nama_pelanggaran = $data['detail-pelanggaran-santri']['nama-pelanggaran'];
 $waktu = $formattedDate;
-$kategori = $data['detail-pelanggaran-santri']['kategori'];
+$kategori = $data['detail-pelanggaran-santri']['kategori-pelanggaran'];
 $frekuensi = $data['detail-pelanggaran-santri']['frekuensi'];
 $dampak = $data['detail-pelanggaran-santri']['dampak'];
 $keseriusan = $data['detail-pelanggaran-santri']['keseriusan'];
 $permohonan = $data['detail-pelanggaran-santri']['permohonan'];
 $sanksi = $data['detail-pelanggaran-santri']['sanksi'];
-
+$color_pelanggaran_and_sanksi = [
+    "Ringan" => 'text-yellow-500',
+    "Sedang" => 'text-orange-400',
+    "Berat" => 'text-red-500',
+];
 ?>
 
 <article class="w-full mt-4 px-6 space-y-2">
@@ -43,8 +47,8 @@ $sanksi = $data['detail-pelanggaran-santri']['sanksi'];
                     <td class=" font-semibold"><?= $waktu ?></td>
                 </tr>
                 <tr>
-                    <td class="py-4 pr-4 text-slate-600">Kategori</td>
-                    <td class=" font-semibold"><?= $kategori ?></td>
+                    <td class="py-4 pr-4 text-slate-600">Kategori Pelanggaran</td>
+                    <td class=" font-semibold <?= $color_pelanggaran_and_sanksi[$kategori] ?>"><?= $kategori ?></td>
                 </tr>
                 <tr>
                     <td class="py-4 pr-4 text-slate-600">Frekuensi Pelanggaran</td>

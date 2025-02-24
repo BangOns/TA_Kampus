@@ -1137,6 +1137,11 @@ video {
   line-height: 1.5rem;
 }
 
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -1150,11 +1155,6 @@ video {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
-}
-
-.text-lg {
-  font-size: 1.125rem;
-  line-height: 1.75rem;
 }
 
 .font-light {
@@ -1508,8 +1508,8 @@ video {
 }
 
 @media (min-width: 640px) {
-  .sm\:right-7 {
-    right: 1.75rem;
+  .sm\:right-20 {
+    right: 5rem;
   }
 
   .sm\:h-3\/4 {
@@ -1692,10 +1692,6 @@ video {
 }
 
 @media (min-width: 1024px) {
-  .lg\:right-9 {
-    right: 2.25rem;
-  }
-
   .lg\:ml-64 {
     margin-left: 16rem;
   }
@@ -1760,5 +1756,11 @@ video {
   .lg\:text-xs {
     font-size: 0.75rem;
     line-height: 1rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .xl\:right-28 {
+    right: 7rem;
   }
 }

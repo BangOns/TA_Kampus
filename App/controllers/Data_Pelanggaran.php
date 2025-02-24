@@ -60,4 +60,15 @@ class Data_Pelanggaran extends Controller
             exit;
         }
     }
+    public function editData($id)
+    {
+        $result = $this->model('Data_Pelanggaran_Model')->EditPelanggaran($_POST, $id);
+        if ($result['status'] === 200) {
+            header('Location: ' . BASEURL . '/data_pelanggaran');
+            exit;
+        } else {
+            header('Location: ' . BASEURL . '/data_pelanggaran');
+            exit;
+        }
+    }
 }

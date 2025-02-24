@@ -8,6 +8,7 @@ $urlPost = [
     'add' => BASEURL . "/" . $data['title'] . "/" . $data['type'] . ucwords($getTextData[0]) . "/",
     'edit' => BASEURL .  "/" . $data['title'] . "/" . $data['type'] . ucwords($getTextData[0]) . "/"  . $id
 ]
+
 ?>
 <article
     class="w-full h-full <?= $data['type'] === "edit" || $data['type'] === "add" ? 'flex' : 'hidden' ?> font-poppins justify-center items-center fixed top-0 left-0 z-10 bg-black/50 bg-modals max-md:px-5">

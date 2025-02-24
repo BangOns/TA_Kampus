@@ -53,4 +53,29 @@ class Data_Pelanggaran_Model
             return Response(404, [], "Gagal Menambah Data Pelanggaran " . $e->getMessage() . " ");
         }
     }
+    public function editPelanggaran($data, $id)
+    {
+        $jenis_map = [
+            "1" => "Ringan",
+            "2" => "Sedang",
+            "3" => "Berat",
+        ];
+        try {
+            $id_pelanggaran = htmlspecialchars($id);
+            $nama_pelanggaran = htmlspecialchars($data['nama_pelanggaran']);
+            $jenis_pelanggaran = $jenis_map[$data['jenis_pelanggaran']];
+            $bobot_pelanggaran = htmlspecialchars($data['jenis_pelanggaran']);
+
+            $query =  "UPDATE  $this->table  SET  nama_pelanggaran = :nama_pelanggaran, jenis_pelanggaran = :jenis_pelanggaran, bobot_pelanggaran = :bobot_pelanggaran WHERE id_pelanggaran = :id_pelanggaran";
+            $this->db->query($query);
+            $this->db->bind('id_pelanggaran', intval($id_pelanggaran));
+            $this->db->bind('nama_pelanggaran', $nama_pelanggaran);
+            $this->db->bind('jenis_pelanggaran', $jenis_pelanggaran);
+            $this->db->bind('bobot_pelanggaran', $bobot_pelanggaran);
+            $this->db->execute();
+            return Response(200, [], "Berhasil Merubah Data Pelanggaran");
+        } catch (\Throwable $e) {
+            return Response(404, [], "Gagal Merubah Data Pelanggaran " . $e->getMessage() . " ");
+        }
+    }
 }

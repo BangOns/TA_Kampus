@@ -10,7 +10,7 @@ class Data_Sanksi extends Controller
         $data['list-table'] = [
             'No',
             'Min-Max Nilai Akhir',
-            'Kategori',
+            'Kategori Sanksi',
         ];
         $data['data-sanksi'] = [];
         $data['detail-sanksi'] = [];
@@ -22,7 +22,7 @@ class Data_Sanksi extends Controller
                     'No' => $index += 1,
                     'id' => $rslt['id_sanksi'],
                     'Min-Max Nilai Akhir' => $rslt['min_skor'] . " - " . $rslt['max_skor'],
-                    'Kategori' => $rslt['jenis_sanksi'],
+                    'Kategori Sanksi' => $rslt['jenis_sanksi'],
                     'Keterangan' => $rslt['deskripsi_sanksi']
 
                 ];
@@ -49,6 +49,17 @@ class Data_Sanksi extends Controller
     {
         $resultDataAll = $this->model('Data_Sanksi_Model')->getDataAll($_POST);
         $result = $this->model('Data_Sanksi_Model')->AddSanksi($_POST, $resultDataAll['data']);
+        if ($result['status'] === 200) {
+            header('Location: ' . BASEURL . '/data_sanksi');
+            exit;
+        } else {
+            header('Location: ' . BASEURL . '/data_sanksi');
+            exit;
+        }
+    }
+    public function editData($id)
+    {
+        $result = $this->model('Data_Sanksi_Model')->EditSanksi($_POST, $id);
         if ($result['status'] === 200) {
             header('Location: ' . BASEURL . '/data_sanksi');
             exit;
