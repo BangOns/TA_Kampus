@@ -68,4 +68,15 @@ class Data_Sanksi extends Controller
             exit;
         }
     }
+    public function deleteData($id)
+    {
+        $result = $this->model('Data_Sanksi_Model')->deleteSanksi($id);
+        if ($result['status'] === 200) {
+            header('Location: ' . BASEURL . '/data_sanksi');
+            exit;
+        } else {
+            header('Location: ' . BASEURL . '/data_sanksi');
+            exit;
+        }
+    }
 }

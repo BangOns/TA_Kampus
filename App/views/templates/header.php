@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="<?= BASEURL; ?>/css/style.css">
     <title> <?= ucwords(preg_replace("/[-_]/", " ", $data["title"])) ?></title>
     <script src="<?= BASEURL; ?>/js/jquery.min.js"></script>
-
 </head>
 
 <body class="bg-white">

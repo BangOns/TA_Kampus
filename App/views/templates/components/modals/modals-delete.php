@@ -21,7 +21,7 @@ if (!file_exists($filepath)) {
         <footer class="w-full flex justify-center mt-4 gap-5 text-sm px-4">
             <a href="<?= BASEURL; ?>/<?= $data['title'] ?>"
                 class="bg-slate-500 text-white px-2 md:px-3 py-1 rounded-md hover:bg-slate-600 text-xs md:text-base">Close</a>
-            <a href="<?= BASEURL; ?>/<?= $data['title'] ?>/delete/<?= $data['action'] ?>/<?= $id ?>"
+            <a href="<?= BASEURL; ?>/<?= $data['title'] ?>/deleteData/<?= $id ?>"
                 class="bg-red-500 text-white  px-2 md:px-3 py-1 rounded-md hover:bg-red-700 text-xs md:text-base">Delete</a>
         </footer>
     </section>

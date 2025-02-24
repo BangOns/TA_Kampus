@@ -74,4 +74,16 @@ class Data_Sanksi_Model
             return Response(404, [], "Gagal Merubah Data Sanksi karena " . $e->getMessage() . " ");
         }
     }
+    public function deleteSanksi($id)
+    {
+        try {
+            $query = "DELETE FROM $this->table WHERE id_sanksi = :id_sanksi";
+            $this->db->query($query);
+            $this->db->bind('id_sanksi', $id);
+            $this->db->execute();
+            return Response(200, [], "Berhasil Menghapus Data Sanksi");
+        } catch (\Throwable $e) {
+            return Response(404, [], "Gagal Menghapus Data Sanksi karena " . $e->getMessage() . " ");
+        }
+    }
 }

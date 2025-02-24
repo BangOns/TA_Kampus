@@ -78,4 +78,16 @@ class Data_Pelanggaran_Model
             return Response(404, [], "Gagal Merubah Data Pelanggaran " . $e->getMessage() . " ");
         }
     }
+    public function deletePelanggaran($id)
+    {
+        try {
+            $query = "DELETE FROM $this->table WHERE id_pelanggaran = :id_pelanggaran";
+            $this->db->query($query);
+            $this->db->bind('id_pelanggaran', $id);
+            $this->db->execute();
+            return Response(200, [], "Berhasil Menghapus Data pelanggaran");
+        } catch (\Throwable $e) {
+            return Response(404, [], "Gagal Menghapus Data pelanggaran karena " . $e->getMessage() . " ");
+        }
+    }
 }

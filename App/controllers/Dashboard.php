@@ -143,8 +143,18 @@ class Dashboard extends Controller
     }
     public function editData($id)
     {
-
         $result = $this->model('Data_Pelanggaran_Santri_Model')->editPelanggaranSantri($_POST, $id);
+        if ($result['status'] === 200) {
+            header('Location: ' . BASEURL . '/dashboard');
+            exit;
+        } else {
+            header('Location: ' . BASEURL . '/dashboard');
+            exit;
+        }
+    }
+    public function deleteData($id)
+    {
+        $result = $this->model('Data_Pelanggaran_Santri_Model')->deletePelanggaranSantri($id);
         if ($result['status'] === 200) {
             header('Location: ' . BASEURL . '/dashboard');
             exit;

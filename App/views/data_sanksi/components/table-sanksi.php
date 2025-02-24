@@ -43,11 +43,19 @@ $link_menu = [
         <!-- Table & Card Pelanggar -->
         <article class="w-full max-md:space-y-3 max-md:mt-3 ">
             <!-- Table Pelanggar -->
-            <?php include dirname(__DIR__, 3) . '/views/templates/components/table-data.php';
-            renderTable($data['data-sanksi'], $data['list-table'], $link_menu); ?>
-            <!-- Card Pelanggar -->
-            <?php include dirname(__DIR__, 3) . '/views/templates/components/card-mobile/card-data-sanksi.php';
-            renderCardSanksi($data['data-sanksi'], $link_menu); ?>
+            <?php if (count($data['data-sanksi']) !== 0) {
+
+                include dirname(__DIR__, 3) . '/views/templates/components/table-data.php';
+                renderTable($data['data-sanksi'], $data['list-table'], $link_menu);
+                // Card Pelanggar
+                include dirname(__DIR__, 3) . '/views/templates/components/card-mobile/card-data-sanksi.php';
+                renderCardSanksi($data['data-sanksi'], $link_menu);
+            } else {
+                echo '<section class="w-full text-center ">
+        <p class="text-2xl font-semibold">Data Not Found X</p>
+    </section>';
+            }
+            ?>
         </article>
 
     </section>

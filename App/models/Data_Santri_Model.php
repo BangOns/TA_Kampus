@@ -3,6 +3,7 @@
 class Data_Santri_Model
 {
     private $table = 'data_santri';
+    private $table_reference = 'pelanggaran_santri';
     private $db;
 
     public function __construct()
@@ -71,6 +72,25 @@ class Data_Santri_Model
         } catch (\Throwable $th) {
             //throw $th;
             return Response(404, [], "Gagal Mengedit Data Santri");
+        }
+    }
+    public function deleteSantri($id)
+    {
+        try {
+            $query = "DELETE FROM $this->table WHERE id_santri = :id_santri";
+            $query_reference = "DELETE FROM $this->table_reference WHERE id_santri = :id_santri";
+            // 
+
+            $this->db->query($query_reference);
+            $this->db->bind('id_santri', $id);
+            $this->db->execute();
+            //
+            $this->db->query($query);
+            $this->db->bind('id_santri', $id);
+            $this->db->execute();
+            return Response(200, [], "Berhasil Menghapus Data Santri");
+        } catch (\Throwable $e) {
+            return Response(404, [], "Gagal Menghapus Data Santri karena " . $e->getMessage() . " ");
         }
     }
 }

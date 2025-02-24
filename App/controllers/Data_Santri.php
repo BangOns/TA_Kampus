@@ -67,4 +67,15 @@ class Data_Santri extends Controller
             exit;
         }
     }
+    public function deleteData($id)
+    {
+        $result = $this->model('Data_Santri_Model')->deleteSantri($id);
+        if ($result['status'] === 200) {
+            header('Location: ' . BASEURL . '/data_santri');
+            exit;
+        } else {
+            header('Location: ' . BASEURL . '/data_santri');
+            exit;
+        }
+    }
 }
