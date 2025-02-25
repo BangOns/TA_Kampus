@@ -1,6 +1,4 @@
 <?php
-
-
 $link_menu = [
     [
         'href' => BASEURL . '/data_santri/detail/data-santri',
@@ -74,8 +72,8 @@ $link_menu = [
     <ul class="flex w-full justify-center  ">
         <!-- Cursor Left -->
         <li class=" border border-slate-300 rounded-l-md ">
-            <a href="#"
-                class="flex w-full h-full items-center gap-2 text-xs md:text-sm px-3 py-2 hover:cursor-pointer hover:bg-slate-200 bg-white ">
+            <a href="<?= BASEURL ?>/data_santri?page=<?= $data['halaman-aktif'] - 1 ?>"
+                class="flex w-full h-full <?= $data['halaman-aktif'] <= 1 ? 'pointer-events-none' : ''  ?>   items-center gap-2 text-xs md:text-sm px-3 py-2 hover:cursor-pointer hover:bg-slate-200 bg-white ">
                 <div class="size-4">
                     <?php include dirname(__DIR__, 4) . '/public/icons/icons-left.svg'; ?>
                 </div>
@@ -83,16 +81,19 @@ $link_menu = [
             </a>
         </li>
         <!-- List Paginate -->
-        <li class=" border border-slate-300 ">
-            <a href="#"
-                class="flex px-4 items-center h-full  text-xs md:text-sm  w-full hover:cursor-pointer hover:bg-slate-200 bg-white">
-                1
-            </a>
-        </li>
+        <?php for ($i = 1; $i <= $data['total-halaman']; $i++) : ?>
+            <li class=" border border-slate-300 ">
+                <a href="<?= BASEURL ?>/data_santri?page=<?= $i ?>"
+                    class="flex px-4 items-center h-full  text-xs md:text-sm  w-full hover:cursor-pointer hover:bg-slate-200 bg-white">
+                    <?= $i ?>
+                </a>
+            </li>
+        <?php endfor; ?>
+
         <!-- Cursor Right -->
         <li class=" border border-slate-300 rounded-r-md ">
-            <a href="#"
-                class="flex w-full h-full items-center gap-2 text-xs md:text-sm px-3 py-2 hover:bg-slate-200 bg-white hover:cursor-pointer">
+            <a href="<?= BASEURL ?>/data_santri?page=<?= $data['halaman-aktif'] + 1 ?>"
+                class="flex w-full h-full items-center gap-2 text-xs md:text-sm px-3 py-2 hover:bg-slate-200 bg-white hover:cursor-pointer  <?= $data['halaman-aktif'] >= $data['total-halaman'] ? 'pointer-events-none' : ''  ?>  ">
                 Next
                 <div class="size-4">
                     <?php include dirname(__DIR__, 4) . '/public/icons/icons-right.svg'; ?>

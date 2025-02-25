@@ -5,7 +5,6 @@ class Logout extends Controller
     public function index()
     {
         session_destroy();
-        header('Location:' . BASEURL . '/auth');
-        exit;
+        $this->redirect('/auth');
     }
 }

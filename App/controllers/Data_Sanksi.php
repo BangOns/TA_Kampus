@@ -50,33 +50,40 @@ class Data_Sanksi extends Controller
         $resultDataAll = $this->model('Data_Sanksi_Model')->getDataAll($_POST);
         $result = $this->model('Data_Sanksi_Model')->AddSanksi($_POST, $resultDataAll['data']);
         if ($result['status'] === 200) {
-            header('Location: ' . BASEURL . '/data_sanksi');
-            exit;
+            Flasher::setFlash('Tambah Data Sanksi', 'Berhasil', 'success');
+
+            $this->redirect('/data_sanksi');
         } else {
-            header('Location: ' . BASEURL . '/data_sanksi');
-            exit;
+            Flasher::setFlash('Tambah Data Sanksi', 'Gagal', 'error');
+
+
+            $this->redirect('/data_sanksi');
         }
     }
     public function editData($id)
     {
         $result = $this->model('Data_Sanksi_Model')->EditSanksi($_POST, $id);
         if ($result['status'] === 200) {
-            header('Location: ' . BASEURL . '/data_sanksi');
-            exit;
+            Flasher::setFlash('Ubah Data Sanksi', 'Berhasil', 'success');
+
+            $this->redirect('/data_sanksi');
         } else {
-            header('Location: ' . BASEURL . '/data_sanksi');
-            exit;
+            Flasher::setFlash('Ubah Data Sanksi', 'Gagal', 'error');
+
+            $this->redirect('/data_sanksi');
         }
     }
     public function deleteData($id)
     {
         $result = $this->model('Data_Sanksi_Model')->deleteSanksi($id);
         if ($result['status'] === 200) {
-            header('Location: ' . BASEURL . '/data_sanksi');
-            exit;
+            Flasher::setFlash('Hapus Data Sanksi', 'Berhasil', 'success');
+
+            $this->redirect('/data_sanksi');
         } else {
-            header('Location: ' . BASEURL . '/data_sanksi');
-            exit;
+            Flasher::setFlash('Hapus Data Sanksi', 'Gagal', 'error');
+
+            $this->redirect('/data_sanksi');
         }
     }
 }

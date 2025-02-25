@@ -134,33 +134,39 @@ class Dashboard extends Controller
 
         $result = $this->model('Data_Pelanggaran_Santri_Model')->addPelanggaranSantri($_POST);
         if ($result['status'] === 200) {
-            header('Location: ' . BASEURL . '/dashboard');
-            exit;
+            Flasher::setFlash('Tambah Data Pelanggaran Santri', 'Berhasil', 'success');
+
+            $this->redirect('/dashboard');
         } else {
-            header('Location: ' . BASEURL . '/dashboard');
-            exit;
+            Flasher::setFlash('Tambah Data Pelanggaran Santri', 'Gagal', 'error');
+
+            $this->redirect('/dashboard');
         }
     }
     public function editData($id)
     {
         $result = $this->model('Data_Pelanggaran_Santri_Model')->editPelanggaranSantri($_POST, $id);
         if ($result['status'] === 200) {
-            header('Location: ' . BASEURL . '/dashboard');
-            exit;
+            Flasher::setFlash('Ubah Data Pelanggaran Santri', 'Berhasil', 'success');
+
+            $this->redirect('/dashboard');
         } else {
-            header('Location: ' . BASEURL . '/dashboard');
-            exit;
+            Flasher::setFlash('Ubah Data Pelanggaran Santri', 'Gagal', 'error');
+
+            $this->redirect('/dashboard');
         }
     }
     public function deleteData($id)
     {
         $result = $this->model('Data_Pelanggaran_Santri_Model')->deletePelanggaranSantri($id);
         if ($result['status'] === 200) {
-            header('Location: ' . BASEURL . '/dashboard');
-            exit;
+            Flasher::setFlash('Hapus Data Pelanggaran Santri', 'Berhasil', 'success');
+
+            $this->redirect('/dashboard');
         } else {
-            header('Location: ' . BASEURL . '/dashboard');
-            exit;
+            Flasher::setFlash('Hapus Data Pelanggaran Santri', 'Gagal', 'error');
+
+            $this->redirect('/dashboard');
         }
     }
 }

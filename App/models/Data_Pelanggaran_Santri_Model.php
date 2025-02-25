@@ -1,21 +1,17 @@
 <?php
 
-class Data_Pelanggaran_Santri_Model
+class Data_Pelanggaran_Santri_Model extends Database
 {
     private $table = 'pelanggaran_santri';
-    private $db;
     public  static $skala_bobot = 3;
 
-    public function __construct()
-    {
-        $this->db = new Database();
-    }
+
     public function getDataAll()
     {
         try {
             $query = 'SELECT * FROM ' . $this->table;
-            $this->db->query($query);
-            $results =  $this->db->resultSet();
+            $this->query($query);
+            $results =  $this->resultSet();
             return Response(200, $results, "Berhasil get data pelanggaran Santri");
         } catch (\Throwable $th) {
             return Response(404, [], "Gagal get data pelanggaran");
@@ -25,9 +21,9 @@ class Data_Pelanggaran_Santri_Model
     {
         try {
             $query = "SELECT * FROM $this->table WHERE id_pelanggaran_santri = :id_pelanggaran_santri ";
-            $this->db->query($query);
-            $this->db->bind('id_pelanggaran_santri', $id);
-            $result = $this->db->single();
+            $this->query($query);
+            $this->bind('id_pelanggaran_santri', $id);
+            $result = $this->single();
             return Response(200, $result, "Berhasil get data pelanggaran");
         } catch (\Throwable $th) {
             return Response(200, [], "Berhasil get data pelanggaran");
@@ -54,17 +50,17 @@ class Data_Pelanggaran_Santri_Model
             ];
             $nilai_akhir  = sumPelanggaranSantri($data_kriteria);
             $query =  "INSERT INTO $this->table (id_pelanggaran_santri,nama_pelanggaran,c1,id_santri,waktu,nilai_akhir,c2,c3,c4,c5) VALUES ('',:nama_pelanggaran,:c1,:id_santri,:waktu,:nilai_akhir,:c2,:c3,:c4,:c5)";
-            $this->db->query($query);
-            $this->db->bind('id_santri', $id_santri);
-            $this->db->bind('nama_pelanggaran', $nama_pelanggaran);
-            $this->db->bind('waktu', $waktu);
-            $this->db->bind('c1', $jenis);
-            $this->db->bind('c2', $frekuensi);
-            $this->db->bind('c3', $dampak);
-            $this->db->bind('c4', $keseriusan_niat);
-            $this->db->bind('c5', $permohonan_maaf);
-            $this->db->bind('nilai_akhir', $nilai_akhir);
-            $this->db->execute();
+            $this->query($query);
+            $this->bind('id_santri', $id_santri);
+            $this->bind('nama_pelanggaran', $nama_pelanggaran);
+            $this->bind('waktu', $waktu);
+            $this->bind('c1', $jenis);
+            $this->bind('c2', $frekuensi);
+            $this->bind('c3', $dampak);
+            $this->bind('c4', $keseriusan_niat);
+            $this->bind('c5', $permohonan_maaf);
+            $this->bind('nilai_akhir', $nilai_akhir);
+            $this->execute();
             return Response(200, [], "Berhasil Menambah Data Pelanggaran Santri");
         } catch (\Throwable $e) {
             return Response(404, [], "Gagal Menambah Data Pelanggaran Santri " . $e->getMessage() . " ");
@@ -93,18 +89,18 @@ class Data_Pelanggaran_Santri_Model
             ];
             $nilai_akhir  = sumPelanggaranSantri($data_kriteria);
             $query =  "UPDATE $this->table SET nama_pelanggaran = :nama_pelanggaran,c1 = :c1,id_santri = :id_santri,waktu = :waktu,nilai_akhir = :nilai_akhir,c2 = :c2,c3 = :c3,c4 = :c4,c5 = :c5  WHERE id_pelanggaran_santri= :id_pelanggaran_santri";
-            $this->db->query($query);
-            $this->db->bind('id_pelanggaran_santri', $id_pelanggaran_santri);
-            $this->db->bind('id_santri', $id_santri);
-            $this->db->bind('nama_pelanggaran', $nama_pelanggaran);
-            $this->db->bind('waktu', $waktu);
-            $this->db->bind('c1', $jenis);
-            $this->db->bind('c2', $frekuensi);
-            $this->db->bind('c3', $dampak);
-            $this->db->bind('c4', $keseriusan_niat);
-            $this->db->bind('c5', $permohonan_maaf);
-            $this->db->bind('nilai_akhir', $nilai_akhir);
-            $this->db->execute();
+            $this->query($query);
+            $this->bind('id_pelanggaran_santri', $id_pelanggaran_santri);
+            $this->bind('id_santri', $id_santri);
+            $this->bind('nama_pelanggaran', $nama_pelanggaran);
+            $this->bind('waktu', $waktu);
+            $this->bind('c1', $jenis);
+            $this->bind('c2', $frekuensi);
+            $this->bind('c3', $dampak);
+            $this->bind('c4', $keseriusan_niat);
+            $this->bind('c5', $permohonan_maaf);
+            $this->bind('nilai_akhir', $nilai_akhir);
+            $this->execute();
             return Response(200, [], "Berhasil Merubah Data Pelanggaran Santri");
         } catch (\Throwable $e) {
             return Response(404, [], "Gagal Merubah Data Pelanggaran Santri " . $e->getMessage() . " ");
@@ -114,9 +110,9 @@ class Data_Pelanggaran_Santri_Model
     {
         try {
             $query = "DELETE FROM $this->table WHERE id_pelanggaran_santri = :id_pelanggaran_santri";
-            $this->db->query($query);
-            $this->db->bind('id_pelanggaran_santri', $id);
-            $this->db->execute();
+            $this->query($query);
+            $this->bind('id_pelanggaran_santri', $id);
+            $this->execute();
             return Response(200, [], "Berhasil Menghapus Data Pelanggaran Santri");
         } catch (\Throwable $e) {
             return Response(404, [], "Gagal Menghapus Data Pelanggaran Santri karena " . $e->getMessage() . " ");

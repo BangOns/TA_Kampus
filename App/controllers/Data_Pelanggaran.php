@@ -53,22 +53,26 @@ class Data_Pelanggaran extends Controller
     {
         $result = $this->model('Data_Pelanggaran_Model')->AddPelanggaran($_POST);
         if ($result['status'] === 200) {
-            header('Location: ' . BASEURL . '/data_pelanggaran');
-            exit;
+            Flasher::setFlash('Tambah Data Pelanggaran', 'Berhasil', 'success');
+
+            $this->redirect('/data_pelanggaran');
         } else {
-            header('Location: ' . BASEURL . '/data_pelanggaran');
-            exit;
+            Flasher::setFlash('Tambah Data Pelanggaran', 'Gagal', 'error');
+
+            $this->redirect('/data_pelanggaran');
         }
     }
     public function editData($id)
     {
         $result = $this->model('Data_Pelanggaran_Model')->EditPelanggaran($_POST, $id);
         if ($result['status'] === 200) {
-            header('Location: ' . BASEURL . '/data_pelanggaran');
-            exit;
+            Flasher::setFlash('Ubah Data Pelanggaran', 'Berhasil', 'success');
+
+            $this->redirect('/data_pelanggaran');
         } else {
-            header('Location: ' . BASEURL . '/data_pelanggaran');
-            exit;
+            Flasher::setFlash('Ubah Data Pelanggaran', 'Gagal', 'error');
+
+            $this->redirect('/data_pelanggaran');
         }
     }
 
@@ -76,11 +80,13 @@ class Data_Pelanggaran extends Controller
     {
         $result = $this->model('Data_Pelanggaran_Model')->deletePelanggaran($id);
         if ($result['status'] === 200) {
-            header('Location: ' . BASEURL . '/data_pelanggaran');
-            exit;
+            Flasher::setFlash('Hapus Data Pelanggaran', 'Berhasil', 'success');
+
+            $this->redirect('/data_pelanggaran');
         } else {
-            header('Location: ' . BASEURL . '/data_pelanggaran');
-            exit;
+            Flasher::setFlash('Hapus Data Pelanggaran', 'Gagal', 'error');
+
+            $this->redirect('/data_pelanggaran');
         }
     }
 }

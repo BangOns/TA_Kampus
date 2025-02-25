@@ -27,22 +27,25 @@ class Auth extends Controller
 
         if ($result['status'] == '200') {
             $_SESSION['user'] = $result['user'][0] . ',' . $result['user'][1];
-            header('Location: ' . BASEURL . '/dashboard');
-            exit;
+            Flasher::setFlash('Login', 'Berhasil', 'success');
+            $this->redirect('/dashboard');
         } else {
-            header('Location: ' . BASEURL . '/auth');
-            exit;
+            Flasher::setFlash('Login', 'Gagal', 'error');
+
+            $this->redirect('/auth');
         }
     }
     public function addAdmin()
     {
         $result =  $this->model('Auth_Model')->register($_POST);
         if ($result['status'] == '200') {
-            header('Location: ' . BASEURL . '/auth');
-            exit;
+            Flasher::setFlash('Register', 'Berhasil', 'success');
+
+            $this->redirect('/auth');
         } else {
-            header('Location: ' . BASEURL . '/auth/register');
-            exit;
+            Flasher::setFlash('Register', 'Gagal', 'error');
+
+            $this->redirect('/auth/register');
         }
     }
 }

@@ -18,4 +18,9 @@ class Controller
             die("File model '$model.php' tidak ditemukan di App/models/");
         }
     }
+    public function redirect($url)
+    {
+        header('Location: ' . BASEURL . $url);
+        exit;
+    }
 }

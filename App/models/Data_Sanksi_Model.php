@@ -1,19 +1,15 @@
 <?php
-class Data_Sanksi_Model
+class Data_Sanksi_Model extends Database
 {
     private $table = 'data_sanksi';
-    private $db;
 
-    public function __construct()
-    {
-        $this->db = new Database();
-    }
+
     public function getDataAll()
     {
         try {
             $query = 'SELECT * FROM ' . $this->table;
-            $this->db->query($query);
-            $results =  $this->db->resultSet();
+            $this->query($query);
+            $results =  $this->resultSet();
             return Response(200, $results, "Berhasil get data Sanksi");
         } catch (\Throwable $th) {
             return Response(404, [], "Gagal get data Sanksi");
@@ -23,9 +19,9 @@ class Data_Sanksi_Model
     {
         try {
             $query = "SELECT * FROM $this->table WHERE id_sanksi = :id_sanksi ";
-            $this->db->query($query);
-            $this->db->bind('id_sanksi', $id);
-            $result = $this->db->single();
+            $this->query($query);
+            $this->bind('id_sanksi', $id);
+            $result = $this->single();
             return Response(200, $result, "Berhasil get data Sanksi");
         } catch (\Throwable $th) {
             return Response(200, [], "Berhasil get data Sanksi");
@@ -42,12 +38,12 @@ class Data_Sanksi_Model
                 throw new Exception('Skor Sudah digunakan!');
             }
             $query =  "INSERT INTO $this->table (id_sanksi,jenis_sanksi,deskripsi_sanksi,min_skor,max_skor) VALUES ('',:jenis_sanksi,:deskripsi_sanksi,:min_skor,:max_skor)";
-            $this->db->query($query);
-            $this->db->bind('jenis_sanksi', $jenis_sanksi);
-            $this->db->bind('deskripsi_sanksi', $deskripsi_sanksi);
-            $this->db->bind('min_skor', floatval(trim($skor[0])));
-            $this->db->bind('max_skor', floatval(trim($skor[1])));
-            $this->db->execute();
+            $this->query($query);
+            $this->bind('jenis_sanksi', $jenis_sanksi);
+            $this->bind('deskripsi_sanksi', $deskripsi_sanksi);
+            $this->bind('min_skor', floatval(trim($skor[0])));
+            $this->bind('max_skor', floatval(trim($skor[1])));
+            $this->execute();
             return Response(200, [], "Berhasil Menambah Data Sanksi");
         } catch (\Throwable $e) {
             return Response(404, [], "Gagal Menambah Data Sanksi karena " . $e->getMessage() . " ");
@@ -62,13 +58,13 @@ class Data_Sanksi_Model
             $skor = explode("-", htmlspecialchars($data['min-max']));
 
             $query =  "UPDATE $this->table SET jenis_sanksi = :jenis_sanksi,deskripsi_sanksi = :deskripsi_sanksi,min_skor = :min_skor,max_skor = :max_skor WHERE id_sanksi = :id_sanksi";
-            $this->db->query($query);
-            $this->db->bind('id_sanksi', $id_sanksi);
-            $this->db->bind('jenis_sanksi', $jenis_sanksi);
-            $this->db->bind('deskripsi_sanksi', $deskripsi_sanksi);
-            $this->db->bind('min_skor', floatval(trim($skor[0])));
-            $this->db->bind('max_skor', floatval(trim($skor[1])));
-            $this->db->execute();
+            $this->query($query);
+            $this->bind('id_sanksi', $id_sanksi);
+            $this->bind('jenis_sanksi', $jenis_sanksi);
+            $this->bind('deskripsi_sanksi', $deskripsi_sanksi);
+            $this->bind('min_skor', floatval(trim($skor[0])));
+            $this->bind('max_skor', floatval(trim($skor[1])));
+            $this->execute();
             return Response(200, [], "Berhasil Merubah Data Sanksi");
         } catch (\Throwable $e) {
             return Response(404, [], "Gagal Merubah Data Sanksi karena " . $e->getMessage() . " ");
@@ -78,9 +74,9 @@ class Data_Sanksi_Model
     {
         try {
             $query = "DELETE FROM $this->table WHERE id_sanksi = :id_sanksi";
-            $this->db->query($query);
-            $this->db->bind('id_sanksi', $id);
-            $this->db->execute();
+            $this->query($query);
+            $this->bind('id_sanksi', $id);
+            $this->execute();
             return Response(200, [], "Berhasil Menghapus Data Sanksi");
         } catch (\Throwable $e) {
             return Response(404, [], "Gagal Menghapus Data Sanksi karena " . $e->getMessage() . " ");

@@ -1,3 +1,6 @@
+<?php
+Flasher::flash();
+?>
 <main class=" w-svw h-svh max-[380px]:h-auto">
     <section class="w-full h-full max-sm:p-0 max-lg:px-5 flex justify-center items-center   ">
         <article class="w-full h-full lg:w-3/4   sm:h-[90%]  bg-white rounded-md shadow-xl flex flex-row-reverse">

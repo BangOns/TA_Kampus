@@ -3,6 +3,7 @@
 require_once 'config/config.php';
 require_once 'utils/SumPelanggaranSantri.php';
 require_once 'utils/SchemaResponse.php';
+require_once 'utils/Generate_Pagination.php';
 
 spl_autoload_register(function ($class) {
 

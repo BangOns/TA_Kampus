@@ -15,7 +15,13 @@ class Data_Santri extends Controller
         ];
         $data['data-santri'] = [];
         $data['detail-santri'] = [];
-        $results = $this->model('Data_Santri_Model')->getDataAll();
+        //
+        $limitPerhalaman = 2;
+        $totalData =  $this->model('Data_Santri_Model')->getDataAll();
+        $generateLimitToPagination = generatePaginate($totalData, $limitPerhalaman);
+
+        //
+        $results = $this->model('Data_Santri_Model')->getDataAllToTable($generateLimitToPagination['index-limit'], $limitPerhalaman);
         if ($results['status'] === 200 && !empty($results['data'])) {
             foreach ($results['data'] as $index => $rslt) {
                 $newData = [
@@ -35,6 +41,8 @@ class Data_Santri extends Controller
                 $data['detail-santri'] = $resultDetailSantri['data'];
             }
         }
+        $data['total-halaman'] = $generateLimitToPagination['total-halaman'];
+        $data['halaman-aktif'] = $generateLimitToPagination['halaman-aktif'];
         $data['title'] = 'data_santri';
         $data['type'] = $type;
         $data['action'] = $action;
@@ -49,33 +57,39 @@ class Data_Santri extends Controller
     {
         $result = $this->model('Data_Santri_Model')->AddSantri($_POST);
         if ($result['status'] === 200) {
-            header('Location: ' . BASEURL . '/data_santri');
-            exit;
+            Flasher::setFlash('Tambah Data Santri', 'Berhasil', 'success');
+
+            $this->redirect('/data_santri');
         } else {
-            header('Location: ' . BASEURL . '/data_santri');
-            exit;
+            Flasher::setFlash('Tambah Data Santri', 'Gagal', 'error');
+
+            $this->redirect('/data_santri');
         }
     }
     public function editData($id)
     {
         $result = $this->model('Data_Santri_Model')->EditSantri($_POST, $id);
         if ($result['status'] === 200) {
-            header('Location: ' . BASEURL . '/data_santri');
-            exit;
+            Flasher::setFlash('Ubah Data Santri', 'Berhasil', 'success');
+
+            $this->redirect('/data_santri');
         } else {
-            header('Location: ' . BASEURL . '/data_santri');
-            exit;
+            Flasher::setFlash('Ubah Data Santri', 'Gagal', 'error');
+
+            $this->redirect('/data_santri');
         }
     }
     public function deleteData($id)
     {
         $result = $this->model('Data_Santri_Model')->deleteSantri($id);
         if ($result['status'] === 200) {
-            header('Location: ' . BASEURL . '/data_santri');
-            exit;
+            Flasher::setFlash('Hapus Data Santri', 'Berhasil', 'success');
+
+            $this->redirect('/data_santri');
         } else {
-            header('Location: ' . BASEURL . '/data_santri');
-            exit;
+            Flasher::setFlash('Hapus Data Santri', 'Gagal', 'error');
+
+            $this->redirect('/data_santri');
         }
     }
 }
