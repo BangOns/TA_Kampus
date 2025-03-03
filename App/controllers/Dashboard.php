@@ -7,17 +7,21 @@ class Dashboard extends Controller
             header('Location: ' . BASEURL . '/auth');
             exit;
         }
-        $data['title'] = 'dashboard';
+        $data['title'] = 'Dashboard';
         $data['list-table'] = [
             'No',
             'Nama Santri',
-            'Tahun Ajaran',
+            'jenis',
+            'frekuensi',
+            'dampak',
+            'keseriusan',
+            'permohonan',
             'Kategori Sanksi'
         ];
         $data['type'] = $type;
         $data['action'] = $action;
         $data['id'] = htmlspecialchars($id);
-        $data['kategori_pelanggaran'] = [
+        $data['kriteria_pelanggaran'] = [
             'jenis_pelanggaran' => [
                 '1' => 'Ringan',
                 '2' => 'Sedang',
@@ -60,6 +64,12 @@ class Dashboard extends Controller
                     'No' => $index += 1,
                     'id' => $rslt['id_pelanggaran_santri'],
                     'Nama Santri' => $data_santri['data']['nama_santri'],
+                    'pelanggaran-dilakukan' => $rslt['nama_pelanggaran'],
+                    'jenis' => $data['kriteria_pelanggaran']['jenis_pelanggaran'][$rslt['c1']],
+                    'frekuensi' => $data['kriteria_pelanggaran']['frekuensi_pelanggaran'][$rslt['c2']],
+                    'dampak' => $data['kriteria_pelanggaran']['dampak_pelanggaran'][$rslt['c3']],
+                    'keseriusan' => $data['kriteria_pelanggaran']['keseriusan_niat'][$rslt['c4']],
+                    'permohonan' => $data['kriteria_pelanggaran']['permohonan_maaf'][$rslt['c5']],
                     'Tahun Ajaran' => $data_santri['data']['tahun_ajaran'],
                     'Kelas' => $data_santri['data']['kelas'],
                     'Waktu' => $rslt['waktu'],
@@ -113,11 +123,11 @@ class Dashboard extends Controller
                     'alamat' => $data_santri['data']['alamat'],
                     'nama-pelanggaran' => $resultDataPelanggaranSantri['data']['nama_pelanggaran'],
                     'waktu' => $resultDataPelanggaranSantri['data']['waktu'],
-                    'kategori-pelanggaran' => $data['kategori_pelanggaran']['jenis_pelanggaran'][$resultDataPelanggaranSantri['data']['c1']],
-                    'frekuensi' => $data['kategori_pelanggaran']['frekuensi_pelanggaran'][$resultDataPelanggaranSantri['data']['c2']],
-                    'dampak' => $data['kategori_pelanggaran']['dampak_pelanggaran'][$resultDataPelanggaranSantri['data']['c3']],
-                    'keseriusan' => $data['kategori_pelanggaran']['keseriusan_niat'][$resultDataPelanggaranSantri['data']['c4']],
-                    'permohonan' => $data['kategori_pelanggaran']['permohonan_maaf'][$resultDataPelanggaranSantri['data']['c5']],
+                    'kategori-pelanggaran' => $data['kriteria_pelanggaran']['jenis_pelanggaran'][$resultDataPelanggaranSantri['data']['c1']],
+                    'frekuensi' => $data['kriteria_pelanggaran']['frekuensi_pelanggaran'][$resultDataPelanggaranSantri['data']['c2']],
+                    'dampak' => $data['kriteria_pelanggaran']['dampak_pelanggaran'][$resultDataPelanggaranSantri['data']['c3']],
+                    'keseriusan' => $data['kriteria_pelanggaran']['keseriusan_niat'][$resultDataPelanggaranSantri['data']['c4']],
+                    'permohonan' => $data['kriteria_pelanggaran']['permohonan_maaf'][$resultDataPelanggaranSantri['data']['c5']],
                     'sanksi' => $data_sanksi['deskripsi_sanksi'],
                 ];
                 $data['detail-pelanggaran-santri'] = $data_detail_pelanggaran_santri;

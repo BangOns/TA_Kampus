@@ -27,7 +27,6 @@ class Auth extends Controller
 
         if ($result['status'] == '200') {
             $_SESSION['user'] = $result['user'][0] . ',' . $result['user'][1];
-            Flasher::setFlash('Login', 'Berhasil', 'success');
             $this->redirect('/dashboard');
         } else {
             Flasher::setFlash('Login', 'Gagal', 'error');

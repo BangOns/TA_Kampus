@@ -1,5 +1,5 @@
 <?php
-date_default_timezone_set('Asia/Jakarta');
+
 function renderCardPelanggaranSantri($data, $menu)
 {
     $kategoriSanksi = [
@@ -11,26 +11,42 @@ function renderCardPelanggaranSantri($data, $menu)
     echo '<section class="w-full flex flex-col gap-4 md:hidden">';
     // Looping melalui data pelanggar untuk menampilkan tiap artikel
     foreach ($data as $index => $pelanggar) {
-        $originalDate = $pelanggar['Waktu']; // Contoh tanggal
-        $dateTime = new DateTime($originalDate);
-        $formattedDate = $dateTime->format('l d F Y');
         echo '<article class="w-full py-3 h-auto border border-slate-300 rounded shadow px-5 sm:px-7">';
         echo '<section class="py-2">';
         echo '<h1 class="font-semibold text-sm sm:text-base">' . $pelanggar['Nama Santri'] . '</h1>';
         echo '<p class="text-xs text-slate-600">Kelas ' .  $pelanggar['Kelas'] . ' | Tahun Ajaran ' .  $pelanggar['Tahun Ajaran'] . '</p>';
         echo '</section>';
-
         // Menampilkan detail pelanggaran dalam tabel
         echo '<section class="py-2 text-xs sm:text-sm">';
         echo '<table class="w-full table-collapse">';
         echo '<tbody class="divide-y divide-gray-200 w-full">';
         echo '<tr>';
-        echo '<td class="py-2">Waktu</td>';
-        echo '<td class="font-semibold">' . $formattedDate . '</td>';
+        echo '<td class="py-2">Pelanggaran yang dilakukan</td>';
+        echo '<td class="font-semibold">' . $pelanggar['pelanggaran-dilakukan'] . '</td>';
+        echo '</tr>';
+        echo '<tr>';
+        echo '<td class="py-2">Jenis Pelanggaran</td>';
+        echo '<td class="font-semibold">' . $pelanggar['jenis-pelanggaran'] . '</td>';
+        echo '</tr>';
+        echo '<tr>';
+        echo '<td class="py-2">Frekuensi</td>';
+        echo '<td class="font-semibold">' . $pelanggar['frekuensi'] . '</td>';
+        echo '</tr>';
+        echo '<tr>';
+        echo '<td class="py-2">Dampak</td>';
+        echo '<td class="font-semibold">' . $pelanggar['dampak'] . '</td>';
+        echo '</tr>';
+        echo '<tr>';
+        echo '<td class="py-2">Keseriusan</td>';
+        echo '<td class="font-semibold">' . $pelanggar['keseriusan'] . '</td>';
+        echo '</tr>';
+        echo '<tr>';
+        echo '<td class="py-2">Permohonan</td>';
+        echo '<td class="font-semibold">' . $pelanggar['permohonan'] . '</td>';
         echo '</tr>';
         echo '<tr>';
         echo '<td class="py-2">Sanksi</td>';
-        echo '<td class="' .  $kategoriSanksi[$pelanggar['Kategori']]  . ' font-semibold">' . $pelanggar['Kategori'] . '</td>';
+        echo '<td class="' .  $kategoriSanksi[$pelanggar['Kategori Sanksi']]  . ' font-semibold">' . $pelanggar['Kategori Sanksi'] . '</td>';
         echo '</tr>';
         echo '</tbody>';
         echo '</table>';

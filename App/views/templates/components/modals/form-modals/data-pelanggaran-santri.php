@@ -1,35 +1,3 @@
-<?php
-$jenis_pelanggaran = [
-    '1' => 'Ringan',
-    '2' => 'Sedang',
-    '3' => 'Berat',
-
-];
-$frekuensi_pelanggaran = [
-    '1' => '1 kali',
-    '2' => '2 kali',
-    '3' => '3 kali lebih',
-
-];
-
-$dampak_pelanggaran = [
-    '1' => 'kecil',
-    '2' => 'sedang',
-    '3' => 'besar',
-
-];
-$keseriusan_niat = [
-    '1' => 'Tidak Sengaja',
-    '2' => 'Kurang Sengaja',
-    '3' => 'Sengaja',
-];
-$permohonan_maaf = [
-    '1' => 'Tidak ada',
-    '2' => 'Tidak Tulus',
-    '3' => 'Meminta Maaf',
-];
-?>
-
 <section class="w-full  mt-4 px-4 space-y-3">
     <section class="w-full  space-y-2">
         <label class="text-xs md:text-base ">Pilih Nama<span class="text-red-500">*</span> </label>
@@ -37,9 +5,9 @@ $permohonan_maaf = [
             class="w-full border px-2 py-1 rounded bg-transparent text-xs sm:text-sm focus:outline-none  selection:text-black hover:cursor-text  focus:ring-0">
             <option value="">Nama Santri</option>
             <?php foreach ($data['data-santri'] as  $ds) : ?>
-            <option value="<?= $ds['id_santri'] ?>"
-                <?= ($data['detail-pelanggaran-santri'] ? ($data['detail-pelanggaran-santri']['nama-santri']  == $ds['nama_santri'] ? 'selected' : '') : '') ?>>
-                <?= $ds['nama_santri'] ?></option><?php endforeach; ?>
+                <option value="<?= $ds['id_santri'] ?>"
+                    <?= ($data['detail-pelanggaran-santri'] ? ($data['detail-pelanggaran-santri']['nama-santri']  == $ds['nama_santri'] ? 'selected' : '') : '') ?>>
+                    <?= $ds['nama_santri'] ?></option><?php endforeach; ?>
         </select>
     </section>
     <section class="w-full  space-y-2">
@@ -60,10 +28,10 @@ $permohonan_maaf = [
         <select name="c1" id="c1" required
             class="w-full border px-2 py-1 rounded bg-transparent text-xs sm:text-sm focus:outline-none  selection:text-black hover:cursor-text  focus:ring-0">
             <option value="">Kategori</option>
-            <?php foreach ($data['kategori_pelanggaran']['jenis_pelanggaran'] as $key => $jp) : ?>
-            <option value="<?= $key ?>"
-                <?= ($data['detail-pelanggaran-santri'] ? ($data['detail-pelanggaran-santri']['kategori-pelanggaran']  == $jp ? 'selected' : '') : '') ?>>
-                <?= $jp ?></option>
+            <?php foreach ($data['kriteria_pelanggaran']['jenis_pelanggaran'] as $key => $jp) : ?>
+                <option value="<?= $key ?>"
+                    <?= ($data['detail-pelanggaran-santri'] ? ($data['detail-pelanggaran-santri']['kategori-pelanggaran']  == $jp ? 'selected' : '') : '') ?>>
+                    <?= $jp ?></option>
             <?php endforeach; ?>
         </select>
     </section>
@@ -72,10 +40,10 @@ $permohonan_maaf = [
         <select name="c2" id="c2" required
             class="w-full border px-2 py-1 rounded bg-transparent text-xs sm:text-sm focus:outline-none  selection:text-black hover:cursor-text  focus:ring-0">
             <option value="">Berapa kali</option>
-            <?php foreach ($data['kategori_pelanggaran']['frekuensi_pelanggaran'] as $key => $fp) : ?>
-            <option value="<?= $key ?>"
-                <?= ($data['detail-pelanggaran-santri'] ? ($data['detail-pelanggaran-santri']['frekuensi']  == $fp ? 'selected' : '') : '') ?>>
-                <?= $fp ?></option>
+            <?php foreach ($data['kriteria_pelanggaran']['frekuensi_pelanggaran'] as $key => $fp) : ?>
+                <option value="<?= $key ?>"
+                    <?= ($data['detail-pelanggaran-santri'] ? ($data['detail-pelanggaran-santri']['frekuensi']  == $fp ? 'selected' : '') : '') ?>>
+                    <?= $fp ?></option>
             <?php endforeach; ?>
         </select>
     </section>
@@ -84,10 +52,10 @@ $permohonan_maaf = [
         <select name="c3" id="c3" required
             class="w-full border px-2 py-1 rounded bg-transparent text-xs sm:text-sm focus:outline-none  selection:text-black hover:cursor-text  focus:ring-0">
             <option value="">Dampak</option>
-            <?php foreach ($data['kategori_pelanggaran']['dampak_pelanggaran'] as $key => $dp) : ?>
-            <option value="<?= $key ?>"
-                <?= ($data['detail-pelanggaran-santri'] ? ($data['detail-pelanggaran-santri']['dampak']  == $dp ? 'selected' : '') : '') ?>>
-                <?= $dp ?></option>
+            <?php foreach ($data['kriteria_pelanggaran']['dampak_pelanggaran'] as $key => $dp) : ?>
+                <option value="<?= $key ?>"
+                    <?= ($data['detail-pelanggaran-santri'] ? ($data['detail-pelanggaran-santri']['dampak']  == $dp ? 'selected' : '') : '') ?>>
+                    <?= $dp ?></option>
             <?php endforeach; ?>
         </select>
     </section>
@@ -96,10 +64,10 @@ $permohonan_maaf = [
         <select name="c4" id="c4" required
             class="w-full border px-2 py-1 rounded bg-transparent text-xs sm:text-sm focus:outline-none  selection:text-black hover:cursor-text  focus:ring-0">
             <option value="">Keseriusan</option>
-            <?php foreach ($data['kategori_pelanggaran']['keseriusan_niat'] as $key => $kn) : ?>
-            <option value="<?= $key ?>"
-                <?= ($data['detail-pelanggaran-santri'] ? ($data['detail-pelanggaran-santri']['keseriusan']  == $kn ? 'selected' : '') : '') ?>>
-                <?= $kn ?></option>
+            <?php foreach ($data['kriteria_pelanggaran']['keseriusan_niat'] as $key => $kn) : ?>
+                <option value="<?= $key ?>"
+                    <?= ($data['detail-pelanggaran-santri'] ? ($data['detail-pelanggaran-santri']['keseriusan']  == $kn ? 'selected' : '') : '') ?>>
+                    <?= $kn ?></option>
             <?php endforeach; ?>
         </select>
     </section>
@@ -108,10 +76,10 @@ $permohonan_maaf = [
         <select name="c5" id="c5" required
             class="w-full border px-2 py-1 rounded bg-transparent text-xs sm:text-sm focus:outline-none  selection:text-black hover:cursor-text  focus:ring-0">
             <option value="">Permohonan</option>
-            <?php foreach ($data['kategori_pelanggaran']['permohonan_maaf'] as $key => $pm) : ?>
-            <option value="<?= $key ?>"
-                <?= ($data['detail-pelanggaran-santri'] ? ($data['detail-pelanggaran-santri']['permohonan']  == $pm ? 'selected' : '') : '') ?>>
-                <?= $pm ?></option>
+            <?php foreach ($data['kriteria_pelanggaran']['permohonan_maaf'] as $key => $pm) : ?>
+                <option value="<?= $key ?>"
+                    <?= ($data['detail-pelanggaran-santri'] ? ($data['detail-pelanggaran-santri']['permohonan']  == $pm ? 'selected' : '') : '') ?>>
+                    <?= $pm ?></option>
             <?php endforeach; ?>
         </select>
     </section>
