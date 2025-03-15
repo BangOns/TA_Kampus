@@ -1,5 +1,8 @@
 const ClassAuth = new Auth();
 window.addEventListener('DOMContentLoaded',()=>{
+   // Form
+   
+    
     // Input Value
     const inputIdAdmin = document.querySelector('#id_admin');
     const inputPassword = document.querySelector('.pw');
@@ -8,6 +11,9 @@ window.addEventListener('DOMContentLoaded',()=>{
     const viewPass = document.querySelector(".viewPass");
     const viewRePass = document.querySelector(".viewRePass");
     const randomId = document.querySelector(".randomId");
+    
+ 
+
     viewPass.addEventListener('click',()=>{
        inputPassword.type =  ClassAuth.PasswordViews();   
     })
