@@ -650,6 +650,14 @@ video {
   z-index: 1;
 }
 
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
+}
+
 .my-3 {
   margin-top: 0.75rem;
   margin-bottom: 0.75rem;
@@ -772,6 +780,14 @@ video {
 
 .w-24 {
   width: 6rem;
+}
+
+.w-\[10\%\] {
+  width: 10%;
+}
+
+.w-\[90\%\] {
+  width: 90%;
 }
 
 .w-fit {
@@ -1182,6 +1198,10 @@ video {
   font-family: "poppins_bold", sans-serif;
 }
 
+.font-serif {
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+}
+
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
@@ -1212,6 +1232,15 @@ video {
   line-height: 1rem;
 }
 
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
 .font-light {
   font-weight: 300;
 }
@@ -1222,6 +1251,10 @@ video {
 
 .font-semibold {
   font-weight: 600;
+}
+
+.uppercase {
+  text-transform: uppercase;
 }
 
 .tracking-wider {
