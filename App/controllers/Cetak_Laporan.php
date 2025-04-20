@@ -139,7 +139,7 @@ class Cetak_Laporan extends Controller
         $mpdf->WriteHTML($html);
 
         // Render PDF
-        $mpdf->Output('laporan_pelanggaran.pdf', 'I');
+         $mpdf->Output('laporan_sanksi.pdf', 'I');
     }
     public function laporan_pelanggaran_santri()
     {

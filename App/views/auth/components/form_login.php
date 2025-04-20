@@ -1,6 +1,6 @@
 <section class="basis-full md:basis-1/2 w-full max-sm:h-full flex flex-col   items-center px-5 md:pl-8 pt-8  gap-6">
     <header class="w-full max-md:flex justify-center">
-        <img src="<?= BASEURL; ?>/icons/icons-logo.svg" alt="">
+        <img src="<?= BASEURL; ?>/img/icons-logo.png" alt="">
     </header>
     <section class="w-full space-y-2 max-md:text-center">
         <h1 class="text-sm md:text-2xl font-poppins_bold text-slate-700 ">Welcome Back !

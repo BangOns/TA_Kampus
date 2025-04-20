@@ -1,8 +1,10 @@
 <?php
 $sanksi = $data['data-sanksi'];
+
 usort($sanksi, function ($a, $b) {
-    return strcmp($a['jenis_sanksi'], $b['jenis_sanksi']);
+    return strcmp($a['min_skor'], $b['min_skor']);
 });
+
 ?>
 <header style="width: 100%; align-items: center; ">
     <section class="w-[10%] float-left" style="width: 10%; float: left;">
