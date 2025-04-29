@@ -38,7 +38,11 @@ class Cetak_Laporan extends Controller
                 'title' => 'Laporan Data Sanksi',
                 'link' => BASEURL . '/cetak_laporan/laporan_sanksi',
                 'icons' => BASEURL . '/icons/icons-sanksi-cetak.svg'
-
+            ],
+            [
+                'title' => 'Laporan Data Kriteria',
+                'link' => BASEURL . '/cetak_laporan/laporan_data_kriteria',
+                'icons' => BASEURL . '/icons/icons-sanksi-cetak.svg'
             ]
         ];
         $data['title'] = 'cetak_laporan';
@@ -139,7 +143,7 @@ class Cetak_Laporan extends Controller
         $mpdf->WriteHTML($html);
 
         // Render PDF
-        $mpdf->Output('laporan_pelanggaran.pdf', 'I');
+        $mpdf->Output('laporan_sanksi.pdf', 'I');
     }
     public function laporan_pelanggaran_santri()
     {
@@ -177,5 +181,143 @@ class Cetak_Laporan extends Controller
 
         // Render PDF
         $mpdf->Output('laporan_pelanggaran_santri.pdf', 'I');
+    }
+    public function laporan_data_kriteria()
+    {
+        $data['list-table'] = [
+            'No',
+            'Nama',
+            'Bobot',
+        ];
+        $data['kriteria_pelanggaran'] = [
+            [
+                'nama' => 'jenis_pelanggaran',
+                'items' => [
+                    [
+                        'No' => '1',
+                        'Nama' => 'Ringan',
+                        'Bobot' => '1'
+                    ],
+                    [
+                        'No' => '2',
+                        'Nama' => 'Sedang',
+                        'Bobot' => '2'
+                    ],
+                    [
+                        'No' => '3',
+                        'Nama' => 'Berat',
+                        'Bobot' => '3'
+                    ],
+
+                ]
+            ],
+            [
+                'nama' => 'frekuensi_pelanggaran',
+                'items' => [
+                    [
+                        'No' => '1',
+                        'Nama' => '1 kali',
+                        'Bobot' => '1'
+                    ],
+                    [
+                        'No' => '2',
+                        'Nama' => '1 kali',
+                        'Bobot' => '2'
+                    ],
+                    [
+                        'No' => '3',
+                        'Nama' => '3 kali lebih',
+                        'Bobot' => '3'
+                    ],
+
+                ]
+            ],
+            [
+                'nama' => 'dampak_pelanggaran',
+                'items' => [
+                    [
+                        'No' => '1',
+                        'Nama' => 'Kecil',
+                        'Bobot' => '1'
+                    ],
+                    [
+                        'No' => '2',
+                        'Nama' => 'Sedang',
+                        'Bobot' => '2'
+                    ],
+                    [
+                        'No' => '3',
+                        'Nama' => 'Besar',
+                        'Bobot' => '3'
+                    ],
+
+                ]
+            ],
+            [
+                'nama' => 'keseriusan_niat',
+                'items' => [
+                    [
+                        'No' => '1',
+                        'Nama' => 'Tidak Sengaja',
+                        'Bobot' => '1'
+                    ],
+                    [
+                        'No' => '2',
+                        'Nama' => 'Kurang Sengaja',
+                        'Bobot' => '2'
+                    ],
+                    [
+                        'No' => '3',
+                        'Nama' => 'Sengaja',
+                        'Bobot' => '3'
+                    ],
+
+                ]
+            ],
+            [
+                'nama' => 'permohonan_maaf',
+                'items' => [
+                    [
+                        'No' => '1',
+                        'Nama' => 'Tidak ada',
+                        'Bobot' => '1'
+                    ],
+                    [
+                        'No' => '2',
+                        'Nama' => 'Tidak Tulus',
+                        'Bobot' => '2'
+                    ],
+                    [
+                        'No' => '3',
+                        'Nama' => 'Meminta Maaf',
+                        'Bobot' => '3'
+                    ],
+
+                ],
+            ]
+        ];
+        ob_start();
+        $data['title'] = 'cetak_laporan_data_kriteria';
+
+        $this->view('templates/header', $data);
+        $this->view('cetak_laporan/kriteria', $data);
+        $this->view('templates/footer');
+        $html = ob_get_clean();
+
+        // Konfigurasi Dompdf
+
+
+        // Inisialisasi mPDF
+        $mpdf = new Mpdf(
+            [
+                'default_font' => 'Arial'
+            ]
+        );
+        $mpdf->SetFont('Arial');
+        // Load HTML ke mPDF
+        $mpdf->WriteHTML($html);
+
+        // Render PDF
+        $mpdf->Output('laporan-kriteria.pdf', 'I');
     }
 }

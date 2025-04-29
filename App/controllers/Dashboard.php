@@ -7,6 +7,8 @@ class Dashboard extends Controller
             header('Location: ' . BASEURL . '/auth');
             exit;
         }
+
+        var_dump($type);
         $data['title'] = 'Dashboard';
         $data['list-table'] = [
             'No',

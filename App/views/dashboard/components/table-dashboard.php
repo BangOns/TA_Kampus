@@ -1,4 +1,8 @@
 <?php
+$datas = $data['data-pelanggar'];
+if (isset($_POST["search"])) {
+    $datas = array_filter($data['data-pelanggar'], fn($item) => str_starts_with(strtolower($item['Nama Santri']), strtolower($_POST['search'])));
+};
 
 $link_menu = [
     [
@@ -35,15 +39,15 @@ $link_menu = [
     <!-- Area Table and Search -->
     <section class="w-full mt-4">
         <!-- Filter and Search -->
-        <header class="w-full flex gap-3  ">
+        <form action="<?= BASEURL; ?>/dashboard/index/search" method="post" class="w-full flex gap-3  items-center">
             <section class=" lg:w-1/5 rounded flex bg-white px-2 md:px-3 items-center border border-slate-300 py-1">
-                <input type="text" placeholder="Cari Nama Santri"
+                <input type="text" placeholder="Cari Nama Santri" name="search" id="search"
                     class="w-full  py-1 border-none bg-transparent text-xs sm:text-sm focus:outline-none focus:ring-0">
                 <div class="size-4 md:size-5 text-slate-600">
                     <?php include dirname(__DIR__, 4) . '/public/icons/icons-search.svg'; ?>
                 </div>
             </section>
-            <section class="lg:w-1/5 rounded flex bg-white px-2 md:px-3  items-center border border-slate-300 py-1">
+            <!-- <section class="lg:w-1/5 rounded flex bg-white px-2 md:px-3  items-center border border-slate-300 py-1">
                 <label for="kategori" class="size-3 md:size-5 text-slate-600">
                     <?php include dirname(__DIR__, 4) . '/public/icons/icons-filter.svg'; ?>
                 </label>
@@ -51,12 +55,15 @@ $link_menu = [
                     class="w-full px-3 py-1 border-none bg-transparent text-xs sm:text-sm focus:outline-none text-slate-400 selection:text-black hover:cursor-pointer  focus:ring-0">
                     <option value="">Kategori</option>
                     <?php foreach ($data['kategori'] as $kategori) : ?>
-                    <option class="hover:cursor-pointer" value="<?= $kategori ?>"><?= $kategori ?></option>
+                        <option class="hover:cursor-pointer" value="<?= $kategori ?>"><?= $kategori ?></option>
                     <?php endforeach; ?>
 
                 </select>
+            </section> -->
+            <section class="flex items-center h-full">
+                <button type="submit" class="bg-red-500 text-white px-3 py-2 rounded">Search</button>
             </section>
-        </header>
+        </form>
         <!-- Button Tambah Pelanggar -->
         <section class="w-full basis-1/2 flex my-4 ">
             <a href="<?= BASEURL; ?>/dashboard/add/data-pelanggaran-santri"
@@ -70,12 +77,12 @@ $link_menu = [
         <!-- Table & Card Pelanggar -->
         <article class="w-full max-md:space-y-3 max-md:mt-3 ">
             <!-- Table Pelanggar -->
-            <?php if (count($data['data-pelanggar']) !== 0) {
+            <?php if (count($datas) !== 0) {
                 include dirname(__DIR__, 3) . '/views/templates/components/table-data.php';
-                renderTable($data['data-pelanggar'], $data['list-table'], $link_menu);
+                renderTable($datas, $data['list-table'], $link_menu);
                 // Card Pelanggar
                 include dirname(__DIR__, 3) . '/views/templates/components/card-mobile/card-data-pelanggaran-santri.php';
-                renderCardPelanggaranSantri($data['data-pelanggar'], $link_menu);
+                renderCardPelanggaranSantri($datas, $link_menu);
             } else {
                 echo '<section class="w-full text-center ">
                 <p class="text-2xl font-semibold">Data Not Found X</p>

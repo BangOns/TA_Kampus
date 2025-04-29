@@ -17,11 +17,11 @@ class Data_Santri extends Controller
         $data['detail-santri'] = [];
         //
         $limitPerhalaman = 2;
-        $totalData =  $this->model('Data_Santri_Model')->getDataAll();
-        $generateLimitToPagination = generatePaginate($totalData, $limitPerhalaman);
+        $results =  $this->model('Data_Santri_Model')->getDataAll();
+        // $generateLimitToPagination = generatePaginate($totalData, $limitPerhalaman);
 
         //
-        $results = $this->model('Data_Santri_Model')->getDataAllToTable($generateLimitToPagination['index-limit'], $limitPerhalaman);
+        // $results = $this->model('Data_Santri_Model')->getDataAllToTable($generateLimitToPagination['index-limit'], $limitPerhalaman);
         if ($results['status'] === 200 && !empty($results['data'])) {
             foreach ($results['data'] as $index => $rslt) {
                 $newData = [
@@ -41,8 +41,8 @@ class Data_Santri extends Controller
                 $data['detail-santri'] = $resultDetailSantri['data'];
             }
         }
-        $data['total-halaman'] = $generateLimitToPagination['total-halaman'];
-        $data['halaman-aktif'] = $generateLimitToPagination['halaman-aktif'];
+        // $data['total-halaman'] = $generateLimitToPagination['total-halaman'];
+        // $data['halaman-aktif'] = $generateLimitToPagination['halaman-aktif'];
         $data['title'] = 'data_santri';
         $data['type'] = $type;
         $data['action'] = $action;

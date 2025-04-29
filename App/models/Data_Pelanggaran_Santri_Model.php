@@ -29,6 +29,8 @@ class Data_Pelanggaran_Santri_Model extends Database
             return Response(200, [], "Berhasil get data pelanggaran");
         }
     }
+
+
     public function addPelanggaranSantri($data)
     {
         try {
