@@ -8,7 +8,6 @@ class Dashboard extends Controller
             exit;
         }
 
-        var_dump($type);
         $data['title'] = 'Dashboard';
         $data['list-table'] = [
             'No',
