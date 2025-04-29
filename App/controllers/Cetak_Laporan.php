@@ -166,9 +166,6 @@ class Cetak_Laporan extends Controller
         $this->view('templates/footer');
         $html = ob_get_clean();
 
-        // Konfigurasi Dompdf
-
-
         // Inisialisasi mPDF
         $mpdf = new Mpdf(
             [
