@@ -7,7 +7,7 @@ function sumPelanggaranSantri($data)
     $c4 = 0.15;
     $c5 = 0.05;
 
-    $sumNilaiAkhir =  round(($data['jenis'] * $c1) +  ($data['frekuensi'] * $c2) + ($data['dampak'] * $c3) + ($data['keseriusan_niat'] * $c4) + ($data['permohonan_maaf'] * $c5), 2);
+    $sumNilaiAkhir =  round((($data['jenis'] / 3) * $c1) +  (($data['frekuensi'] / 3) * $c2) + (($data['dampak'] / 3) * $c3) + (($data['keseriusan_niat'] / 3) * $c4) + (($data['permohonan_maaf'] / 3) * $c5), 2);
 
     return $sumNilaiAkhir;
 }

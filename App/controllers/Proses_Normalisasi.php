@@ -79,11 +79,11 @@ class Proses_Normalisasi extends Controller
                     'No' => $index += 1,
                     'id' => $rslt['id_pelanggaran_santri'],
                     'Nama' => $data_santri['data']['nama_santri'],
-                    'jenis' => $rslt['c1'],
-                    'frekuensi' => $rslt['c2'],
-                    'dampak' => $rslt['c3'],
-                    'keseriusan' => $rslt['c4'],
-                    'permohonan' => $rslt['c5'],
+                    'jenis' => round($rslt['c1'] / 3, 2),
+                    'frekuensi' => round($rslt['c2'] / 3, 2),
+                    'dampak' => round($rslt['c3'] / 3, 2),
+                    'keseriusan' => round($rslt['c4'] / 3, 2),
+                    'permohonan' => round($rslt['c5'] / 3, 2),
 
 
                 ];
@@ -107,11 +107,11 @@ class Proses_Normalisasi extends Controller
                     'id' => $rslt['id_pelanggaran_santri'],
                     'Nama' => $data_santri['data']['nama_santri'],
                     'pelanggaran-dilakukan' => $rslt['nama_pelanggaran'],
-                    'jenis' =>  round(($rslt['c1'] * $c1), 2),
-                    'frekuensi' => round(($rslt['c2'] * $c2), 2),
-                    'dampak' => round(($rslt['c3'] * $c3), 2),
-                    'keseriusan' => round(($rslt['c4'] * $c4), 2),
-                    'permohonan' => round(($rslt['c5'] * $c5), 2),
+                    'jenis' =>  round((($rslt['c1'] / 3) * $c1), 2),
+                    'frekuensi' => round((($rslt['c2'] / 3) * $c2), 2),
+                    'dampak' => round((($rslt['c3'] / 3) * $c3), 2),
+                    'keseriusan' => round((($rslt['c4'] / 3) * $c4), 2),
+                    'permohonan' => round((($rslt['c5'] / 3) * $c5), 2),
 
                 ];
                 array_push($data['data-nilai-normalisasi'], $newData);

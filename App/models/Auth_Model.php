@@ -11,7 +11,7 @@ class Auth_Model extends Database
             try {
                 $id_admin = htmlspecialchars($data['id_admin']);
                 $password = htmlspecialchars($data['password']);
-                $query = "SELECT * FROM $this->table WHERE id_admin = :id_admin ";
+                $query = "SELECT * FROM $this->table WHERE id_admin = :id_admin OR name = :id_admin";
                 $this->query($query);
                 $this->bind('id_admin', $id_admin);
                 $user = $this->single();

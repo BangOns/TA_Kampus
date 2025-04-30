@@ -11,12 +11,26 @@
         </select>
     </section>
     <section class="w-full  space-y-2">
+        <label class="text-xs md:text-base ">Pilih Pelanggaran<span class="text-red-500">*</span> </label>
+        <select name="nama_pelanggaran" id="nama_pelanggaran" required
+            class="w-full border px-2 py-1 rounded bg-transparent text-xs sm:text-sm focus:outline-none  selection:text-black hover:cursor-text  focus:ring-0">
+            <option value="">Pelanggaran yang Dilakukan</option>
+            <?php foreach ($data['data-pelanggaran'] as  $ds) : ?>
+                <?= $ds ?>
+                <option value="<?= $ds['nama_pelanggaran'] ?>">
+                    <?= $ds['nama_pelanggaran'] ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+    </section>
+    <!-- <section class="w-full  space-y-2">
         <label class="text-xs md:text-base ">Pelanggaran Yang Dilakukan<span class="text-red-500">*</span> </label>
+
 
         <input type="text" placeholder="merokok..." name="nama_pelanggaran" required
             value="<?= $data['detail-pelanggaran-santri']['nama-pelanggaran']  ?? '' ?>"
             class="w-full border px-2 py-1 rounded bg-transparent text-xs sm:text-sm focus:outline-noneselection:text-black hover:cursor-text  focus:ring-0">
-    </section>
+    </section> -->
     <section class="w-full  space-y-2">
         <label class="text-xs md:text-base ">Waktu yang dilakukan<span class="text-red-500">*</span> </label>
         <input type="date" placeholder="merokok..." name="waktu" required
