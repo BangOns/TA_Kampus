@@ -27,7 +27,7 @@
         <!-- Table & Card Nilai Alternatif -->
         <article class="w-full max-md:space-y-3 mt-3 ">
             <header class="w-full pb-2">
-                <h1 class="text-lg">Nilai Alternatif</h1>
+                <h1 class="text-lg">Matriks Normalisasi</h1>
             </header>
             <!-- Table Pelanggar -->
             <?php if (count($data['data-nilai-alternatif']) !== 0) {

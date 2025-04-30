@@ -51,6 +51,7 @@ class Dashboard extends Controller
             ],
         ];
         $data['kategori'] = ['Ringan', 'Sedang', 'Berat'];
+        $data['data-pelanggaran'] = [];
         // Get data All
         $resultsPelanggaranSantri = $this->model('Data_Pelanggaran_Santri_Model')->getDataAll();
         $resultsDataSantri = $this->model('Data_Santri_Model')->getDataAll();
@@ -103,10 +104,8 @@ class Dashboard extends Controller
                     'title' => 'Pelanggaran Santri',
                     'jumlah' => count($resultsPelanggaranSantri['data'])
                 ],
-
-
-
             ];
+            $data['data-pelanggaran'] = $resultsDataPelanggaran['data'];
         }
         // Get data for detail
         $data['detail-pelanggaran-santri'] = [];
