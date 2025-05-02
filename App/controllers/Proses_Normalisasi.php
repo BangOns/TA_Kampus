@@ -23,9 +23,9 @@ class Proses_Normalisasi extends Controller
                 '3' => 'Berat',
             ],
             'frekuensi_pelanggaran' => [
-                '1' => '1 kali',
-                '2' => '2 kali',
-                '3' => '3 kali lebih',
+                '1' => 'jarang',
+                '2' => 'lumayan',
+                '3' => 'sering',
             ],
             'dampak_pelanggaran' => [
                 '1' => 'Kecil',
@@ -38,9 +38,9 @@ class Proses_Normalisasi extends Controller
                 '3' => 'Sengaja',
             ],
             'permohonan_maaf' => [
-                '1' => 'Tidak ada',
+                '1' => 'Meminta Maaf',
                 '2' => 'Tidak Tulus',
-                '3' => 'Meminta Maaf',
+                '3' => 'Tidak Ada',
             ],
         ];
         $resultsPelanggaranSantri = $this->model('Data_Pelanggaran_Santri_Model')->getDataAll();
@@ -97,7 +97,7 @@ class Proses_Normalisasi extends Controller
         $c2 = 0.25;
         $c3 = 0.2;
         $c4 = 0.15;
-        $c5 = 0.05;
+        $c5 = 0.15;
         if ($resultsPelanggaranSantri['status'] === 200 && !empty($resultsPelanggaranSantri['data'])) {
             foreach ($resultsPelanggaranSantri['data'] as $index => $rslt) {
 

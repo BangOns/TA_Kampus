@@ -29,9 +29,9 @@ class Dashboard extends Controller
                 '3' => 'Berat',
             ],
             'frekuensi_pelanggaran' => [
-                '1' => '1 kali',
-                '2' => '2 kali',
-                '3' => '3 kali lebih',
+                '1' => 'jarang',
+                '2' => 'lumayan',
+                '3' => 'sering',
             ],
             'dampak_pelanggaran' => [
                 '1' => 'Kecil',
@@ -44,9 +44,9 @@ class Dashboard extends Controller
                 '3' => 'Sengaja',
             ],
             'permohonan_maaf' => [
-                '1' => 'Tidak ada',
+                '1' => 'Meminta Maaf',
                 '2' => 'Tidak Tulus',
-                '3' => 'Meminta Maaf',
+                '3' => 'Tidak Ada',
             ],
         ];
         $data['kategori'] = ['Ringan', 'Sedang', 'Berat'];

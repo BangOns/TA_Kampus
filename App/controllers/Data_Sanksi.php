@@ -17,6 +17,9 @@ class Data_Sanksi extends Controller
 
         $results = $this->model('Data_Sanksi_Model')->getDataAll();
         if ($results['status'] === 200 && !empty($results['data'])) {
+            usort($results['data'], function ($a, $b) {
+                return $b['max_skor'] <=> $a['max_skor'];
+            });
             foreach ($results['data'] as $index => $rslt) {
                 $newData = [
                     'No' => $index += 1,
@@ -26,9 +29,11 @@ class Data_Sanksi extends Controller
                     'Keterangan' => $rslt['deskripsi_sanksi']
 
                 ];
+
                 array_push($data['data-sanksi'], $newData);
             }
         }
+
         if ($id !== '') {
             $resultDetailSanksi = $this->model('Data_Sanksi_Model')->getDataById($id);
             if ($resultDetailSanksi['status'] === 200 && !empty($resultDetailSanksi['data'])) {
