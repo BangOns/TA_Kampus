@@ -3,7 +3,8 @@
 class Data_Pelanggaran_Santri_Model extends Database
 {
     private $table = 'pelanggaran_santri';
-    public  static $skala_bobot = 3;
+    public  static $skala_bobot_benefit = 3;
+    public  static $skala_bobot_cost = 1;
 
 
     public function getDataAll()
@@ -44,11 +45,11 @@ class Data_Pelanggaran_Santri_Model extends Database
             $keseriusan_niat = htmlspecialchars($data['c4']);
             $permohonan_maaf = htmlspecialchars($data['c5']);
             $data_kriteria = [
-                "jenis" => round((intval($jenis) / self::$skala_bobot), 2),
-                "frekuensi" => round((intval($frekuensi) / self::$skala_bobot), 2),
-                "dampak" => round((intval($dampak) / self::$skala_bobot), 2),
-                "keseriusan_niat" => round((intval($keseriusan_niat) / self::$skala_bobot), 2),
-                "permohonan_maaf" => round((intval($permohonan_maaf) / self::$skala_bobot), 2),
+                "jenis" => round((self::$skala_bobot_cost / intval($jenis)), 2),
+                "frekuensi" => round((self::$skala_bobot_cost / intval($frekuensi)), 2),
+                "dampak" => round((self::$skala_bobot_cost / intval($dampak)), 2),
+                "keseriusan_niat" => round((self::$skala_bobot_cost / intval($keseriusan_niat)), 2),
+                "permohonan_maaf" => round((intval($permohonan_maaf) / self::$skala_bobot_benefit), 2),
             ];
             $nilai_akhir  = sumPelanggaranSantri($data_kriteria);
             $query =  "INSERT INTO $this->table (id_pelanggaran_santri,nama_pelanggaran,c1,id_santri,waktu,nilai_akhir,c2,c3,c4,c5) VALUES ('',:nama_pelanggaran,:c1,:id_santri,:waktu,:nilai_akhir,:c2,:c3,:c4,:c5)";
@@ -83,11 +84,11 @@ class Data_Pelanggaran_Santri_Model extends Database
             $keseriusan_niat = htmlspecialchars($data['c4']);
             $permohonan_maaf = htmlspecialchars($data['c5']);
             $data_kriteria = [
-                "jenis" => round((intval($jenis) / self::$skala_bobot), 2),
-                "frekuensi" => round((intval($frekuensi) / self::$skala_bobot), 2),
-                "dampak" => round((intval($dampak) / self::$skala_bobot), 2),
-                "keseriusan_niat" => round((intval($keseriusan_niat) / self::$skala_bobot), 2),
-                "permohonan_maaf" => round((intval($permohonan_maaf) / self::$skala_bobot), 2),
+                "jenis" => round((self::$skala_bobot_cost / intval($jenis)), 2),
+                "frekuensi" => round((self::$skala_bobot_cost / intval($frekuensi)), 2),
+                "dampak" => round((self::$skala_bobot_cost / intval($dampak)), 2),
+                "keseriusan_niat" => round((self::$skala_bobot_cost / intval($keseriusan_niat)), 2),
+                "permohonan_maaf" => round((intval($permohonan_maaf) / self::$skala_bobot_benefit), 2),
             ];
             $nilai_akhir  = sumPelanggaranSantri($data_kriteria);
             $query =  "UPDATE $this->table SET nama_pelanggaran = :nama_pelanggaran,c1 = :c1,id_santri = :id_santri,waktu = :waktu,nilai_akhir = :nilai_akhir,c2 = :c2,c3 = :c3,c4 = :c4,c5 = :c5  WHERE id_pelanggaran_santri= :id_pelanggaran_santri";

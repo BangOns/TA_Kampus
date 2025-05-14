@@ -13,13 +13,13 @@
     </section>
 </header>
 <hr class="mt-5">
-<section class="w-full mt-5 text-center">
+<section class="w-full mt-3 text-center">
     <header class="w-full">
         <h1 style="font-weight: 800;">
             <?= ucwords(preg_replace("/[-_]/", " ", $data["title"]));  ?></h1>
     </header>
     <?php foreach ($data['kriteria_pelanggaran'] as $key => $value) : ?>
-        <article class="mt-4">
+        <article class="mt-1">
             <h1
                 class=" text-start  text-lg font-semibold">
                 <?= ucwords(preg_replace("/[-_]/", " ", $value["nama"]));  ?>
@@ -47,3 +47,15 @@
 
         </article>
 </section>
+<footer
+    class="w-full mt-5 float-right">
+    <section class="w-[90%] float-right " style="text-align: right;">
+        <p><?= $data['formatDate'] ?></p>
+        <p>Pengurus Pondok</p>
+    </section>
+    <section class="w-[90%] float-right" style="text-align: right; margin-top: 8%;">
+
+        <p>Syahroni</p>
+    </section>
+
+</footer>

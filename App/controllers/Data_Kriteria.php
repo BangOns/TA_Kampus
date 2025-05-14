@@ -18,7 +18,7 @@ class Data_Kriteria extends Controller
                 'items' => [
                     [
                         'No' => '1',
-                        'Nama' => 'Ringan',
+                        'Nama' => 'Berat',
                         'Bobot' => '1'
                     ],
                     [
@@ -28,7 +28,7 @@ class Data_Kriteria extends Controller
                     ],
                     [
                         'No' => '3',
-                        'Nama' => 'Berat',
+                        'Nama' => 'Ringan',
                         'Bobot' => '3'
                     ],
 
@@ -39,17 +39,17 @@ class Data_Kriteria extends Controller
                 'items' => [
                     [
                         'No' => '1',
-                        'Nama' => '1 kali',
+                        'Nama' => '3 kali lebih',
                         'Bobot' => '1'
                     ],
                     [
                         'No' => '2',
-                        'Nama' => '1 kali',
+                        'Nama' => '2 kali',
                         'Bobot' => '2'
                     ],
                     [
                         'No' => '3',
-                        'Nama' => '3 kali lebih',
+                        'Nama' => '1 kali',
                         'Bobot' => '3'
                     ],
 
@@ -60,7 +60,7 @@ class Data_Kriteria extends Controller
                 'items' => [
                     [
                         'No' => '1',
-                        'Nama' => 'Kecil',
+                        'Nama' => 'Besar',
                         'Bobot' => '1'
                     ],
                     [
@@ -70,7 +70,7 @@ class Data_Kriteria extends Controller
                     ],
                     [
                         'No' => '3',
-                        'Nama' => 'Besar',
+                        'Nama' => 'Kecil',
                         'Bobot' => '3'
                     ],
 
@@ -81,7 +81,7 @@ class Data_Kriteria extends Controller
                 'items' => [
                     [
                         'No' => '1',
-                        'Nama' => 'Tidak Sengaja',
+                        'Nama' => 'Sengaja',
                         'Bobot' => '1'
                     ],
                     [
@@ -91,7 +91,7 @@ class Data_Kriteria extends Controller
                     ],
                     [
                         'No' => '3',
-                        'Nama' => 'Sengaja',
+                        'Nama' => 'Tidak Sengaja',
                         'Bobot' => '3'
                     ],
 
@@ -102,7 +102,7 @@ class Data_Kriteria extends Controller
                 'items' => [
                     [
                         'No' => '1',
-                        'Nama' => 'Tidak ada',
+                        'Nama' => 'Meminta Maaf',
                         'Bobot' => '1'
                     ],
                     [
@@ -112,7 +112,7 @@ class Data_Kriteria extends Controller
                     ],
                     [
                         'No' => '3',
-                        'Nama' => 'Meminta Maaf',
+                        'Nama' => 'Tidak Meminta Maaf',
                         'Bobot' => '3'
                     ],
 

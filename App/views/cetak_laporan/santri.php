@@ -32,15 +32,27 @@
             </thead>
             <tbody>
                 <?php foreach ($data['data-santri'] as $index => $santri): ?>
-                <tr>
-                    <td><?= $index += 1 ?></td>
-                    <td><?= htmlspecialchars($santri['nama_santri']); ?></td>
-                    <td><?= htmlspecialchars($santri['alamat']); ?></td>
-                    <td><?= htmlspecialchars($santri['kelas']); ?></td>
-                    <td><?= htmlspecialchars($santri['tahun_ajaran']); ?></td>
-                </tr>
+                    <tr>
+                        <td><?= $index += 1 ?></td>
+                        <td><?= htmlspecialchars($santri['nama_santri']); ?></td>
+                        <td><?= htmlspecialchars($santri['alamat']); ?></td>
+                        <td><?= htmlspecialchars($santri['kelas']); ?></td>
+                        <td><?= htmlspecialchars($santri['tahun_ajaran']); ?></td>
+                    </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
     </article>
 </section>
+<footer
+    class="w-full mt-10 float-right">
+    <section class="w-[90%] float-right " style="text-align: right;">
+        <p><?= $data['formatDate'] ?></p>
+        <p>Pengurus Pondok</p>
+    </section>
+    <section class="w-[90%] float-right" style="text-align: right; margin-top: 13%;">
+
+        <p>Syahroni</p>
+    </section>
+
+</footer>

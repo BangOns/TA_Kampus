@@ -18,12 +18,12 @@ function renderCardSantri($data, $menu)
         echo '<table class="w-full table-collapse">';
         echo '<tbody class="divide-y divide-gray-200 w-full">';
         echo '<tr>';
-        echo '<td class="py-2">Kategori</td>';
-        echo '<td class="text-red-500 font-semibold">' . $santri['Tahun Masuk'] . '</td>';
+        echo '<td class="py-2">Tahun Masuk</td>';
+        echo '<td class=" font-semibold">' . $santri['Tahun Masuk'] . '</td>';
         echo '</tr>';
         echo '<tr>';
-        echo '<td class="py-2">Sanksi</td>';
-        echo '<td class="text-red-500 font-semibold">Dicukur rambutnya</td>';
+        echo '<td class="py-2">Alamat</td>';
+        echo '<td class=" font-semibold">' . $santri['Alamat'] .  '</td>';
         echo '</tr>';
         echo '</tbody>';
         echo '</table>';

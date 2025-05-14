@@ -61,11 +61,11 @@ $link_menu = [
     </section>
 </article>
 <!-- Pagination -->
-
+<!-- 
 <section class=" my-3 font-poppins font-semibold ">
-    <ul class="flex w-full justify-center  ">
-        <!-- Cursor Left -->
-        <li class=" border border-slate-300 rounded-l-md ">
+    <ul class="flex w-full justify-center  "> -->
+<!-- Cursor Left -->
+<!-- <li class=" border border-slate-300 rounded-l-md ">
             <a href="#"
                 class="flex w-full h-full items-center gap-2 text-xs md:text-sm px-3 py-2 hover:cursor-pointer hover:bg-slate-200 bg-white ">
                 <div class="size-4">
@@ -73,16 +73,16 @@ $link_menu = [
                 </div>
                 Previous
             </a>
-        </li>
-        <!-- List Paginate -->
-        <li class=" border border-slate-300 ">
+        </li> -->
+<!-- List Paginate -->
+<!-- <li class=" border border-slate-300 ">
             <a href="#"
                 class="flex px-4 items-center h-full  text-xs md:text-sm  w-full hover:cursor-pointer hover:bg-slate-200 bg-white">
                 1
             </a>
-        </li>
-        <!-- Cursor Right -->
-        <li class=" border border-slate-300 rounded-r-md ">
+        </li> -->
+<!-- Cursor Right -->
+<!-- <li class=" border border-slate-300 rounded-r-md ">
             <a href="#"
                 class="flex w-full h-full items-center gap-2 text-xs md:text-sm px-3 py-2 hover:bg-slate-200 bg-white hover:cursor-pointer">
                 Next
@@ -92,4 +92,4 @@ $link_menu = [
             </a>
         </li>
     </ul>
-</section>
+</section> -->

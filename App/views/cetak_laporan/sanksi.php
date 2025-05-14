@@ -5,6 +5,7 @@ usort($sanksi, function ($a, $b) {
     return strcmp($a['min_skor'], $b['min_skor']);
 });
 
+
 ?>
 <header style="width: 100%; align-items: center; ">
     <section class="w-[10%] float-left" style="width: 10%; float: left;">
@@ -40,16 +41,29 @@ usort($sanksi, function ($a, $b) {
             </thead>
             <tbody>
                 <?php foreach ($sanksi as $index => $item) : ?>
-                <tr>
-                    <td><?= $index += 1 ?></td>
-                    <td><?= $item['jenis_sanksi']; ?></td>
-                    <td><?= $item['deskripsi_sanksi']; ?></td>
-                    <td><?= $item['min_skor']; ?></td>
-                    <td><?= $item['max_skor']; ?></td>
-                </tr>
+                    <tr>
+                        <td><?= $index += 1 ?></td>
+                        <td><?= $item['jenis_sanksi']; ?></td>
+                        <td><?= $item['deskripsi_sanksi']; ?></td>
+                        <td><?= $item['min_skor']; ?></td>
+                        <td><?= $item['max_skor']; ?></td>
+                    </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
 
     </article>
 </section>
+
+<footer
+    class="w-full mt-10 float-right">
+    <section class="w-[90%] float-right " style="text-align: right;">
+        <p><?= $data['formatDate'] ?></p>
+        <p>Pengurus Pondok</p>
+    </section>
+    <section class="w-[90%] float-right" style="text-align: right; margin-top: 13%;">
+
+        <p>Syahroni</p>
+    </section>
+
+</footer>

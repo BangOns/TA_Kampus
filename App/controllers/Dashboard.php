@@ -24,29 +24,29 @@ class Dashboard extends Controller
         $data['id'] = htmlspecialchars($id);
         $data['kriteria_pelanggaran'] = [
             'jenis_pelanggaran' => [
-                '1' => 'Ringan',
+                '1' => 'Berat',
                 '2' => 'Sedang',
-                '3' => 'Berat',
+                '3' => 'Ringan',
             ],
             'frekuensi_pelanggaran' => [
-                '1' => 'jarang',
-                '2' => 'lumayan',
-                '3' => 'sering',
+                '1' => '3 kali >',
+                '2' => '2 kali',
+                '3' => '1 kali',
             ],
             'dampak_pelanggaran' => [
-                '1' => 'Kecil',
+                '1' => 'Besar',
                 '2' => 'Sedang',
-                '3' => 'Besar',
+                '3' => 'Kecil',
             ],
             'keseriusan_niat' => [
-                '1' => 'Tidak Sengaja',
+                '1' => 'Sengaja',
                 '2' => 'Kurang Sengaja',
-                '3' => 'Sengaja',
+                '3' => 'Tidak Sengaja',
             ],
             'permohonan_maaf' => [
                 '1' => 'Meminta Maaf',
                 '2' => 'Tidak Tulus',
-                '3' => 'Tidak Ada',
+                '3' => 'Tidak ada',
             ],
         ];
         $data['kategori'] = ['Ringan', 'Sedang', 'Berat'];
@@ -58,6 +58,9 @@ class Dashboard extends Controller
         $resultsDataPelanggaran = $this->model('Data_Pelanggaran_Model')->getDataAll();
         $data['data-pelanggar'] = [];
         if ($resultsPelanggaranSantri['status'] === 200 && !empty($resultsPelanggaranSantri['data'])) {
+            usort($resultsPelanggaranSantri['data'], function ($a, $b) {
+                return $b['nilai_akhir'] <=> $a['nilai_akhir'];
+            });
             foreach ($resultsPelanggaranSantri['data'] as $index => $rslt) {
                 $get_sanksi = updateNilaiPelanggaranSantri($rslt['nilai_akhir'], $resultsDataSanksi['data']);
                 $data_santri = $this->model('Data_Santri_Model')->getDataById($rslt['id_santri']);

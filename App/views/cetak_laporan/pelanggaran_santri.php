@@ -36,7 +36,7 @@
             </thead>
             <tbody>
                 <?php foreach ($data['data-pelanggaran-santri'] as $index => $item) : ?>
-                <?php
+                    <?php
                     // Cari santri berdasarkan id_santri
                     $santri = array_filter($data['data-santri'], function ($s) use ($item) {
                         return $s['id_santri'] == $item['id_santri'];
@@ -45,19 +45,31 @@
                     // Ambil nama santri (jika ditemukan)
                     $namaSantri = !empty($santri) ? reset($santri)['nama_santri'] : "Tidak Diketahui";
                     ?>
-                <tr>
-                    <td><?= $index += 1 ?></td>
-                    <td><?= ucfirst($item['nama_pelanggaran']); ?></td>
-                    <td><?= $namaSantri ?></td>
-                    <td><?= number_format($item['nilai_akhir'], 2); ?></td>
-                    <td><?= $item['c1']; ?></td>
-                    <td><?= $item['c2']; ?></td>
-                    <td><?= $item['c3']; ?></td>
-                    <td><?= $item['c4']; ?></td>
-                    <td><?= $item['c5']; ?></td>
-                </tr>
+                    <tr>
+                        <td><?= $index += 1 ?></td>
+                        <td><?= ucfirst($item['nama_pelanggaran']); ?></td>
+                        <td><?= $namaSantri ?></td>
+                        <td><?= number_format($item['nilai_akhir'], 2); ?></td>
+                        <td><?= $item['c1']; ?></td>
+                        <td><?= $item['c2']; ?></td>
+                        <td><?= $item['c3']; ?></td>
+                        <td><?= $item['c4']; ?></td>
+                        <td><?= $item['c5']; ?></td>
+                    </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
     </article>
 </section>
+<footer
+    class="w-full mt-10 float-right">
+    <section class="w-[90%] float-right " style="text-align: right;">
+        <p><?= $data['formatDate'] ?></p>
+        <p>Pengurus Pondok</p>
+    </section>
+    <section class="w-[90%] float-right" style="text-align: right; margin-top: 13%;">
+
+        <p>Syahroni</p>
+    </section>
+
+</footer>

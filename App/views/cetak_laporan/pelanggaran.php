@@ -1,3 +1,16 @@
+<?php
+date_default_timezone_set('Asia/Jakarta');
+$lokasi = 'Depok';
+$formatter = new IntlDateFormatter(
+    'id_ID',
+    IntlDateFormatter::FULL,
+    IntlDateFormatter::NONE,
+    'Asia/Jakarta',
+    IntlDateFormatter::GREGORIAN,
+    'EEEE dd MMMM yyyy'
+);
+$tanggal = $formatter->format(new DateTime());
+?>
 <header style="width: 100%; align-items: center; ">
     <section class="w-[10%] float-left" style="width: 10%; float: left;">
         <img src="http://localhost/takampus/public/img/icons-logo.png" width="50" height="50" alt="banner-auth">
@@ -31,14 +44,26 @@
             </thead>
             <tbody>
                 <?php foreach ($data['data-pelanggaran'] as $index => $item) : ?>
-                <tr>
-                    <td><?= $index += 1 ?></td>
-                    <td><?= $item['nama_pelanggaran']; ?></td>
-                    <td><?= $item['jenis_pelanggaran']; ?></td>
-                    <td><?= $item['bobot_pelanggaran']; ?></td>
-                </tr>
+                    <tr>
+                        <td><?= $index += 1 ?></td>
+                        <td><?= $item['nama_pelanggaran']; ?></td>
+                        <td><?= $item['jenis_pelanggaran']; ?></td>
+                        <td><?= $item['bobot_pelanggaran']; ?></td>
+                    </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
     </article>
 </section>
+<footer
+    class="w-full mt-10 float-right">
+    <section class="w-[90%] float-right " style="text-align: right;">
+        <p><?= $data['formatDate'] ?></p>
+        <p>Pengurus Pondok</p>
+    </section>
+    <section class="w-[90%] float-right" style="text-align: right; margin-top: 13%;">
+
+        <p>Syahroni</p>
+    </section>
+
+</footer>

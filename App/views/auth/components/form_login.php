@@ -26,7 +26,7 @@
             </div>
         </section>
         <!-- Action Login -->
-        <section class="max-sm:w-full w-11/12 md:w-4/5  flex justify-between  items-center">
+        <!-- <section class="max-sm:w-full w-11/12 md:w-4/5  flex justify-between  items-center">
             <section class="flex items-center gap-1">
                 <input type="checkbox" name="remember" id="remember">
                 <label class="text-xs sm:text-sm  ">remember me </label>
@@ -34,7 +34,7 @@
             <section class="">
                 <a href="#" class="text-xs sm:text-sm underline text-sky-300">Lupa password?</a>
             </section>
-        </section>
+        </section> -->
         <!-- Button Login Account -->
         <section class="flex flex-col justify-center max-sm:w-full w-11/12 md:w-4/5  gap-2">
             <button type="submit" class="py-1 rounded  bg-slate-400 w-full">Login</button>

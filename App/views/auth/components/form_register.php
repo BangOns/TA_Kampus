@@ -70,7 +70,7 @@
             </section>
         </div>
         <!-- Select Option Hint -->
-        <section class="flex flex-col gap-1 w-full">
+        <!-- <section class="flex flex-col gap-1 w-full">
             <label for="pertanyaan" class=" text-slate-700 max-sm:text-sm ">Pilih Pertanyaan</label>
             <div class="flex   gap-2 w-full">
                 <select name="pertanyaan" id="pertanyaan"
@@ -83,9 +83,9 @@
 
                 </select>
             </div>
-        </section>
+        </section> -->
         <!-- Answer Hint -->
-        <section class="flex flex-col gap-1 w-full">
+        <!-- <section class="flex flex-col gap-1 w-full">
             <label for="answer_hint" class=" text-slate-700 max-sm:text-sm ">Jawaban anda </label>
             <div class="flex   gap-2 w-full">
                 <input type="text" required id="jawaban" name="jawaban" placeholder="jawaban..."
@@ -94,7 +94,7 @@
             <p class="text-xs text-slate-500"><span class="text-red-500">*</span>Mohon diingat pilihan dan
                 jawaban anda
             </p>
-        </section>
+        </section> -->
         <!-- Button Register Account -->
         <section class="flex flex-col justify-center w-full  gap-2">
             <button type="submit" class="py-1 rounded  bg-slate-400 w-full">Register</button>

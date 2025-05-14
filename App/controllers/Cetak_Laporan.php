@@ -9,11 +9,30 @@ if (file_exists($autoloadPath)) {
 } else {
     var_dump('File autoload.php tidak ditemukan. Pastikan sudah menjalankan "composer install".');
 }
+date_default_timezone_set('Asia/Jakarta');
 
+function getTanggalIndonesia($lokasi = 'Depok')
+{
+    $formatter = new IntlDateFormatter(
+        'id_ID',
+        IntlDateFormatter::FULL,
+        IntlDateFormatter::NONE,
+        'Asia/Jakarta',
+        IntlDateFormatter::GREGORIAN,
+        'EEEE dd MMMM yyyy'
+    );
 
+    $tanggal = $formatter->format(new DateTime());
+    return "$lokasi, $tanggal";
+}
 
 class Cetak_Laporan extends Controller
 {
+    public $formatDate;
+    public function __construct()
+    {
+        $this->formatDate = getTanggalIndonesia();
+    }
     public function index()
     {
         $data['list-cetak-laporan'] = [
@@ -45,6 +64,7 @@ class Cetak_Laporan extends Controller
                 'icons' => BASEURL . '/icons/icons-sanksi-cetak.svg'
             ]
         ];
+        $data['formatDate'] = $this->formatDate;
         $data['title'] = 'cetak_laporan';
         $this->view('templates/header', $data);
         $this->view('templates/components/navbar', $data);
@@ -60,7 +80,7 @@ class Cetak_Laporan extends Controller
         }
         ob_start();
         $data['title'] = 'cetak_laporan_santri';
-
+        $data['formatDate'] = $this->formatDate;
         $this->view('templates/header', $data);
         $this->view('cetak_laporan/santri', $data);
         $this->view('templates/footer');
@@ -91,7 +111,7 @@ class Cetak_Laporan extends Controller
         }
         ob_start();
         $data['title'] = 'cetak_laporan_pelanggaran';
-
+        $data['formatDate'] = $this->formatDate;
         $this->view('templates/header', $data);
         $this->view('cetak_laporan/pelanggaran', $data);
         $this->view('templates/footer');
@@ -116,6 +136,7 @@ class Cetak_Laporan extends Controller
     public function laporan_sanksi()
     {
         $data['data-sanksi'] = [];
+        $data['formatDate'] = $this->formatDate;
 
         $resultsDataSanksi = $this->model('Data_Sanksi_Model')->getDataAll();
         if ($resultsDataSanksi['status'] === 200 && !empty($resultsDataSanksi['data'])) {
@@ -149,6 +170,8 @@ class Cetak_Laporan extends Controller
     {
         $data['data-pelanggaran-santri'] = [];
         $data['data-santri'] = [];
+        $data['formatDate'] = $this->formatDate;
+
         $resultsPelanggaranSantri = $this->model('Data_Pelanggaran_Santri_Model')->getDataAll();
         $resultsDataSantri = $this->model('Data_Santri_Model')->getDataAll();
 
@@ -192,7 +215,7 @@ class Cetak_Laporan extends Controller
                 'items' => [
                     [
                         'No' => '1',
-                        'Nama' => 'Ringan',
+                        'Nama' => 'Berat',
                         'Bobot' => '1'
                     ],
                     [
@@ -202,7 +225,7 @@ class Cetak_Laporan extends Controller
                     ],
                     [
                         'No' => '3',
-                        'Nama' => 'Berat',
+                        'Nama' => 'Ringan',
                         'Bobot' => '3'
                     ],
 
@@ -213,17 +236,17 @@ class Cetak_Laporan extends Controller
                 'items' => [
                     [
                         'No' => '1',
-                        'Nama' => '1 kali',
+                        'Nama' => '3 kali >',
                         'Bobot' => '1'
                     ],
                     [
                         'No' => '2',
-                        'Nama' => '1 kali',
+                        'Nama' => '2 kali',
                         'Bobot' => '2'
                     ],
                     [
                         'No' => '3',
-                        'Nama' => '3 kali lebih',
+                        'Nama' => '1kali',
                         'Bobot' => '3'
                     ],
 
@@ -234,7 +257,7 @@ class Cetak_Laporan extends Controller
                 'items' => [
                     [
                         'No' => '1',
-                        'Nama' => 'Kecil',
+                        'Nama' => 'Berat',
                         'Bobot' => '1'
                     ],
                     [
@@ -244,7 +267,7 @@ class Cetak_Laporan extends Controller
                     ],
                     [
                         'No' => '3',
-                        'Nama' => 'Besar',
+                        'Nama' => 'Ringan',
                         'Bobot' => '3'
                     ],
 
@@ -255,7 +278,7 @@ class Cetak_Laporan extends Controller
                 'items' => [
                     [
                         'No' => '1',
-                        'Nama' => 'Tidak Sengaja',
+                        'Nama' => 'Sengaja',
                         'Bobot' => '1'
                     ],
                     [
@@ -265,7 +288,7 @@ class Cetak_Laporan extends Controller
                     ],
                     [
                         'No' => '3',
-                        'Nama' => 'Sengaja',
+                        'Nama' => 'Tidak Sengaja',
                         'Bobot' => '3'
                     ],
 
@@ -276,7 +299,7 @@ class Cetak_Laporan extends Controller
                 'items' => [
                     [
                         'No' => '1',
-                        'Nama' => 'Tidak ada',
+                        'Nama' => 'Meminta Maaf',
                         'Bobot' => '1'
                     ],
                     [
@@ -286,7 +309,7 @@ class Cetak_Laporan extends Controller
                     ],
                     [
                         'No' => '3',
-                        'Nama' => 'Meminta Maaf',
+                        'Nama' => 'Tidak ada',
                         'Bobot' => '3'
                     ],
 
@@ -295,7 +318,7 @@ class Cetak_Laporan extends Controller
         ];
         ob_start();
         $data['title'] = 'cetak_laporan_data_kriteria';
-
+        $data['formatDate'] = $this->formatDate;
         $this->view('templates/header', $data);
         $this->view('cetak_laporan/kriteria', $data);
         $this->view('templates/footer');

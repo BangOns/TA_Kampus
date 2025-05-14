@@ -13,7 +13,7 @@ function renderCardSanksi($data, $menu)
     foreach ($data as $index => $pelanggar) {
         echo '<article class="w-full py-3 h-auto border border-slate-300 rounded shadow px-5 sm:px-7">';
         echo '<section  >';
-        echo '<h1 class="font-semibold ' .  $kategoriSanksi[$pelanggar['Kategori']]  . '   text-lg">' . $pelanggar['Kategori'] . '</h1>';
+        echo '<h1 class="font-semibold ' .  $kategoriSanksi[$pelanggar['Kategori Sanksi']]  . '   text-lg">' . $pelanggar['Kategori Sanksi'] . '</h1>';
         echo '</section>';
 
         // Menampilkan detail pelanggaran dalam tabel

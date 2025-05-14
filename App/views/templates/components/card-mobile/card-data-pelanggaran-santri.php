@@ -25,10 +25,6 @@ function renderCardPelanggaranSantri($data, $menu)
         echo '<td class="font-semibold">' . $pelanggar['pelanggaran-dilakukan'] . '</td>';
         echo '</tr>';
         echo '<tr>';
-        echo '<td class="py-2">Jenis Pelanggaran</td>';
-        echo '<td class="font-semibold">' . $pelanggar['jenis-pelanggaran'] . '</td>';
-        echo '</tr>';
-        echo '<tr>';
         echo '<td class="py-2">Frekuensi</td>';
         echo '<td class="font-semibold">' . $pelanggar['frekuensi'] . '</td>';
         echo '</tr>';
