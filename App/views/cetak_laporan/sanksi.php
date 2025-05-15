@@ -62,8 +62,8 @@ usort($sanksi, function ($a, $b) {
         <p>Pengurus Pondok</p>
     </section>
     <section class="w-[90%] float-right" style="text-align: right; margin-top: 13%;">
-
-        <p>Syahroni</p>
+        <p><?= $data['pengurus_pondok']['nama_pengurus'] ?></p>
+        <p>NIDN: <?= $data['pengurus_pondok']['NIDN'] ?></p>
     </section>
 
 </footer>

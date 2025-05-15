@@ -20,11 +20,12 @@
             <?= ucwords(preg_replace("/[-_]/", " ", $data["title"]));  ?></h1>
     </header>
     <article class="mt-4">
+        <!-- Table -->
         <table border="1" width="100%" cellspacing="0" cellpadding="5">
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Nama Pelanggaran</th>
+                    <th>Pelanggaran</th>
                     <th>Nama Santri</th>
                     <th>Nilai Akhir</th>
                     <th>C1</th>
@@ -68,8 +69,8 @@
         <p>Pengurus Pondok</p>
     </section>
     <section class="w-[90%] float-right" style="text-align: right; margin-top: 13%;">
-
-        <p>Syahroni</p>
+        <p><?= $data['pengurus_pondok']['nama_pengurus'] ?></p>
+        <p>NIDN: <?= $data['pengurus_pondok']['NIDN'] ?></p>
     </section>
 
 </footer>

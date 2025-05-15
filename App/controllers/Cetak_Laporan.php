@@ -64,6 +64,10 @@ class Cetak_Laporan extends Controller
                 'icons' => BASEURL . '/icons/icons-sanksi-cetak.svg'
             ]
         ];
+        $data['pengurus_pondok'] = [
+            "nama_pengurus" => "Sulaeman Haekal",
+            "NIDN" => "12312312312",
+        ];
         $data['formatDate'] = $this->formatDate;
         $data['title'] = 'cetak_laporan';
         $this->view('templates/header', $data);
@@ -79,7 +83,11 @@ class Cetak_Laporan extends Controller
             $data['data-santri'] = $resultsDataSantri['data'];
         }
         ob_start();
-        $data['title'] = 'cetak_laporan_santri';
+        $data['pengurus_pondok'] = [
+            "nama_pengurus" => "Sulaeman Haekal",
+            "NIDN" => "12312312312",
+        ];
+        $data['title'] = 'laporan_santri';
         $data['formatDate'] = $this->formatDate;
         $this->view('templates/header', $data);
         $this->view('cetak_laporan/santri', $data);
@@ -110,7 +118,11 @@ class Cetak_Laporan extends Controller
             $data['data-pelanggaran'] = $resultsDataPelanggaran['data'];
         }
         ob_start();
-        $data['title'] = 'cetak_laporan_pelanggaran';
+        $data['pengurus_pondok'] = [
+            "nama_pengurus" => "Sulaeman Haekal",
+            "NIDN" => "12312312312",
+        ];
+        $data['title'] = 'laporan_pelanggaran';
         $data['formatDate'] = $this->formatDate;
         $this->view('templates/header', $data);
         $this->view('cetak_laporan/pelanggaran', $data);
@@ -143,8 +155,11 @@ class Cetak_Laporan extends Controller
             $data['data-sanksi'] = $resultsDataSanksi['data'];
         }
         ob_start();
-        $data['title'] = 'cetak_laporan_sanksi';
-
+        $data['pengurus_pondok'] = [
+            "nama_pengurus" => "Sulaeman Haekal",
+            "NIDN" => "12312312312",
+        ];
+        $data['title'] = 'laporan_sanksi';
         $this->view('templates/header', $data);
         $this->view('cetak_laporan/sanksi', $data);
         $this->view('templates/footer');
@@ -178,12 +193,18 @@ class Cetak_Laporan extends Controller
         if (($resultsPelanggaranSantri['status'] === 200 && !empty($resultsPelanggaranSantri['data']))
             && ($resultsDataSantri['status'] === 200 && !empty($resultsDataSantri['data']))
         ) {
+            usort($resultsPelanggaranSantri['data'], function ($a, $b) {
+                return $b['nilai_akhir'] <=> $a['nilai_akhir'];
+            });
             $data['data-pelanggaran-santri'] = $resultsPelanggaranSantri['data'];
             $data['data-santri'] = $resultsDataSantri['data'];
         }
         ob_start();
-        $data['title'] = 'cetak_laporan_pelanggaran_santri';
-
+        $data['pengurus_pondok'] = [
+            "nama_pengurus" => "Sulaeman Haekal",
+            "NIDN" => "12312312312",
+        ];
+        $data['title'] = 'laporan_pelanggaran_santri';
         $this->view('templates/header', $data);
         $this->view('cetak_laporan/pelanggaran_santri', $data);
         $this->view('templates/footer');
@@ -317,7 +338,11 @@ class Cetak_Laporan extends Controller
             ]
         ];
         ob_start();
-        $data['title'] = 'cetak_laporan_data_kriteria';
+        $data['pengurus_pondok'] = [
+            "nama_pengurus" => "Sulaeman Haekal",
+            "NIDN" => "12312312312",
+        ];
+        $data['title'] = 'laporan_data_kriteria';
         $data['formatDate'] = $this->formatDate;
         $this->view('templates/header', $data);
         $this->view('cetak_laporan/kriteria', $data);

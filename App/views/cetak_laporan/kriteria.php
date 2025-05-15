@@ -12,8 +12,8 @@
         </p>
     </section>
 </header>
-<hr class="mt-5">
-<section class="w-full mt-3 text-center">
+<hr class="mt-5 mb-1">
+<section class="w-full mt-1 text-center">
     <header class="w-full">
         <h1 style="font-weight: 800;">
             <?= ucwords(preg_replace("/[-_]/", " ", $data["title"]));  ?></h1>
@@ -53,9 +53,9 @@
         <p><?= $data['formatDate'] ?></p>
         <p>Pengurus Pondok</p>
     </section>
-    <section class="w-[90%] float-right" style="text-align: right; margin-top: 8%;">
-
-        <p>Syahroni</p>
+    <section class="w-[90%] float-right" style="text-align: right; margin-top: 7%;">
+        <p><?= $data['pengurus_pondok']['nama_pengurus'] ?></p>
+        <p>NIDN: <?= $data['pengurus_pondok']['NIDN'] ?></p>
     </section>
 
 </footer>
