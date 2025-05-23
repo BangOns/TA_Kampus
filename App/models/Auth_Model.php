@@ -2,9 +2,6 @@
 class Auth_Model extends Database
 {
     private $table = 'admin';
-
-
-
     public function login($data)
     {
         if ($data) {
@@ -40,21 +37,12 @@ class Auth_Model extends Database
     public function register($data)
     {
         try {
-
             $id_admin = htmlspecialchars($data['id_admin']);
             $name = htmlspecialchars($data['name']);
             $password = htmlspecialchars($data['password']);
             $repassword = htmlspecialchars($data['repassword']);
             $pertanyaan = htmlspecialchars($data['pertanyaan']);
             $jawaban = htmlspecialchars($data['jawaban']);
-            // if (preg_match('/^(?=(.*[A-Za-z]){3})(?=(.*[0-9]){3})[A-Za-z0-9]{6}$/', $id_admin, $matches)) {
-
-            //     print_r($matches);
-            // } else {
-            //     echo "any matvhs";
-            // }
-
-
             if ($password !== $repassword) {
                 throw new Exception('Password dan Re-Password tidak sama!');
             }

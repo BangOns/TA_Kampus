@@ -1,9 +1,6 @@
 <article class="w-full  font-poppins max-md:space-y-3 ">
-
     <!-- Area Table and Search -->
     <section class="w-full mt-4">
-
-
         <!-- Table & Card Data Alternatif -->
         <article class="w-full max-md:space-y-3 max-md:mt-3 ">
             <header class="w-full pb-2">
@@ -20,10 +17,8 @@
                 echo '<section class="w-full text-center ">
             <p class="text-2xl font-semibold">Data Not Found X</p>
         </section>';
-            }
-            ?>
+            } ?>
         </article>
-
         <!-- Table & Card Nilai Alternatif -->
         <article class="w-full max-md:space-y-3 mt-3 ">
             <header class="w-full pb-2">
@@ -40,10 +35,8 @@
                 echo '<section class="w-full text-center ">
             <p class="text-2xl font-semibold">Data Not Found X</p>
         </section>';
-            }
-            ?>
+            }  ?>
         </article>
-
         <!-- Table & Card Hasil Normalisasi -->
         <article class="w-full max-md:space-y-3 mt-3 ">
             <header class="w-full pb-2">
@@ -60,9 +53,7 @@
                 echo '<section class="w-full text-center ">
             <p class="text-2xl font-semibold">Data Not Found X</p>
         </section>';
-            }
-            ?>
+            } ?>
         </article>
-
     </section>
 </article>

@@ -69,32 +69,7 @@
                 </div>
             </section>
         </div>
-        <!-- Select Option Hint -->
-        <!-- <section class="flex flex-col gap-1 w-full">
-            <label for="pertanyaan" class=" text-slate-700 max-sm:text-sm ">Pilih Pertanyaan</label>
-            <div class="flex   gap-2 w-full">
-                <select name="pertanyaan" id="pertanyaan"
-                    class="  border px-3 py-1 rounded  border-slate-500 pw max-sm:text-sm w-full hover:cursor-pointer"
-                    required>
-                    <option value="">Pilih Pertanyaan</option>
-                    <?php foreach ($data['pertanyaan'] as $pertanyaan) : ?>
-                        <option value="<?= $pertanyaan ?>"><?= $pertanyaan ?></option>
-                    <?php endforeach; ?>
 
-                </select>
-            </div>
-        </section> -->
-        <!-- Answer Hint -->
-        <!-- <section class="flex flex-col gap-1 w-full">
-            <label for="answer_hint" class=" text-slate-700 max-sm:text-sm ">Jawaban anda </label>
-            <div class="flex   gap-2 w-full">
-                <input type="text" required id="jawaban" name="jawaban" placeholder="jawaban..."
-                    class="  border px-3 py-1 rounded  border-slate-500 pw max-sm:text-sm w-full">
-            </div>
-            <p class="text-xs text-slate-500"><span class="text-red-500">*</span>Mohon diingat pilihan dan
-                jawaban anda
-            </p>
-        </section> -->
         <!-- Button Register Account -->
         <section class="flex flex-col justify-center w-full  gap-2">
             <button type="submit" class="py-1 rounded  bg-slate-400 w-full">Register</button>
@@ -111,3 +86,29 @@
         </section>
     </form>
 </section>
+<!-- Select Option Hint -->
+<!-- <section class="flex flex-col gap-1 w-full">
+            <label for="pertanyaan" class=" text-slate-700 max-sm:text-sm ">Pilih Pertanyaan</label>
+            <div class="flex   gap-2 w-full">
+                <select name="pertanyaan" id="pertanyaan"
+                    class="  border px-3 py-1 rounded  border-slate-500 pw max-sm:text-sm w-full hover:cursor-pointer"
+                    required>
+                    <option value="">Pilih Pertanyaan</option>
+                    <?php foreach ($data['pertanyaan'] as $pertanyaan) : ?>
+                        <option value="<?= $pertanyaan ?>"><?= $pertanyaan ?></option>
+                    <?php endforeach; ?>
+
+                </select>
+            </div>
+        </section> -->
+<!-- Answer Hint -->
+<!-- <section class="flex flex-col gap-1 w-full">
+            <label for="answer_hint" class=" text-slate-700 max-sm:text-sm ">Jawaban anda </label>
+            <div class="flex   gap-2 w-full">
+                <input type="text" required id="jawaban" name="jawaban" placeholder="jawaban..."
+                    class="  border px-3 py-1 rounded  border-slate-500 pw max-sm:text-sm w-full">
+            </div>
+            <p class="text-xs text-slate-500"><span class="text-red-500">*</span>Mohon diingat pilihan dan
+                jawaban anda
+            </p>
+        </section> -->

@@ -1,7 +1,6 @@
 <?php
 class Hasil_Akhir extends Controller
 {
-
     public  static $skala_bobot_benefit = 3;
     public  static $skala_bobot_cost = 1;
     public function index($type = "", $action = "", $id = '')
@@ -44,12 +43,9 @@ class Hasil_Akhir extends Controller
             ],
         ];
         $resultsPelanggaranSantri = $this->model('Data_Pelanggaran_Santri_Model')->getDataAll();
-
-
         // Nilai Alternatif 
         $data['data-matriks'] = [];
         $resultsDataSanksi = $this->model('Data_Sanksi_Model')->getDataAll();
-
         if ($resultsPelanggaranSantri['status'] === 200 && !empty($resultsPelanggaranSantri['data'])) {
             usort($resultsPelanggaranSantri['data'], function ($a, $b) {
                 return $b['nilai_akhir'] <=> $a['nilai_akhir'];
@@ -69,8 +65,6 @@ class Hasil_Akhir extends Controller
                 array_push($data['data-matriks'], $newData);
             };
         }
-
-
         $data['type'] = $type;
         $data['action'] = $action;
         $data['id'] = htmlspecialchars($id);
