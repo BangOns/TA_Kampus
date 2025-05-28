@@ -10,3 +10,4 @@ Flasher::flash();
     <?php include dirname(__DIR__, 1) . '/templates/components/modals/modals-delete.php'; ?>
 </main>
 <script src="<?= BASEURL; ?>/js/script_action.js"></script>
+<script type="module" src="<?= BASEURL; ?>/js/script_dashboard.js"></script>
