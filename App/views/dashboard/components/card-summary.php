@@ -1,6 +1,8 @@
 <article
     class="w-full flex gap-5 md:gap-3 mt-5 justify-around md:justify-center lg:justify-between items-center font-poppins max-lg:flex-wrap ">
-    <canvas id="myChart" height="60"></canvas>
+    <section class="relative w-full h-64 md:h-72"> <!-- tinggi fleksibel -->
+        <canvas id="myChart" height="300" class="  w-full h-full"></canvas>
+    </section>
     <!-- <?php if ($data['data-card-summary']) {
                 foreach ($data['data-card-summary'] as  $value) {
                     echo '<section

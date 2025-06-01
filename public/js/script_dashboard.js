@@ -8,31 +8,36 @@ $(function () {
     dataType: "json",
     method: "GET",
     success: function (data) {
-      console.log(data);
+      chartData(data.data);
     },
     error: function (xhr, status, error) {
       console.error("AJAX Error:", status, error);
     },
   });
 
-  new Chart(ctx, {
-    type: "bar",
-    data: {
-      labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-      datasets: [
-        {
-          label: "# of Votes",
-          data: [12, 19, 3, 5, 2, 3],
-          borderWidth: 1,
-        },
-      ],
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true,
+  function chartData(data) {
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: data?.map((item) => item.label),
+        datasets: [
+          {
+            label: "DataSet",
+            data: data?.map((item) => item.data.length),
+            borderWidth: 1,
+            borderColor: "rgba(75, 192, 192, 1)",
+            backgroundColor: "rgba(75, 192, 192, 0.2)",
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
         },
       },
-    },
-  });
+    });
+  }
 });

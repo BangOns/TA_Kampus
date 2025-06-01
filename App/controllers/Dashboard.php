@@ -191,7 +191,8 @@ class Dashboard extends Controller
         if ($resultsPelanggaranSantri['status'] !== 200 || $resultsDataSantri['status'] !== 200 || $resultsDataSanksi['status'] !== 200 || $resultsDataPelanggaran['status'] !== 200) {
             return [
                 'status' => 500,
-                'message' => 'Error fetching data'
+                'message' => 'Error fetching data',
+                'data' => []
             ];
         }
         echo json_encode(
@@ -200,19 +201,19 @@ class Dashboard extends Controller
                 'message' => 'Data fetched successfully',
                 'data' => [
                     [
-                        'title' => 'Santri',
+                        'label' => 'Santri',
                         'data' => $resultsDataSantri['data']
                     ],
                     [
-                        'title' => 'Pelanggaran',
+                        'label' => 'Pelanggaran',
                         'data' => $resultsDataPelanggaran['data']
                     ],
                     [
-                        'title' => 'Sanksi',
+                        'label' => 'Sanksi',
                         'data' => $resultsDataSanksi['data']
                     ],
                     [
-                        'title' => 'Pelanggaran Santri',
+                        'label' => 'Pelanggaran Santri',
                         'data' => $resultsPelanggaranSantri['data']
                     ]
                 ]
