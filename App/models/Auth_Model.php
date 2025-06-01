@@ -41,19 +41,19 @@ class Auth_Model extends Database
             $name = htmlspecialchars($data['name']);
             $password = htmlspecialchars($data['password']);
             $repassword = htmlspecialchars($data['repassword']);
-            $pertanyaan = htmlspecialchars($data['pertanyaan']);
-            $jawaban = htmlspecialchars($data['jawaban']);
+            // $pertanyaan = htmlspecialchars($data['pertanyaan']);
+            // $jawaban = htmlspecialchars($data['jawaban']);
             if ($password !== $repassword) {
                 throw new Exception('Password dan Re-Password tidak sama!');
             }
             $hashPassword = password_hash($password, PASSWORD_DEFAULT);
-            $query = "INSERT INTO $this->table (id_admin,name,password,pertanyaan,jawaban) VALUES (:id_admin,:name,:password,:pertanyaan,:jawaban)";
+            $query = "INSERT INTO $this->table (id_admin,name,password) VALUES (:id_admin,:name,:password)";
             $this->query($query);
             $this->bind('id_admin', $id_admin);
             $this->bind('name', $name);
             $this->bind('password', $hashPassword);
-            $this->bind('pertanyaan', $pertanyaan);
-            $this->bind('jawaban', $jawaban);
+            // $this->bind('pertanyaan', $pertanyaan);
+            // $this->bind('jawaban', $jawaban);
             $this->execute();
             return [
                 'status' => '200',

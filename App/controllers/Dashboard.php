@@ -182,4 +182,41 @@ class Dashboard extends Controller
             $this->redirect('/dashboard');
         }
     }
+    public function getDataAll()
+    {
+        $resultsPelanggaranSantri = $this->model('Data_Pelanggaran_Santri_Model')->getDataAll();
+        $resultsDataSantri = $this->model('Data_Santri_Model')->getDataAll();
+        $resultsDataSanksi = $this->model('Data_Sanksi_Model')->getDataAll();
+        $resultsDataPelanggaran = $this->model('Data_Pelanggaran_Model')->getDataAll();
+        if ($resultsPelanggaranSantri['status'] !== 200 || $resultsDataSantri['status'] !== 200 || $resultsDataSanksi['status'] !== 200 || $resultsDataPelanggaran['status'] !== 200) {
+            return [
+                'status' => 500,
+                'message' => 'Error fetching data'
+            ];
+        }
+        echo json_encode(
+            [
+                'status' => 200,
+                'message' => 'Data fetched successfully',
+                'data' => [
+                    [
+                        'title' => 'Santri',
+                        'data' => $resultsDataSantri['data']
+                    ],
+                    [
+                        'title' => 'Pelanggaran',
+                        'data' => $resultsDataPelanggaran['data']
+                    ],
+                    [
+                        'title' => 'Sanksi',
+                        'data' => $resultsDataSanksi['data']
+                    ],
+                    [
+                        'title' => 'Pelanggaran Santri',
+                        'data' => $resultsPelanggaranSantri['data']
+                    ]
+                ]
+            ]
+        );
+    }
 }

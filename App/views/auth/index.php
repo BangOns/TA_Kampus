@@ -1,7 +1,7 @@
 <?php
 Flasher::flash();
 ?>
-<main class=" w-svw h-svh overflow-hidden bg-custom-green-gradient-2">
+<main class=" w-svw h-svh overflow-hidden bg-custom-green-gradient bg-slate-600">
     <section class="w-full h-full max-sm:p-0 max-lg:px-5 flex justify-center items-center   ">
         <article class="w-full h-full lg:w-3/4  sm:h-3/4 bg-white rounded-md shadow-xl flex">
             <!-- Form -->
