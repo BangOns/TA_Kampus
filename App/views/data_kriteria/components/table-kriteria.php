@@ -2,8 +2,8 @@
     <!-- Area Table and Search -->
     <section class="w-full mt-4">
         <section class="w-full basis-1/2 flex my-4 ">
-            <button href=""
-                class="py-1 px-2 sm:py-2 sm:px-2 lg:px-3   rounded transition-all items-center bg-black text-white  flex text-xs md:text-sm gap-1 lg:text-sm ">
+            <button
+                class=" showKriteria py-1 px-2 sm:py-2 sm:px-2 lg:px-3   rounded transition-all items-center bg-black text-white  flex text-xs md:text-sm gap-1 lg:text-sm ">
                 <div class="size-5">
                     <?php include dirname(__DIR__, 4) . '/public/icons/icons-add.svg'; ?>
                 </div>
