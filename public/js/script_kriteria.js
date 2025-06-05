@@ -1,10 +1,17 @@
 $(function () {
-  const showTable = "fixed top-0 left-0 z-10";
+  const showTable = "show";
+  const notShowTable = "not-show";
   const modals = $(".modals-kriteria");
-  const ButtonModals = $(".showKriteria");
+  const ButtonOpenModals = $(".showKriteria");
+  const ButtonCloseModals = $(".close-modals");
   const JudulKriteria = $(".judul-kriteria");
-  ButtonModals.on("click", function () {
-    modals.toggleClass(showTable);
+  ButtonOpenModals.on("click", function () {
+    modals.addClass(showTable);
+    modals.removeClass(notShowTable);
     JudulKriteria.text("Tambah Kriteria");
+  });
+  ButtonCloseModals.on("click", function () {
+    modals.addClass(notShowTable);
+    modals.removeClass(showTable);
   });
 });

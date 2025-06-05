@@ -1,5 +1,5 @@
 <?php
-class Data_Pelanggaran_Model extends Database
+class Data_Kriteria_Model extends Database
 {
 
     private $table = 'data_kriteria';

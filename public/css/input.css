@@ -4,7 +4,10 @@
 
 @layer components {
   .show {
-    @apply fixed top-0 left-0 z-10 bg-black/50;
+    @apply flex bg-black/50 fixed top-0 left-0 z-10;
+  }
+  .not-show {
+    @apply hidden;
   }
 }
 

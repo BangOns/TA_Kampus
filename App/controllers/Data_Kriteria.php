@@ -12,6 +12,19 @@ class Data_Kriteria extends Controller
             'Nama',
             'Bobot',
         ];
+        $resultDataKriteria = $this->model('Data_Kriteria_Model')->getDataAllKriteria();
+        $resultDataSubKriteria = $this->model('Data_Kriteria_Model')->getDataAllSubkriteria();
+        if ($resultDataKriteria['status'] === 200) {
+            $data['kriteria'] = $resultDataKriteria['data'];
+        } else {
+            $data['kriteria'] = [];
+        }
+        if ($resultDataSubKriteria['status'] === 200) {
+            $data['sub_kriteria'] = $resultDataSubKriteria['data'];
+        } else {
+            $data['sub_kriteria'] = [];
+        };
+        var_dump($data['sub_kriteria']);
         $data['kriteria_pelanggaran'] = [
             [
                 'nama' => 'jenis_pelanggaran',
