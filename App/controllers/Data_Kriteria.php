@@ -12,19 +12,17 @@ class Data_Kriteria extends Controller
             'Nama',
             'Bobot',
         ];
+        $data['kriteria'] = [];
+        $data['sub_kriteria'] = [];
+
         $resultDataKriteria = $this->model('Data_Kriteria_Model')->getDataAllKriteria();
         $resultDataSubKriteria = $this->model('Data_Kriteria_Model')->getDataAllSubkriteria();
         if ($resultDataKriteria['status'] === 200) {
             $data['kriteria'] = $resultDataKriteria['data'];
-        } else {
-            $data['kriteria'] = [];
         }
         if ($resultDataSubKriteria['status'] === 200) {
             $data['sub_kriteria'] = $resultDataSubKriteria['data'];
-        } else {
-            $data['sub_kriteria'] = [];
-        };
-        var_dump($data['sub_kriteria']);
+        }
         $data['kriteria_pelanggaran'] = [
             [
                 'nama' => 'jenis_pelanggaran',
@@ -141,17 +139,17 @@ class Data_Kriteria extends Controller
         $this->view('data_kriteria/index', $data);
         $this->view('templates/footer', $data);
     }
-    public function addData()
+    public function tambahKriteria()
     {
-        $result = $this->model('Data_Pelanggaran_Model')->AddPelanggaran($_POST);
+        $result = $this->model('Data_Kriteria_Model')->AddKriteria($_POST);
         if ($result['status'] === 200) {
-            Flasher::setFlash('Tambah Data Pelanggaran', 'Berhasil', 'success');
+            Flasher::setFlash('Tambah Data kriteria', 'Berhasil', 'success');
 
-            $this->redirect('/data_pelanggaran');
+            $this->redirect('/data_kriteria');
         } else {
-            Flasher::setFlash('Tambah Data Pelanggaran', 'Gagal', 'error');
+            Flasher::setFlash('Tambah Data kriteria', 'Gagal', 'error');
 
-            $this->redirect('/data_pelanggaran');
+            $this->redirect('/data_kriteria');
         }
     }
     public function editData($id)

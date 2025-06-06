@@ -6,6 +6,7 @@ Flasher::flash();
     <?php include __DIR__ . '/components/header.php'; ?>
     <?php include __DIR__ . '/components/table-kriteria.php'; ?>
     <?php include __DIR__ . '/components/modal-form-kriteria.php'; ?>
+    <?php include __DIR__ . '/components/delete-kriteria.php'; ?>
     <?php include dirname(__DIR__, 1) . '/templates/components/modals/modals-detail.php'; ?>
     <?php include dirname(__DIR__, 1) . '/templates/components/modals/modals-form.php'; ?>
     <?php include dirname(__DIR__, 1) . '/templates/components/modals/modals-delete.php'; ?>

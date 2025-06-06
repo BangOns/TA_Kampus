@@ -1,6 +1,6 @@
 <?php
 
-function renderCardKriteria($data)
+function renderCardKriteria($data, $menu)
 {
     // Mulai dengan section utama
     echo '<section class="w-full flex flex-col gap-4 md:hidden">';
@@ -19,11 +19,31 @@ function renderCardKriteria($data)
         echo '<td class="py-2">Bobot</td>';
         echo '<td class="font-semibold">' . $kriteria['Bobot'] . '</td>';
         echo '</tr>';
+        echo '<tr>';
+        echo '<td class="py-2">Jenis Kriteria</td>';
+        echo '<td class="font-semibold">' . 'Benefit' . '</td>';
+        echo '</tr>';
         echo '</tbody>';
         echo '</table>';
         echo '</section>';
 
-
+        // Menambahkan tombol untuk melihat opsi lebih lanjut
+        echo '<section class="py-2 h-auto">';
+        echo '<button onclick="buttonToggleMenuMobile(\'#menu-mobile-' . $index . '\')" class="w-full flex items-center justify-center gap-2 text-white py-2 text-xs sm:text-sm bg-black rounded">View More Option';
+        echo '<div class="size-4 text-white">';
+        include dirname(__DIR__, 5) . '/public/icons/icons-dropdown.svg';
+        echo '</div>';
+        echo '</button>';
+        echo '<section id="menu-mobile-' . $index . '" class="w-full hidden flex-col gap-2 p-2 border border-gray-300 rounded">';
+        foreach ($menu as $mn) {
+            // Menambahkan menu opsi tambahan
+            echo  "<button type='button'  class='showKriteria {$mn['class']} justify-center'>";
+            echo '<div class="size-4">';
+            include($mn['icon']);
+            echo '</div>';
+            echo $mn['text'] . "</button>";
+        }
+        echo '</section>';
         echo '</article>';
     }
 

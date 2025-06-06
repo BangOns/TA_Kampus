@@ -64,8 +64,8 @@ $list_settings_navbar = [
     class=" top-0 max-md:w-full transition-all max-md:pr-2 max-md:-translate-x-full z-10  lg:w-64   fixed h-screen  font-poppins pl-3 pt-6 pb-3 md:mt-10 flex flex-col gap-3 container-navbar md:bg-white bg-slate-300">
     <section class="w-full flex md:hidden items-center ">
         <a href="<?= BASEURL ?>/dashboard" class="w-full flex gap-2 items-center">
-            <img src="<?= BASEURL; ?>/icons/icons-logo.svg" width="30" height="30" alt="">
-            <figcaption class="text-sm font-semibold">Logo Test</figcaption>
+            <img src="<?= BASEURL; ?>/img/icons-logo.png" width="30" height="30" alt="">
+            <figcaption class="text-sm font-semibold">Pondok Pesantren Asshaburratib</figcaption>
         </a>
         <button onclick="handleMenuCloseNavbar()"
             class="block md:hidden w-fit bg-slate-50 h-fit p-1  rounded-full hover:shadow-lg ">
