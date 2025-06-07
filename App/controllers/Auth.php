@@ -37,7 +37,6 @@ class Auth extends Controller
     public function addAdmin()
     {
         $result =  $this->model('Auth_Model')->register($_POST);
-        var_dump($result);
         if ($result['status'] == '200') {
             Flasher::setFlash('Register', 'Berhasil', 'success');
 

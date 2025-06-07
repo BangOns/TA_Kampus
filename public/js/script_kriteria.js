@@ -29,6 +29,7 @@ function handleModalsForm() {
     $("#bobot_subkriteria").prop("disabled", true);
     //
     const id = $(this).data("id");
+    handleFormEditKriteria();
   });
   $(".deleteKriteria").on("click", function () {
     modalsDelete.addClass(showTable);
@@ -79,6 +80,26 @@ function handleFormTambahKriteria() {
   $("#form-kriteria").attr(
     "action",
     "http://localhost/takampus/public/Data_Kriteria/tambahKriteria"
+  );
+  // $("#form-kriteria").on("submit", function (e) {
+  //   e.preventDefault();
+  //   const newData = $(this).serialize();
+
+  //   $.ajax({
+  //     url: "http://localhost/takampus/public/data_kriteria/tambahKriteria",
+  //     data: newData,
+  //     dataType: "json",
+  //     method: "POST",
+  //     onSuccess: function (data) {
+  //       console.log(data);
+  //     },
+  //   });
+  // });
+}
+function handleFormEditKriteria() {
+  $("#form-kriteria").attr(
+    "action",
+    "http://localhost/takampus/public/Data_Kriteria/editKriteria"
   );
   // $("#form-kriteria").on("submit", function (e) {
   //   e.preventDefault();

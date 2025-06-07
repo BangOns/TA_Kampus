@@ -8,7 +8,6 @@ class Data_Kriteria extends Controller
             exit;
         }
         $data['list-table'] = [
-            'No',
             'Nama',
             'Bobot',
         ];
@@ -152,18 +151,19 @@ class Data_Kriteria extends Controller
             $this->redirect('/data_kriteria');
         }
     }
-    public function editData($id)
+    public function editKriteria($id)
     {
-        $result = $this->model('Data_Pelanggaran_Model')->EditPelanggaran($_POST, $id);
-        if ($result['status'] === 200) {
-            Flasher::setFlash('Ubah Data Pelanggaran', 'Berhasil', 'success');
+        var_dump($_POST, $id);
+        // $result = $this->model('Data_Kriteria_Model')->editKriteria($_POST, $id);
+        // if ($result['status'] === 200) {
+        //     Flasher::setFlash('Ubah Data Pelanggaran', 'Berhasil', 'success');
 
-            $this->redirect('/data_pelanggaran');
-        } else {
-            Flasher::setFlash('Ubah Data Pelanggaran', 'Gagal', 'error');
+        //     $this->redirect('/data_kriteria');
+        // } else {
+        //     Flasher::setFlash('Ubah Data Pelanggaran', 'Gagal', 'error');
 
-            $this->redirect('/data_pelanggaran');
-        }
+        //     $this->redirect('/data_kriteria');
+        // }
     }
 
     public function deleteData($id)
