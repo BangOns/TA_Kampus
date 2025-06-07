@@ -1,5 +1,7 @@
 <?php
 
+echo json_encode($data['kriteria']);
+
 $link_menu_card = [
 
     [
@@ -36,12 +38,12 @@ $link_menu_card = [
         <!-- Table & Card Pelanggar -->
         <article class="w-full max-md:space-y-3 max-md:mt-3 ">
             <!-- Table Pelanggar -->
-            <?php if (count($data['kriteria_pelanggaran']) !== 0) {
+            <?php if (count($data['kriteria']) !== 0) {
 
                 echo "<section class='w-full space-y-5 max-md:hidden '>";
-                foreach ($data['kriteria_pelanggaran'] as $key => $value) {
+                foreach ($data['kriteria'] as $key => $value) {
                     echo "<section class='w-full basis-full flex my-4 justify-between items-center max-md:gap-2'>
-                    <h1 class='hidden md:block text-nowrap font-semibold'>" . ucwords(preg_replace("/[-_]/", " ", $value["nama"])) . "</h1>";
+                    <h1 class='hidden md:block text-nowrap font-semibold'>" . ucwords(preg_replace("/[-_]/", " ", $value["kriteria"])) . "</h1>";
                     echo "
                     <section class='w-full hidden md:flex justify-end gap-2'>
                       <button data-id='test'

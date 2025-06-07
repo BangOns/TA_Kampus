@@ -7,9 +7,16 @@ class Data_Kriteria_Model extends Database
     public function getDataAllKriteria()
     {
         try {
-            $query = 'SELECT * FROM ' . $this->table;
-            $this->query($query);
+            // $querytest =  'SELECT * FROM ' . $this->table . ' LEFT JOIN ' . $this->table_subkriteria . ' ON ' . $this->table . '.id_kriteria = ' . $this->table_subkriteria . 'id_kriteria';
+
+            $queryTest = 'SELECT * FROM data_kriteria 
+LEFT JOIN data_subkriteria 
+ON data_kriteria.id_kriteria = data_subkriteria.id_kriteria';
+            // $query = 'SELECT * FROM ' . $this->table;
+            $this->query($queryTest);
+            // $this->query($querytest);
             $results =  $this->resultSet();
+
             return Response(200, $results, "Berhasil get data pelanggaran");
         } catch (\Throwable $th) {
             return Response(404, [], "Gagal get data pelanggaran");

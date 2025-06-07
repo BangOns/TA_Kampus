@@ -16,11 +16,7 @@ function handleModalsForm() {
     modals.addClass(showTable);
     modals.removeClass(notShowTable);
     JudulKriteria.text("Tambah Kriteria");
-    $("#nama_kriteria").prop("disabled", false);
-    $("#bobot_kriteria").prop("disabled", false);
-    $("#jenis_kriteria").prop("disabled", false);
-    $("#sub_kriteria").prop("disabled", false);
-    $("#bobot_subkriteria").prop("disabled", false);
+
     handleFormTambahKriteria();
     //
   });
@@ -71,6 +67,11 @@ function handleModalsForm() {
     modals.removeClass(showTable);
     modalsDelete.addClass(notShowTable);
     modalsDelete.removeClass(showTable);
+    $("#nama_kriteria").prop("disabled", false);
+    $("#bobot_kriteria").prop("disabled", false);
+    $("#jenis_kriteria").prop("disabled", false);
+    $("#sub_kriteria").prop("disabled", false);
+    $("#bobot_subkriteria").prop("disabled", false);
   });
 }
 
