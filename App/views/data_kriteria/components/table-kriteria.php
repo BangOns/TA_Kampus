@@ -80,6 +80,7 @@ $link_menu_card = [
                       Edit Kriteria
                   </button>
                     <button 
+                    data-id='{$value['id_kriteria']}'
                     data-type='edit-kriteria'
                      class='deleteKriteria  py-1 px-2 sm:py-2 sm:px-2 lg:px-3 rounded transition-all items-center bg-red-400 text-white hidden md:flex text-xs md:text-sm gap-1 lg:text-sm'>
                    <div class='size-5'>";
@@ -90,7 +91,7 @@ $link_menu_card = [
                     </section>
                     </section>";
                     echo "<section class='w-full hidden md:flex gap-2 items-center'>
-                     <button 
+                     <button data-id='{$value['id_kriteria']}'
                        class='tambahSubKriteria  py-1 px-2 sm:py-2 sm:px-2 lg:px-3 rounded transition-all items-center bg-black text-white hidden md:flex text-xs md:text-sm gap-1 lg:text-sm'>
                      <div class='size-5'>";
                     include dirname(__DIR__, 4) . '/public/icons/icons-add.svg';
@@ -120,7 +121,7 @@ $link_menu_card = [
                             echo "</div>
     <div id='menu-$index' class='absolute invisible z-10 scale-0 transition-all ease-in-out duration-300 w-auto sm:right-20  xl:right-12 md:top-6 space-y-2 border shadow bg-white rounded p-2 max-lg:text-xs'>";
                             foreach ($link_menu_table as $mn) {
-                                echo "<button  class='{$mn['class']}'>
+                                echo "<button data-id='{$row['id_kriteria']}' data-id_subkriteria='{$row['id_subkriteria']}' class='{$mn['class']}'>
                  <div class='size-4'> ";
                                 include($mn['icon']);
                                 echo " </div>" . $mn['text'] .

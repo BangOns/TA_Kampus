@@ -11,8 +11,8 @@
         </header>
         <article class="w-full space-y-4 px-2">
             <section>
-                <label for="nama_kriteria">Nama Kriteria</label>
-                <input type="text" name="nama_kriteria" id="nama_kriteria"
+                <label for="kriteria">Nama Kriteria</label>
+                <input type="text" name="kriteria" id="kriteria"
                     class="w-full border border-slate-300 rounded-md px-2 py-1 mt-1 disabled:cursor-not-allowed focus:outline-none focus:border-slate-500"
                     placeholder="Masukkan nama kriteria" required>
             </section>
@@ -33,7 +33,7 @@
             </section>
             <hr>
             <section>
-                <label for="nama_kriteria">Nama Sub-Kriteria</label>
+                <label for="sub_kriteria">Nama Sub-Kriteria</label>
                 <input type="text" name="sub_kriteria" id="sub_kriteria"
                     class="w-full border border-slate-300 rounded-md disabled:cursor-not-allowed px-2 py-1 mt-1 focus:outline-none focus:border-slate-500"
                     placeholder="Masukkan nama kriteria" required>
