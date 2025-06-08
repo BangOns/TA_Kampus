@@ -45,38 +45,41 @@ function handleModalsForm() {
 
   // Subkriteria
   $(".tambahSubKriteria").on("click", function () {
+    console.log($(this).data("id"));
+
     modals.addClass(showTable);
     modals.removeClass(notShowTable);
-    JudulKriteria.text("Tambah Sub-Kriteria");
-    $("#kriteria").prop("disabled", true);
-    $("#bobot_kriteria").prop("disabled", true);
-    $("#jenis_kriteria").prop("disabled", true);
-    //
-    const id = $(this).data("id");
-    handleGetDataKriteriaById(id);
+    // JudulKriteria.text("Tambah Sub-Kriteria");
+    // $("#kriteria").prop("disabled", true);
+    // $("#bobot_kriteria").prop("disabled", true);
+    // $("#jenis_kriteria").prop("disabled", true);
+    // //
+    // const id = $(this).data("id");
+    // handleGetDataKriteriaById(id);
 
-    handleFormTambahSubKriteria(id);
+    // handleFormTambahSubKriteria(id);
   });
   $(".editSubKriteria").on("click", function () {
+    console.log("oe");
+
     modals.addClass(showTable);
     modals.removeClass(notShowTable);
     JudulKriteria.text("Edit Sub-Kriteria");
     $("#kriteria").prop("disabled", true);
     $("#bobot_kriteria").prop("disabled", true);
     $("#jenis_kriteria").prop("disabled", true);
-
     //
     const id = $(this).data("id");
     const id_subkriteria = $(this).data("id_subkriteria");
-    console.log(id, id_subkriteria);
-
     handleGetDataKriteriaById(id);
     handleGetDataSubKriteriaById(id_subkriteria);
-    // handleFormEditSubKriteria(id);
+    handleFormEditSubKriteria(id_subkriteria);
   });
   $(".deleteSubKriteria").on("click", function () {
     modalsDelete.addClass(showTable);
     modalsDelete.removeClass(notShowTable);
+    const id_subkriteria = $(this).data("id_subkriteria");
+    handleFormDeleteSubKriteria(id_subkriteria);
   });
 
   // Close modals
@@ -144,14 +147,23 @@ function handleGetDataSubKriteriaById(id) {
       }
     },
     error: function (xhr, status, error) {
-      console.error("Error fetching data:", error);
-      alert("Terjadi kesalahan saat mengambil data kriteria.");
+      console.log("Error fetching data:", error);
+      alert("Terjadi kesalahan saat mengambil data sub kriteria.");
     },
   });
 }
 function handleFormTambahSubKriteria(id) {
   $("#form-kriteria").attr("action", `${API_URL}/tambahSubKriteria/${id}`);
 }
-function handleFormEditSubKriteria(id) {
-  $("#form-kriteria").attr("action", `${API_URL}/editSubKriteria/${id}`);
+function handleFormEditSubKriteria(id_subkriteria) {
+  $("#form-kriteria").attr(
+    "action",
+    `${API_URL}/editSubKriteria/${id_subkriteria}`
+  );
+}
+function handleFormDeleteSubKriteria(id) {
+  $("#form-delete-kriteria").attr(
+    "action",
+    `${API_URL}/deleteSubKriteriaById/${id}`
+  );
 }

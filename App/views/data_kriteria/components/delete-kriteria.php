@@ -2,7 +2,7 @@
     class="w-full h-full font-poppins modals-delete not-show justify-center items-center fixed top-0 left-0 z-10 bg-black/50 bg-modals max-md:px-5">
     <form class="  w-full  md:w-2/3 p-3 bg-white rounded-md h-auto" id="form-delete-kriteria" method="post">
         <header class="w-full px-2 flex justify-end items-center">
-            <button id="close-modals" class="text-red-500 size-5 md:size-6 close-modals">
+            <button type="button" id="close-modals" class="text-red-500 size-5 md:size-6 close-modals">
                 <?php include dirname(__DIR__, 4) . '/public/icons/icons-close.svg'; ?>
             </button>
         </header>

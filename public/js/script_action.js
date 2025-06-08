@@ -4,6 +4,8 @@ const bgModals = getElementExist(".bg-modals");
 //  handle toggle menu
 function buttonToggleMenu(menu) {
   const menuElement = getElementExist(menu);
+  console.log(menuElement, menu);
+
   if (menuElement.classList.contains("invisible")) {
     menuElement.classList.remove("invisible", "scale-0");
     menuElement.classList.add("visible", "scale-100");

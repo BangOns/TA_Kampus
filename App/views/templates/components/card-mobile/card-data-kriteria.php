@@ -37,7 +37,7 @@ function renderCardKriteria($data, $menu)
         echo '<section id="menu-mobile-' . $index . '" class="w-full hidden flex-col gap-2 p-2 border border-gray-300 rounded">';
         foreach ($menu as $mn) {
             // Menambahkan menu opsi tambahan
-            echo  "<button type='button'  class='showKriteria {$mn['class']} justify-center'>";
+            echo  "<button type='button' data-id='{$kriteria['id_kriteria']}' data-id_subkriteria='{$kriteria['id_subkriteria']}'  class='{$mn['class']} '>";
             echo '<div class="size-4">';
             include($mn['icon']);
             echo '</div>';

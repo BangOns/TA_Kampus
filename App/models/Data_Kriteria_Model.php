@@ -113,9 +113,8 @@ ON data_kriteria.id_kriteria = data_subkriteria.id_kriteria';
         try {
             $query = 'SELECT * FROM ' . $this->table_subkriteria . ' WHERE id_subkriteria = :id_subkriteria';
             $this->query($query);
-            $this->bind('id_subkriteria', $id);
+            $this->bind('id_subkriteria', intval($id));
             $result =  $this->single();
-            var_dump($result);
             return Response(200, $result, "Berhasil get data kriteria");
         } catch (\Throwable $th) {
             return Response(404, [], "Gagal get data kriteria");
@@ -136,6 +135,38 @@ ON data_kriteria.id_kriteria = data_subkriteria.id_kriteria';
             return Response(200, [], "Berhasil tambah data Subkriteria");
         } catch (\Throwable $th) {
             return Response(404, [], "Gagal tambah data subkriteria");
+        }
+    }
+    public function editSubKriteria($data,  $id_subkriteria)
+    {
+        try {
+            $id_subKriteria = htmlspecialchars($id_subkriteria);
+            $sub_kriteria = htmlspecialchars($data['sub_kriteria']);
+            $bobot_subkriteria = htmlspecialchars($data['bobot_subkriteria']);
+            $querySubKriteria =  "UPDATE  $this->table_subkriteria  SET  sub_kriteria = :sub_kriteria, bobot_subkriteria = :bobot_subkriteria WHERE id_subkriteria = :id_subkriteria";
+            $this->query($querySubKriteria);
+            $this->bind('id_subkriteria', intval($id_subKriteria));
+            $this->bind('sub_kriteria', $sub_kriteria);
+            $this->bind('bobot_subkriteria', $bobot_subkriteria);
+            $this->execute();
+            return Response(200, [], "Berhasil tambah data Subkriteria");
+        } catch (\Throwable $th) {
+            return Response(404, [], "Gagal tambah data subkriteria");
+        }
+    }
+
+    public function deleteSubKriteria($id_subkriteria)
+    {
+        try {
+            $query_reference = "DELETE FROM $this->table_subkriteria WHERE id_subkriteria = :id_subkriteria";
+            // 
+
+            $this->query($query_reference);
+            $this->bind('id_subkriteria', intval($id_subkriteria));
+            $this->execute();
+            return Response(200, [], "Berhasil menghapus data Sub kriteria");
+        } catch (\Throwable $th) {
+            return Response(400, [], "Gagal menghapus data kriteria");
         }
     }
 }
