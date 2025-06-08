@@ -30,6 +30,7 @@ ON data_kriteria.id_kriteria = data_subkriteria.id_kriteria';
             return Response(404, [], "Gagal get data kriteria");
         }
     }
+
     public function getDataAllSubkriteria()
     {
         try {

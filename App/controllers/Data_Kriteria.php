@@ -219,7 +219,7 @@ class Data_Kriteria extends Controller
 
             $this->redirect('/data_kriteria');
         } else {
-            Flasher::setFlash('Tambah Data Sub Kriteria', 'Gagal', 'error');
+            Flasher::setFlash('Hapus Data Kriteria', 'Gagal', 'error');
 
             $this->redirect('/data_kriteria');
         }
