@@ -151,32 +151,40 @@ class Data_Kriteria extends Controller
             $this->redirect('/data_kriteria');
         }
     }
-    public function editKriteria($id)
+    public function getDataKriteriaId()
     {
-        var_dump($_POST, $id);
-        // $result = $this->model('Data_Kriteria_Model')->editKriteria($_POST, $id);
-        // if ($result['status'] === 200) {
-        //     Flasher::setFlash('Ubah Data Pelanggaran', 'Berhasil', 'success');
+        $result = $this->model('Data_Kriteria_Model')->getDataKriteriaById($_POST['id']);
+        if ($result['status'] === 200) {
+            echo json_encode($result['data']);
+        } else {
+            echo json_encode([]);
+        }
+    }
+    public function editKriteriaById($id)
+    {
+        $result = $this->model('Data_Kriteria_Model')->editKriteria($_POST, $id);
+        if ($result['status'] === 200) {
+            Flasher::setFlash('Ubah Data Kriteria', 'Berhasil', 'success');
 
-        //     $this->redirect('/data_kriteria');
-        // } else {
-        //     Flasher::setFlash('Ubah Data Pelanggaran', 'Gagal', 'error');
+            $this->redirect('/data_kriteria');
+        } else {
+            Flasher::setFlash('Ubah Data Kriteria', 'Gagal', 'error');
 
-        //     $this->redirect('/data_kriteria');
-        // }
+            $this->redirect('/data_kriteria');
+        }
     }
 
-    public function deleteData($id)
+    public function deleteKriteriaById($id)
     {
-        $result = $this->model('Data_Pelanggaran_Model')->deletePelanggaran($id);
+        $result = $this->model('Data_Kriteria_Model')->deleteKriteria($id);
         if ($result['status'] === 200) {
-            Flasher::setFlash('Hapus Data Pelanggaran', 'Berhasil', 'success');
+            Flasher::setFlash('Hapus Data Kriteria', 'Berhasil', 'success');
 
-            $this->redirect('/data_pelanggaran');
+            $this->redirect('/data_kriteria');
         } else {
-            Flasher::setFlash('Hapus Data Pelanggaran', 'Gagal', 'error');
+            Flasher::setFlash('Hapus Data Kriteria', 'Gagal', 'error');
 
-            $this->redirect('/data_pelanggaran');
+            $this->redirect('/data_kriteria');
         }
     }
 }

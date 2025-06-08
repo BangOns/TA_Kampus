@@ -18,6 +18,18 @@ ON data_kriteria.id_kriteria = data_subkriteria.id_kriteria';
             return Response(404, [], "Gagal get data kriteria");
         }
     }
+    public function getDataKriteriaById($id)
+    {
+        try {
+            $query = 'SELECT * FROM ' . $this->table . ' WHERE id_kriteria = :id_kriteria';
+            $this->query($query);
+            $this->bind('id_kriteria', $id);
+            $result =  $this->single();
+            return Response(200, $result, "Berhasil get data kriteria");
+        } catch (\Throwable $th) {
+            return Response(404, [], "Gagal get data kriteria");
+        }
+    }
     public function getDataAllSubkriteria()
     {
         try {
@@ -32,7 +44,7 @@ ON data_kriteria.id_kriteria = data_subkriteria.id_kriteria';
     public function addKriteria($data)
     {
         try {
-            $kriteria = htmlspecialchars($data['nama_kriteria']);
+            $kriteria = htmlspecialchars($data['kriteria']);
             $bobot_kriteria = htmlspecialchars($data['bobot_kriteria']);
             $jenis_kriteria = htmlspecialchars($data['jenis_kriteria']);
             $sub_kriteria = htmlspecialchars($data['sub_kriteria']);
@@ -58,27 +70,41 @@ ON data_kriteria.id_kriteria = data_subkriteria.id_kriteria';
     {
         try {
             $id_kriteria = htmlspecialchars($id);
-            $kriteria = htmlspecialchars($data['nama_kriteria']);
+            $kriteria = htmlspecialchars($data['kriteria']);
             $bobot_kriteria = htmlspecialchars($data['bobot_kriteria']);
             $jenis_kriteria = htmlspecialchars($data['jenis_kriteria']);
 
-            $query =  "UPDATE  $this->table  SET  nama_kriteria = :nama_kriteria, bobot_kriteria = :bobot_kriteria, jenis_kriteria = :jenis_kriteria WHERE id_kriteria = :id_kriteria";
+            $query =  "UPDATE  $this->table  SET  kriteria = :kriteria, bobot_kriteria = :bobot_kriteria, jenis_kriteria = :jenis_kriteria WHERE id_kriteria = :id_kriteria";
+            $this->query($query);
 
-            $this->bind('id_kriteria', $id_kriteria);
+            $this->bind('id_kriteria', intval($id_kriteria));
             $this->bind('kriteria', $kriteria);
             $this->bind('bobot_kriteria', $bobot_kriteria);
             $this->bind('jenis_kriteria', $jenis_kriteria);
-            $this->query($query);
-            // $idKriteria =  $this->lastId();
-            // $querySubKriteria = "INSERT INTO $this->table_subkriteria (id_kriteria,id_subkriteria,sub_kriteria,bobot_subkriteria) VALUES (:id_kriteria,'',:sub_kriteria,:bobot_subkriteria)";
-            // $this->query($querySubKriteria);
-            // $this->bind('id_kriteria', $idKriteria);
-            // $this->bind('sub_kriteria', $sub_kriteria);
-            // $this->bind('bobot_subkriteria', $bobot_subkriteria);
             $this->execute();
             return Response(200, [], "Berhasil edit data kriteria");
         } catch (\Throwable $th) {
+            echo $th->getMessage();
             return Response(404, [], "Gagal edit data kriteria");
+        }
+    }
+    public function deleteKriteria($id)
+    {
+        try {
+            $query = "DELETE FROM $this->table WHERE id_kriteria = :id_kriteria";
+            $query_reference = "DELETE FROM $this->table_subkriteria WHERE id_kriteria = :id_kriteria";
+            // 
+
+            $this->query($query_reference);
+            $this->bind('id_kriteria', intval($id));
+            $this->execute();
+            //
+            $this->query($query);
+            $this->bind('id_kriteria', intval($id));
+            $this->execute();
+            return Response(200, [], "Berhasil menghapus data kriteria");
+        } catch (\Throwable $th) {
+            return Response(400, [], "Gagal menghapus data kriteria");
         }
     }
 }
