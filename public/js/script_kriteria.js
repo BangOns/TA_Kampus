@@ -38,30 +38,40 @@ function handleModalsForm() {
     modalsDelete.addClass(showTable);
     modalsDelete.removeClass(notShowTable);
     const id = $(this).data("id");
-    console.log(id);
 
     handleFormDeleteKriteria(id);
   });
 
   // Subkriteria
   $(".tambahSubKriteria").on("click", function () {
-    console.log($(this).data("id"));
-
     modals.addClass(showTable);
     modals.removeClass(notShowTable);
-    // JudulKriteria.text("Tambah Sub-Kriteria");
-    // $("#kriteria").prop("disabled", true);
-    // $("#bobot_kriteria").prop("disabled", true);
-    // $("#jenis_kriteria").prop("disabled", true);
-    // //
-    // const id = $(this).data("id");
-    // handleGetDataKriteriaById(id);
+    JudulKriteria.text("Tambah Sub-Kriteria");
+    $("#kriteria").prop("disabled", true);
+    $("#bobot_kriteria").prop("disabled", true);
+    $("#jenis_kriteria").prop("disabled", true);
+    //
+    const id = $(this).data("id");
 
-    // handleFormTambahSubKriteria(id);
+    handleGetDataKriteriaById(id);
+
+    handleFormTambahSubKriteria(id);
   });
   $(".editSubKriteria").on("click", function () {
-    console.log("oe");
-
+    modals.addClass(showTable);
+    modals.removeClass(notShowTable);
+    JudulKriteria.text("Edit Sub-Kriteria");
+    $("#kriteria").prop("disabled", true);
+    $("#bobot_kriteria").prop("disabled", true);
+    $("#jenis_kriteria").prop("disabled", true);
+    //
+    const id = $(this).data("id");
+    const id_subkriteria = $(this).data("id_subkriteria");
+    handleGetDataKriteriaById(id);
+    handleGetDataSubKriteriaById(id_subkriteria);
+    handleFormEditSubKriteria(id_subkriteria);
+  });
+  $(".editSubkriteriaMobile").on("click", function () {
     modals.addClass(showTable);
     modals.removeClass(notShowTable);
     JudulKriteria.text("Edit Sub-Kriteria");
@@ -147,7 +157,6 @@ function handleGetDataSubKriteriaById(id) {
       }
     },
     error: function (xhr, status, error) {
-      console.log("Error fetching data:", error);
       alert("Terjadi kesalahan saat mengambil data sub kriteria.");
     },
   });

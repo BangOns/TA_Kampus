@@ -7,9 +7,15 @@ class Data_Kriteria_Model extends Database
     public function getDataAllKriteria()
     {
         try {
-            $queryTest = 'SELECT *, data_subkriteria.sub_kriteria as Nama, data_subkriteria.bobot_subkriteria as Bobot FROM data_kriteria 
+            $queryTest = 'SELECT 
+  data_kriteria.*,
+  data_subkriteria.id_subkriteria,
+  data_subkriteria.sub_kriteria AS Nama,
+  data_subkriteria.bobot_subkriteria AS Bobot
+FROM data_kriteria
 LEFT JOIN data_subkriteria 
-ON data_kriteria.id_kriteria = data_subkriteria.id_kriteria';
+  ON data_kriteria.id_kriteria = data_subkriteria.id_kriteria
+';
             $this->query($queryTest);
             $results =  $this->resultSet();
 
