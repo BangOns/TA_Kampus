@@ -1,3 +1,21 @@
+<?php
+$data_kriteria = $data['data-kriteria'];
+$result = [];
+foreach ($data_kriteria as $item) {
+    $key = $item['kriteria'];
+    if (!isset($result[$key])) {
+        $result[$key] = [
+            'kriteria' => $item['kriteria'],
+            'jenis_kriteria' => $item['jenis_kriteria'],
+            'id_kriteria' => $item['id_kriteria'],
+            'items' => []
+        ];
+    }
+    $result[$key]['items'][] = $item;
+}
+$result = array_values($result);
+?>
+
 <section class="w-full  mt-4 px-4 space-y-3">
     <section class="w-full  space-y-2">
         <label class="text-xs md:text-base ">Pilih Nama<span class="text-red-500">*</span> </label>
@@ -37,19 +55,24 @@
             value="<?= $data['detail-pelanggaran-santri']['waktu']  ?? '' ?>"
             class="w-full border px-2 py-1 rounded bg-transparent text-xs sm:text-sm focus:outline-noneselection:text-black hover:cursor-text  focus:ring-0">
     </section>
-    <section class="w-full  space-y-2">
-        <label class="text-xs md:text-base ">Jenis pelanggaran<span class="text-red-500">*</span> </label>
-        <select name="c1" id="c1" required
-            class="w-full border px-2 py-1 rounded bg-transparent text-xs sm:text-sm focus:outline-none  selection:text-black hover:cursor-text  focus:ring-0">
-            <option value="">Kategori</option>
-            <?php foreach ($data['kriteria_pelanggaran']['jenis_pelanggaran'] as $key => $jp) : ?>
-                <option value="<?= $key ?>"
-                    <?= ($data['detail-pelanggaran-santri'] ? ($data['detail-pelanggaran-santri']['kategori-pelanggaran']  == $jp ? 'selected' : '') : '') ?>>
-                    <?= $jp ?></option>
-            <?php endforeach; ?>
-        </select>
-    </section>
-    <section class="w-full  space-y-2">
+    <?php foreach ($result as $key => $item): ?>
+        <section class="w-full  space-y-2">
+            <label class="text-xs md:text-base "><?= $item['kriteria'] ?><span class="text-red-500">*</span> </label>
+            <select name="c<?= $key += 1; ?>" id="c<?= $key += 1; ?>" required
+                class="w-full border px-2 py-1 rounded bg-transparent text-xs sm:text-sm focus:outline-none  selection:text-black hover:cursor-text  focus:ring-0">
+                <option value="">Kategori</option>
+                <?php foreach ($item['items'] as $key => $value) : ?>
+                    <!-- <option value="<?= $key ?>"
+                        <?= ($data['detail-pelanggaran-santri'] ? ($data['detail-pelanggaran-santri']['kategori-pelanggaran']  == $jp ? 'selected' : '') : '') ?>>
+                        <?= $jp ?></option> -->
+                    <option value="<?= $value['Bobot'] ?>">
+
+                        <?= $value['Nama'] ?></option>
+                <?php endforeach; ?>
+            </select>
+        </section>
+    <?php endforeach; ?>
+    <!-- <section class="w-full  space-y-2">
         <label class="text-xs md:text-base ">Frekuensi pelanggaran<span class="text-red-500">*</span> </label>
         <select name="c2" id="c2" required
             class="w-full border px-2 py-1 rounded bg-transparent text-xs sm:text-sm focus:outline-none  selection:text-black hover:cursor-text  focus:ring-0">
@@ -60,8 +83,8 @@
                     <?= $fp ?></option>
             <?php endforeach; ?>
         </select>
-    </section>
-    <section class="w-full  space-y-2">
+    </section> -->
+    <!-- <section class="w-full  space-y-2">
         <label class="text-xs md:text-base ">Dampak pelanggaran<span class="text-red-500">*</span> </label>
         <select name="c3" id="c3" required
             class="w-full border px-2 py-1 rounded bg-transparent text-xs sm:text-sm focus:outline-none  selection:text-black hover:cursor-text  focus:ring-0">
@@ -72,8 +95,8 @@
                     <?= $dp ?></option>
             <?php endforeach; ?>
         </select>
-    </section>
-    <section class="w-full  space-y-2">
+    </section> -->
+    <!-- <section class="w-full  space-y-2">
         <label class="text-xs md:text-base ">Keseriusan Niat<span class="text-red-500">*</span> </label>
         <select name="c4" id="c4" required
             class="w-full border px-2 py-1 rounded bg-transparent text-xs sm:text-sm focus:outline-none  selection:text-black hover:cursor-text  focus:ring-0">
@@ -84,8 +107,8 @@
                     <?= $kn ?></option>
             <?php endforeach; ?>
         </select>
-    </section>
-    <section class="w-full  space-y-2">
+    </section> -->
+    <!-- <section class="w-full  space-y-2">
         <label class="text-xs md:text-base ">Permohonan Maaf<span class="text-red-500">*</span> </label>
         <select name="c5" id="c5" required
             class="w-full border px-2 py-1 rounded bg-transparent text-xs sm:text-sm focus:outline-none  selection:text-black hover:cursor-text  focus:ring-0">
@@ -96,5 +119,5 @@
                     <?= $pm ?></option>
             <?php endforeach; ?>
         </select>
-    </section>
+    </section> -->
 </section>

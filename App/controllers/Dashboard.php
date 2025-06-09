@@ -56,6 +56,11 @@ class Dashboard extends Controller
         $resultsDataSantri = $this->model('Data_Santri_Model')->getDataAll();
         $resultsDataSanksi = $this->model('Data_Sanksi_Model')->getDataAll();
         $resultsDataPelanggaran = $this->model('Data_Pelanggaran_Model')->getDataAll();
+        $resultDataKriteria = $this->model('Data_Kriteria_Model')->getDataAllKriteria();
+        $data['data-kriteria'] = [];
+        if ($resultDataKriteria['status'] === 200) {
+            $data['data-kriteria'] = $resultDataKriteria['data'];
+        }
         $data['data-pelanggar'] = [];
         if ($resultsPelanggaranSantri['status'] === 200 && !empty($resultsPelanggaranSantri['data'])) {
             usort($resultsPelanggaranSantri['data'], function ($a, $b) {
@@ -144,17 +149,17 @@ class Dashboard extends Controller
 
     public function addData()
     {
+        var_dump($_POST);
+        // $result = $this->model('Data_Pelanggaran_Santri_Model')->addPelanggaranSantri($_POST);
+        // if ($result['status'] === 200) {
+        //     Flasher::setFlash('Tambah Data Pelanggaran Santri', 'Berhasil', 'success');
 
-        $result = $this->model('Data_Pelanggaran_Santri_Model')->addPelanggaranSantri($_POST);
-        if ($result['status'] === 200) {
-            Flasher::setFlash('Tambah Data Pelanggaran Santri', 'Berhasil', 'success');
+        //     $this->redirect('/dashboard');
+        // } else {
+        //     Flasher::setFlash('Tambah Data Pelanggaran Santri', 'Gagal', 'error');
 
-            $this->redirect('/dashboard');
-        } else {
-            Flasher::setFlash('Tambah Data Pelanggaran Santri', 'Gagal', 'error');
-
-            $this->redirect('/dashboard');
-        }
+        //     $this->redirect('/dashboard');
+        // }
     }
     public function editData($id)
     {

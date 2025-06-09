@@ -1,10 +1,8 @@
 <?php
 $data_table_kriteria = $data['kriteria'];
 $result = [];
-
 foreach ($data_table_kriteria as $item) {
-    $key = $item['kriteria']; // grup berdasarkan nama kriteria
-
+    $key = $item['kriteria'];
     if (!isset($result[$key])) {
         $result[$key] = [
             'kriteria' => $item['kriteria'],
@@ -13,7 +11,6 @@ foreach ($data_table_kriteria as $item) {
             'items' => []
         ];
     }
-
     $result[$key]['items'][] = $item;
 }
 $result = array_values($result);
@@ -30,16 +27,10 @@ $link_menu_table = [
     ],
 ];
 $link_menu_card = [
-
-    [
-        'text' => 'Tambah Sub-Kriteria',
-        'icon' => dirname(__DIR__, 4) . '/public/icons/icons-edit.svg',
-        'class' => 'editSubkriteria w-full text-sm px-1 py-2 text-yellow-500 flex items-center gap-2 hover:bg-slate-200'
-    ],
     [
         'text' => 'Edit Sub-Kriteria',
         'icon' => dirname(__DIR__, 4) . '/public/icons/icons-edit.svg',
-        'class' => 'editSubkriteria w-full text-sm px-1 py-2 text-yellow-500 flex items-center gap-2 hover:bg-slate-200'
+        'class' => 'editSubkriteriaMobile w-full text-sm px-1 py-2 text-yellow-500 flex items-center gap-2 hover:bg-slate-200'
     ],
     [
         'text' => 'Delete Sub-Kriteria',
