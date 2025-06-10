@@ -149,17 +149,16 @@ class Dashboard extends Controller
 
     public function addData()
     {
-        var_dump($_POST);
-        // $result = $this->model('Data_Pelanggaran_Santri_Model')->addPelanggaranSantri($_POST);
-        // if ($result['status'] === 200) {
-        //     Flasher::setFlash('Tambah Data Pelanggaran Santri', 'Berhasil', 'success');
+        $result = $this->model('Dashboard_Model')->addDataPenilian($_POST);
+        if ($result['status'] === 200) {
+            Flasher::setFlash('Tambah Data Pelanggaran Santri', 'Berhasil', 'success');
 
-        //     $this->redirect('/dashboard');
-        // } else {
-        //     Flasher::setFlash('Tambah Data Pelanggaran Santri', 'Gagal', 'error');
+            $this->redirect('/dashboard');
+        } else {
+            Flasher::setFlash('Tambah Data Pelanggaran Santri', 'Gagal', 'error');
 
-        //     $this->redirect('/dashboard');
-        // }
+            $this->redirect('/dashboard');
+        }
     }
     public function editData($id)
     {

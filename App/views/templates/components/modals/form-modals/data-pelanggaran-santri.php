@@ -35,7 +35,7 @@ $result = array_values($result);
             <option value="">Pelanggaran yang Dilakukan</option>
             <?php foreach ($data['data-pelanggaran'] as  $ds) : ?>
                 <?= $ds ?>
-                <option value="<?= $ds['nama_pelanggaran'] ?>">
+                <option value="<?= $ds['id_pelanggaran'] ?>">
                     <?= $ds['nama_pelanggaran'] ?>
                 </option>
             <?php endforeach; ?>
@@ -58,14 +58,13 @@ $result = array_values($result);
     <?php foreach ($result as $key => $item): ?>
         <section class="w-full  space-y-2">
             <label class="text-xs md:text-base "><?= $item['kriteria'] ?><span class="text-red-500">*</span> </label>
-            <select name="c<?= $key += 1; ?>" id="c<?= $key += 1; ?>" required
+            <input type="hidden" name="id_kriteria[]" value="<?= $item['id_kriteria'] ?>">
+            <select name="nilai[]" required
                 class="w-full border px-2 py-1 rounded bg-transparent text-xs sm:text-sm focus:outline-none  selection:text-black hover:cursor-text  focus:ring-0">
                 <option value="">Kategori</option>
                 <?php foreach ($item['items'] as $key => $value) : ?>
-                    <!-- <option value="<?= $key ?>"
-                        <?= ($data['detail-pelanggaran-santri'] ? ($data['detail-pelanggaran-santri']['kategori-pelanggaran']  == $jp ? 'selected' : '') : '') ?>>
-                        <?= $jp ?></option> -->
-                    <option value="<?= $value['Bobot'] ?>">
+
+                    <option value="<?= $value['id_subkriteria'] . '|' . $value['Bobot'] ?>" data-sub="<?= $value['id_subkriteria'] ?>">
 
                         <?= $value['Nama'] ?></option>
                 <?php endforeach; ?>
