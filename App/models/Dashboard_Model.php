@@ -8,11 +8,45 @@ class Dashboard_Model extends Database
             $query = 'SELECT * FROM ' . $this->table;
             $this->query($query);
             $results =  $this->resultSet();
-            return Response(200, $results, "Berhasil get data penilaian");
+            foreach ($results as $item) {
+                $key = $item['id_reference'];
+                if (!isset($result[$key])) {
+                    $result[$key] = [
+                        "id_penilaian" => $item['id_penilaian'],
+                        "id_reference" => $item['id_reference'],
+                        "id_pelanggaran" => $item['id_pelanggaran'],
+                        "waktu" => $item['waktu'],
+                        "id_santri" => $item['id_santri'],
+                        'kriteria' => [],
+                        'sub_kriteria' => [],
+                    ];
+                }
+                $result[$key]['kriteria'][] = [
+                    'id_kriteria' => $item['id_kriteria']
+                ];
+                $result[$key]['sub_kriteria'][] =  [
+                    'id_subkriteria' => $item['id_subkriteria']
+                ];
+            }
+            $result = array_values($result);
+            return Response(200, $result, "Berhasil get data penilaian");
         } catch (\Throwable $th) {
             return Response(404, [], "Gagal get data penilaian");
         }
     }
+    public function getDataById($id)
+    {
+        try {
+            $query = "SELECT * FROM $this->table WHERE id_reference = :id_reference ";
+            $this->query($query);
+            $this->bind('id_reference', htmlspecialchars(intval($id)));
+            $result = $this->single();
+            return Response(200, $result, "Berhasil get  Data Pelanggaran Santri");
+        } catch (\Throwable $e) {
+            return Response(404, [], "Gagal get  Data Pelanggaran Santri");
+        }
+    }
+
     public function addDataPenilian($data)
     {
         try {

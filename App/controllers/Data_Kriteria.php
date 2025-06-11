@@ -17,7 +17,20 @@ class Data_Kriteria extends Controller
         $resultDataKriteria = $this->model('Data_Kriteria_Model')->getDataAllKriteria();
         $resultDataSubKriteria = $this->model('Data_Kriteria_Model')->getDataAllSubkriteria();
         if ($resultDataKriteria['status'] === 200) {
-            $data['kriteria'] = $resultDataKriteria['data'];
+            $result = [];
+            foreach ($resultDataKriteria['data'] as $item) {
+                $key = $item['kriteria'];
+                if (!isset($result[$key])) {
+                    $result[$key] = [
+                        'kriteria' => $item['kriteria'],
+                        'jenis_kriteria' => $item['jenis_kriteria'],
+                        'id_kriteria' => $item['id_kriteria'],
+                        'items' => []
+                    ];
+                }
+                $result[$key]['items'][] = $item;
+            }
+            $data['kriteria'] = array_values($result);
         }
         if ($resultDataSubKriteria['status'] === 200) {
             $data['sub_kriteria'] = $resultDataSubKriteria['data'];

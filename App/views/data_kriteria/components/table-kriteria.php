@@ -1,19 +1,6 @@
 <?php
 $data_table_kriteria = $data['kriteria'];
-$result = [];
-foreach ($data_table_kriteria as $item) {
-    $key = $item['kriteria'];
-    if (!isset($result[$key])) {
-        $result[$key] = [
-            'kriteria' => $item['kriteria'],
-            'jenis_kriteria' => $item['jenis_kriteria'],
-            'id_kriteria' => $item['id_kriteria'],
-            'items' => []
-        ];
-    }
-    $result[$key]['items'][] = $item;
-}
-$result = array_values($result);
+
 $link_menu_table = [
     [
         'text' => 'Edit Sub-Kriteria',
@@ -56,10 +43,10 @@ $link_menu_card = [
         <!-- Table & Card Pelanggar -->
         <article class="w-full max-md:space-y-3 max-md:mt-3 ">
             <!-- Table Pelanggar -->
-            <?php if (count($result) !== 0) {
+            <?php if (count($data_table_kriteria) !== 0) {
 
                 echo "<section class='w-full space-y-5 max-md:hidden '>";
-                foreach ($result as $key => $value) {
+                foreach ($data_table_kriteria as $key => $value) {
                     echo "<section class='w-full basis-full flex my-4 justify-between items-center max-md:gap-2'>
                     <h1 class='hidden md:block text-nowrap font-semibold'>" . ucwords(preg_replace("/[-_]/", " ", $value["kriteria"])) . "</h1> - 
                     <h1 class='hidden md:block text-nowrap font-semibold'> (" . ucwords(preg_replace("/[-_]/", " ", $value["jenis_kriteria"])) . ")</h1>";
@@ -136,7 +123,7 @@ $link_menu_card = [
                 }
                 echo '</section >';
                 // Card Pelanggar
-                foreach ($result as $key => $value) {
+                foreach ($data_table_kriteria as $key => $value) {
                     echo "<h1 class='block md:hidden font-semibold'>" . ucwords(preg_replace("/[-_]/", " ", $value["kriteria"])) . "</h1>
                         ";
                     echo " <section class='w-full  flex md:hidden justify-between gap-2'>

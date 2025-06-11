@@ -19,7 +19,7 @@ class Data_Pelanggaran_Model extends Database
         try {
             $query = "SELECT * FROM $this->table WHERE id_pelanggaran = :id_pelanggaran ";
             $this->query($query);
-            $this->bind('id_pelanggaran', $id);
+            $this->bind('id_pelanggaran', htmlspecialchars(intval($id)));
             $result = $this->single();
             return Response(200, $result, "Berhasil get data pelanggaran");
         } catch (\Throwable $th) {

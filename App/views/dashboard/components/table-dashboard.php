@@ -63,12 +63,10 @@ $link_menu = [
             </a>
         </section>
         <!-- Table & Card Pelanggar -->
-        <article class="w-full max-md:space-y-3 max-md:mt-3 ">
-            <!-- Table Pelanggar -->
+        <!-- <article class="w-full max-md:space-y-3 max-md:mt-3 ">
             <?php if (count($datas) !== 0) {
                 include dirname(__DIR__, 3) . '/views/templates/components/table-data.php';
                 renderTable($datas, $data['list-table'], $link_menu);
-                // Card Pelanggar
                 include dirname(__DIR__, 3) . '/views/templates/components/card-mobile/card-data-pelanggaran-santri.php';
                 renderCardPelanggaranSantri($datas, $link_menu);
             } else {
@@ -77,8 +75,7 @@ $link_menu = [
             </section>';
             }
             ?>
-
-        </article>
+        </article> -->
 
     </section>
 </article>

@@ -19,6 +19,7 @@ class Dashboard extends Controller
             'permohonan',
             'Kategori Sanksi'
         ];
+
         $data['type'] = $type;
         $data['action'] = $action;
         $data['id'] = htmlspecialchars($id);
@@ -52,95 +53,127 @@ class Dashboard extends Controller
         $data['kategori'] = ['Ringan', 'Sedang', 'Berat'];
         $data['data-pelanggaran'] = [];
         // Get data All
-        $resultsPelanggaranSantri = $this->model('Data_Pelanggaran_Santri_Model')->getDataAll();
-        $resultsDataSantri = $this->model('Data_Santri_Model')->getDataAll();
-        $resultsDataSanksi = $this->model('Data_Sanksi_Model')->getDataAll();
-        $resultsDataPelanggaran = $this->model('Data_Pelanggaran_Model')->getDataAll();
+        // $resultsPelanggaranSantri = $this->model('Data_Pelanggaran_Santri_Model')->getDataAll();
+        // $resultsDataSantri = $this->model('Data_Santri_Model')->getDataAll();
+        // $resultsDataSanksi = $this->model('Data_Sanksi_Model')->getDataAll();
+        // $resultsDataPelanggaran = $this->model('Data_Pelanggaran_Model')->getDataAll();
         $resultDataKriteria = $this->model('Data_Kriteria_Model')->getDataAllKriteria();
-        $data['data-kriteria'] = [];
+        $resultDataSantriPelanggar = $this->model('Dashboard_Model')->getData();
+        // $data['data-update-pelanggaran-santri'] = $resultDataSantriPelanggar['data'];
+        $data['kriteria'] = [];
+        $data['list-table2'] = ['No', 'Nama Santri'];
         if ($resultDataKriteria['status'] === 200) {
-            $data['data-kriteria'] = $resultDataKriteria['data'];
+            $result = [];
+            foreach ($resultDataKriteria['data'] as $item) {
+                $key = $item['kriteria'];
+                if (!isset($result[$key])) {
+                    $result[$key] = [
+                        'kriteria' => $item['kriteria'],
+                        'id_kriteria' => $item['id_kriteria'],
+                    ];
+                }
+            }
+            $dataresult = array_values($result);
+            foreach ($dataresult as $key => $value) {
+                $data['list-table2'][] = $value['kriteria'];
+            }
+            $data['kriteria'] = $dataresult;
         }
+        $data['list-table2'][] = 'Kategori Sanksi';
         $data['data-pelanggar'] = [];
-        if ($resultsPelanggaranSantri['status'] === 200 && !empty($resultsPelanggaranSantri['data'])) {
-            usort($resultsPelanggaranSantri['data'], function ($a, $b) {
-                return $b['nilai_akhir'] <=> $a['nilai_akhir'];
-            });
-            foreach ($resultsPelanggaranSantri['data'] as $index => $rslt) {
-                $get_sanksi = updateNilaiPelanggaranSantri($rslt['nilai_akhir'], $resultsDataSanksi['data']);
+        $data['data-pelanggar-santri'] = [];
+        if ($resultDataSantriPelanggar['status'] === 200) {
+            $newData = [];
+            foreach ($resultDataSantriPelanggar['data'] as $index => $rslt) {
                 $data_santri = $this->model('Data_Santri_Model')->getDataById($rslt['id_santri']);
-                $data_sanksi = $resultsDataSanksi['data'][$get_sanksi];
-                $newData = [
+                $data_pelanggaran = $this->model('Data_Pelanggaran_Model')->getDataById($rslt['id_pelanggaran']);
+                $data_pelanggaran_santri = $this->model('Dashboard_Model')->getDataById($rslt['id_reference']);
+                $newData[] = [
                     'No' => $index += 1,
-                    'id' => $rslt['id_pelanggaran_santri'],
                     'Nama Santri' => $data_santri['data']['nama_santri'],
-                    'pelanggaran-dilakukan' => $rslt['nama_pelanggaran'],
-                    'jenis' => $data['kriteria_pelanggaran']['jenis_pelanggaran'][$rslt['c1']],
-                    'frekuensi' => $data['kriteria_pelanggaran']['frekuensi_pelanggaran'][$rslt['c2']],
-                    'dampak' => $data['kriteria_pelanggaran']['dampak_pelanggaran'][$rslt['c3']],
-                    'keseriusan' => $data['kriteria_pelanggaran']['keseriusan_niat'][$rslt['c4']],
-                    'permohonan' => $data['kriteria_pelanggaran']['permohonan_maaf'][$rslt['c5']],
-                    'Tahun Ajaran' => $data_santri['data']['tahun_ajaran'],
-                    'Kelas' => $data_santri['data']['kelas'],
-                    'Waktu' => $rslt['waktu'],
-                    'Kategori Sanksi' => $data_sanksi['jenis_sanksi'],
-
                 ];
-                array_push($data['data-pelanggar'], $newData);
-            };
+            }
+            $data['data-pelanggar-santri'] = $newData;
         }
+        // if ($resultsPelanggaranSantri['status'] === 200 && !empty($resultsPelanggaranSantri['data'])) {
+        //     usort($resultsPelanggaranSantri['data'], function ($a, $b) {
+        //         return $b['nilai_akhir'] <=> $a['nilai_akhir'];
+        //     });
+        //     foreach ($resultsPelanggaranSantri['data'] as $index => $rslt) {
+        //         $get_sanksi = updateNilaiPelanggaranSantri($rslt['nilai_akhir'], $resultsDataSanksi['data']);
+        //         $data_santri = $this->model('Data_Santri_Model')->getDataById($rslt['id_santri']);
+        //         $data_sanksi = $resultsDataSanksi['data'][$get_sanksi];
+        //         $newData = [
+        //             'No' => $index += 1,
+        //             'id' => $rslt['id_pelanggaran_santri'],
+        //             'Nama Santri' => $data_santri['data']['nama_santri'],
+        //             'pelanggaran-dilakukan' => $rslt['nama_pelanggaran'],
+        //             'jenis' => $data['kriteria_pelanggaran']['jenis_pelanggaran'][$rslt['c1']],
+        //             'frekuensi' => $data['kriteria_pelanggaran']['frekuensi_pelanggaran'][$rslt['c2']],
+        //             'dampak' => $data['kriteria_pelanggaran']['dampak_pelanggaran'][$rslt['c3']],
+        //             'keseriusan' => $data['kriteria_pelanggaran']['keseriusan_niat'][$rslt['c4']],
+        //             'permohonan' => $data['kriteria_pelanggaran']['permohonan_maaf'][$rslt['c5']],
+        //             'Tahun Ajaran' => $data_santri['data']['tahun_ajaran'],
+        //             'Kelas' => $data_santri['data']['kelas'],
+        //             'Waktu' => $rslt['waktu'],
+        //             'Kategori Sanksi' => $data_sanksi['jenis_sanksi'],
+
+        //         ];
+        //         array_push($data['data-pelanggar'], $newData);
+        //     };
+        // }
         // get data for card Summary
         $data['data-card-summary'] = [];
         $data['data-santri'] = [];
-        if ($resultsPelanggaranSantri['status'] === 200 && $resultsDataPelanggaran['status'] === 200 && $resultsDataSantri['status'] === 200 && $resultsDataSanksi['status'] === 200) {
-            $data['data-santri'] = $resultsDataSantri['data'];
-            $data['data-card-summary'] = [
-                [
-                    'title' => 'Santri',
-                    'jumlah' => count($resultsDataSantri['data']),
-                ],
-                [
-                    'title' => 'Pelanggaran',
-                    'jumlah' => count($resultsDataPelanggaran['data']),
-                ],
-                [
-                    'title' => 'Sanksi',
-                    'jumlah' => count($resultsDataSanksi['data']),
-                ],
-                [
-                    'title' => 'Pelanggaran Santri',
-                    'jumlah' => count($resultsPelanggaranSantri['data'])
-                ],
-            ];
-            $data['data-pelanggaran'] = $resultsDataPelanggaran['data'];
-        }
+        // if ($resultsPelanggaranSantri['status'] === 200 && $resultsDataPelanggaran['status'] === 200 && $resultsDataSantri['status'] === 200 && $resultsDataSanksi['status'] === 200) {
+        //     $data['data-santri'] = $resultsDataSantri['data'];
+        //     $data['data-card-summary'] = [
+        //         [
+        //             'title' => 'Santri',
+        //             'jumlah' => count($resultsDataSantri['data']),
+        //         ],
+        //         [
+        //             'title' => 'Pelanggaran',
+        //             'jumlah' => count($resultsDataPelanggaran['data']),
+        //         ],
+        //         [
+        //             'title' => 'Sanksi',
+        //             'jumlah' => count($resultsDataSanksi['data']),
+        //         ],
+        //         [
+        //             'title' => 'Pelanggaran Santri',
+        //             'jumlah' => count($resultsPelanggaranSantri['data'])
+        //         ],
+        //     ];
+        //     $data['data-pelanggaran'] = $resultsDataPelanggaran['data'];
+        // }
         // Get data for detail
         $data['detail-pelanggaran-santri'] = [];
-        if ($id) {
-            $resultDataPelanggaranSantri = $this->model('Data_Pelanggaran_Santri_Model')->getDataById($id);
-            if ($resultDataPelanggaranSantri['status'] === 200) {
-                //
-                $get_sanksi = updateNilaiPelanggaranSantri($resultDataPelanggaranSantri['data']['nilai_akhir'], $resultsDataSanksi['data']);
-                $data_santri = $this->model('Data_Santri_Model')->getDataById($resultDataPelanggaranSantri['data']['id_santri']);
-                $data_sanksi = $resultsDataSanksi['data'][$get_sanksi];
-                //
-                $data_detail_pelanggaran_santri = [
-                    'nama-santri' => $data_santri['data']['nama_santri'],
-                    'kelas' => $data_santri['data']['kelas'],
-                    'tahun-ajaran' => $data_santri['data']['tahun_ajaran'],
-                    'alamat' => $data_santri['data']['alamat'],
-                    'nama-pelanggaran' => $resultDataPelanggaranSantri['data']['nama_pelanggaran'],
-                    'waktu' => $resultDataPelanggaranSantri['data']['waktu'],
-                    'kategori-pelanggaran' => $data['kriteria_pelanggaran']['jenis_pelanggaran'][$resultDataPelanggaranSantri['data']['c1']],
-                    'frekuensi' => $data['kriteria_pelanggaran']['frekuensi_pelanggaran'][$resultDataPelanggaranSantri['data']['c2']],
-                    'dampak' => $data['kriteria_pelanggaran']['dampak_pelanggaran'][$resultDataPelanggaranSantri['data']['c3']],
-                    'keseriusan' => $data['kriteria_pelanggaran']['keseriusan_niat'][$resultDataPelanggaranSantri['data']['c4']],
-                    'permohonan' => $data['kriteria_pelanggaran']['permohonan_maaf'][$resultDataPelanggaranSantri['data']['c5']],
-                    'sanksi' => $data_sanksi['deskripsi_sanksi'],
-                ];
-                $data['detail-pelanggaran-santri'] = $data_detail_pelanggaran_santri;
-            }
-        }
+        // if ($id) {
+        //     $resultDataPelanggaranSantri = $this->model('Data_Pelanggaran_Santri_Model')->getDataById($id);
+        //     if ($resultDataPelanggaranSantri['status'] === 200) {
+        //         //
+        //         $get_sanksi = updateNilaiPelanggaranSantri($resultDataPelanggaranSantri['data']['nilai_akhir'], $resultsDataSanksi['data']);
+        //         $data_santri = $this->model('Data_Santri_Model')->getDataById($resultDataPelanggaranSantri['data']['id_santri']);
+        //         $data_sanksi = $resultsDataSanksi['data'][$get_sanksi];
+        //         //
+        //         $data_detail_pelanggaran_santri = [
+        //             'nama-santri' => $data_santri['data']['nama_santri'],
+        //             'kelas' => $data_santri['data']['kelas'],
+        //             'tahun-ajaran' => $data_santri['data']['tahun_ajaran'],
+        //             'alamat' => $data_santri['data']['alamat'],
+        //             'nama-pelanggaran' => $resultDataPelanggaranSantri['data']['nama_pelanggaran'],
+        //             'waktu' => $resultDataPelanggaranSantri['data']['waktu'],
+        //             'kategori-pelanggaran' => $data['kriteria_pelanggaran']['jenis_pelanggaran'][$resultDataPelanggaranSantri['data']['c1']],
+        //             'frekuensi' => $data['kriteria_pelanggaran']['frekuensi_pelanggaran'][$resultDataPelanggaranSantri['data']['c2']],
+        //             'dampak' => $data['kriteria_pelanggaran']['dampak_pelanggaran'][$resultDataPelanggaranSantri['data']['c3']],
+        //             'keseriusan' => $data['kriteria_pelanggaran']['keseriusan_niat'][$resultDataPelanggaranSantri['data']['c4']],
+        //             'permohonan' => $data['kriteria_pelanggaran']['permohonan_maaf'][$resultDataPelanggaranSantri['data']['c5']],
+        //             'sanksi' => $data_sanksi['deskripsi_sanksi'],
+        //         ];
+        //         $data['detail-pelanggaran-santri'] = $data_detail_pelanggaran_santri;
+        //     }
+        // }
         $this->view('templates/header', $data);
         $this->view('templates/components/navbar', $data);
         $this->view('dashboard/index', $data);
