@@ -53,17 +53,20 @@ class Dashboard extends Controller
         $data['kategori'] = ['Ringan', 'Sedang', 'Berat'];
         $data['data-pelanggaran'] = [];
         // Get data All
-        // $resultsPelanggaranSantri = $this->model('Data_Pelanggaran_Santri_Model')->getDataAll();
-        // $resultsDataSantri = $this->model('Data_Santri_Model')->getDataAll();
-        // $resultsDataSanksi = $this->model('Data_Sanksi_Model')->getDataAll();
-        // $resultsDataPelanggaran = $this->model('Data_Pelanggaran_Model')->getDataAll();
+        $resultsPelanggaranSantri = $this->model('Data_Pelanggaran_Santri_Model')->getDataAll();
+        $resultsDataSantri = $this->model('Data_Santri_Model')->getDataAll();
+        $resultsDataSanksi = $this->model('Data_Sanksi_Model')->getDataAll();
+        $resultsDataPelanggaran = $this->model('Data_Pelanggaran_Model')->getDataAll();
         $resultDataKriteria = $this->model('Data_Kriteria_Model')->getDataAllKriteria();
         $resultDataSantriPelanggar = $this->model('Dashboard_Model')->getData();
+
         // $data['data-update-pelanggaran-santri'] = $resultDataSantriPelanggar['data'];
         $data['kriteria'] = [];
+        $data['data-input-kriteria'] = [];
         $data['list-table2'] = ['No', 'Nama Santri'];
         if ($resultDataKriteria['status'] === 200) {
             $result = [];
+            $result_data_input = [];
             foreach ($resultDataKriteria['data'] as $item) {
                 $key = $item['kriteria'];
                 if (!isset($result[$key])) {
@@ -71,13 +74,21 @@ class Dashboard extends Controller
                         'kriteria' => $item['kriteria'],
                         'id_kriteria' => $item['id_kriteria'],
                     ];
+                    $result_data_input[$key] = [
+                        'kriteria' => $item['kriteria'],
+                        'id_kriteria' => $item['id_kriteria'],
+                        'items' => []
+                    ];
                 }
+                $result_data_input[$key]['items'][] = $item;
             }
             $dataresult = array_values($result);
+            $dataresultInput = array_values($result_data_input);
             foreach ($dataresult as $key => $value) {
                 $data['list-table2'][] = $value['kriteria'];
             }
             $data['kriteria'] = $dataresult;
+            $data['data-input-kriteria'] = $dataresultInput;
         }
         $data['list-table2'][] = 'Kategori Sanksi';
         $data['data-pelanggar'] = [];
@@ -86,13 +97,19 @@ class Dashboard extends Controller
             $newData = [];
             foreach ($resultDataSantriPelanggar['data'] as $index => $rslt) {
                 $data_santri = $this->model('Data_Santri_Model')->getDataById($rslt['id_santri']);
-                $data_pelanggaran = $this->model('Data_Pelanggaran_Model')->getDataById($rslt['id_pelanggaran']);
-                $data_pelanggaran_santri = $this->model('Dashboard_Model')->getDataById($rslt['id_reference']);
-                $newData[] = [
-                    'No' => $index += 1,
+                $row = [
+                    'No' => $index + 1,
                     'Nama Santri' => $data_santri['data']['nama_santri'],
                 ];
+                foreach ($rslt['sub_kriteria'] as $krt) {
+                    $data_subkriteria = $this->model('Data_Kriteria_Model')->getDataSubKriteriaById($krt['id_subkriteria']);
+                    $data_kriteria = $this->model('Data_Kriteria_Model')->getDataKriteriaById($data_subkriteria['data']['id_kriteria']);
+                    $row[$data_kriteria['data']['kriteria']] = $data_subkriteria['data']['sub_kriteria'];
+                }
+                $row['Kategori Sanksi'] = 'Berat';
+                $newData[] = $row;
             }
+
             $data['data-pelanggar-santri'] = $newData;
         }
         // if ($resultsPelanggaranSantri['status'] === 200 && !empty($resultsPelanggaranSantri['data'])) {
@@ -125,28 +142,28 @@ class Dashboard extends Controller
         // get data for card Summary
         $data['data-card-summary'] = [];
         $data['data-santri'] = [];
-        // if ($resultsPelanggaranSantri['status'] === 200 && $resultsDataPelanggaran['status'] === 200 && $resultsDataSantri['status'] === 200 && $resultsDataSanksi['status'] === 200) {
-        //     $data['data-santri'] = $resultsDataSantri['data'];
-        //     $data['data-card-summary'] = [
-        //         [
-        //             'title' => 'Santri',
-        //             'jumlah' => count($resultsDataSantri['data']),
-        //         ],
-        //         [
-        //             'title' => 'Pelanggaran',
-        //             'jumlah' => count($resultsDataPelanggaran['data']),
-        //         ],
-        //         [
-        //             'title' => 'Sanksi',
-        //             'jumlah' => count($resultsDataSanksi['data']),
-        //         ],
-        //         [
-        //             'title' => 'Pelanggaran Santri',
-        //             'jumlah' => count($resultsPelanggaranSantri['data'])
-        //         ],
-        //     ];
-        //     $data['data-pelanggaran'] = $resultsDataPelanggaran['data'];
-        // }
+        if ($resultsPelanggaranSantri['status'] === 200 && $resultsDataPelanggaran['status'] === 200 && $resultsDataSantri['status'] === 200 && $resultsDataSanksi['status'] === 200) {
+            $data['data-santri'] = $resultsDataSantri['data'];
+            $data['data-card-summary'] = [
+                [
+                    'title' => 'Santri',
+                    'jumlah' => count($resultsDataSantri['data']),
+                ],
+                [
+                    'title' => 'Pelanggaran',
+                    'jumlah' => count($resultsDataPelanggaran['data']),
+                ],
+                [
+                    'title' => 'Sanksi',
+                    'jumlah' => count($resultsDataSanksi['data']),
+                ],
+                [
+                    'title' => 'Pelanggaran Santri',
+                    'jumlah' => count($resultsPelanggaranSantri['data'])
+                ],
+            ];
+            $data['data-pelanggaran'] = $resultsDataPelanggaran['data'];
+        }
         // Get data for detail
         $data['detail-pelanggaran-santri'] = [];
         // if ($id) {

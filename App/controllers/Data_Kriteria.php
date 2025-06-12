@@ -67,6 +67,15 @@ class Data_Kriteria extends Controller
             echo json_encode([]);
         }
     }
+    public function getDataKriteriaIds($id)
+    {
+        $result = $this->model('Data_Kriteria_Model')->getDataKriteriaById($id);
+        if ($result['status'] === 200) {
+            echo json_encode($result['data']);
+        } else {
+            echo json_encode([]);
+        }
+    }
     public function editKriteriaById($id)
     {
         $result = $this->model('Data_Kriteria_Model')->editKriteria($_POST, $id);
@@ -98,6 +107,16 @@ class Data_Kriteria extends Controller
     public function getDataSubKriteriaId()
     {
         $result = $this->model('Data_Kriteria_Model')->getDataSubKriteriaById($_POST['id']);
+        if ($result['status'] === 200) {
+            echo json_encode($result['data']);
+        } else {
+            echo json_encode([]);
+        }
+    }
+
+    public function getDataSubKriteriaIds($id)
+    {
+        $result = $this->model('Data_Kriteria_Model')->getDataSubKriteriaById($id);
         if ($result['status'] === 200) {
             echo json_encode($result['data']);
         } else {

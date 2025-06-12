@@ -1,5 +1,6 @@
 <?php
-$datas = $data['data-pelanggar'];
+$datas = $data['data-pelanggar-santri'];
+$data_list = $data['list-table2'];
 if (isset($_POST["search"])) {
     $datas = array_filter($data['data-pelanggar'], fn($item) => str_starts_with(strtolower($item['Nama Santri']), strtolower($_POST['search'])));
 };
@@ -63,19 +64,52 @@ $link_menu = [
             </a>
         </section>
         <!-- Table & Card Pelanggar -->
-        <!-- <article class="w-full max-md:space-y-3 max-md:mt-3 ">
+        <article class="w-full max-md:space-y-3 max-md:mt-3 ">
             <?php if (count($datas) !== 0) {
-                include dirname(__DIR__, 3) . '/views/templates/components/table-data.php';
-                renderTable($datas, $data['list-table'], $link_menu);
-                include dirname(__DIR__, 3) . '/views/templates/components/card-mobile/card-data-pelanggaran-santri.php';
-                renderCardPelanggaranSantri($datas, $link_menu);
+                echo '<table class="hidden font-poppins md:table w-full table-auto sm:text-xs text-sm lg:text-base  border border-gray-300 divide-y divide-gray-200">';
+                echo '<thead class="text-black "><tr>';
+                foreach ($data_list as $column) {
+                    echo "<th class='font-medium text-start " . ($column == 'No' ? "pl-2 py-2 w-1/6" : "") . " font-semibold '>$column</th>";
+                }
+                echo '<th></th>';
+                echo '</tr>';
+                echo '</thead>';
+                echo '<tbody class="divide-y divide-gray-200">';
+                foreach ($datas as $index => $row) {
+                    echo '<tr class="bg-white">';
+                    foreach ($data_list as $indexColumn => $column) {
+                        echo "<td class=' " . ($indexColumn == 0 ? "pl-2 py-3" : "") . ($indexColumn == 1 ? " font-semibold" : "") . "'>" . $row[$column] . '</td>';
+                    }
+                    //     if ($menu) {
+                    //         echo "<td class='pr-1 relative'>
+                    // <div onclick=\"buttonToggleMenu('#menu-$index')\" class='size-5 hover:cursor-pointer'>
+                    //     ";
+                    //         include(dirname(__DIR__, 4) . '/public/icons/icons-menu-table.svg');
+                    //         echo "</div>
+                    // <div id='menu-$index' class='absolute invisible z-10 scale-0 transition-all ease-in-out duration-300 w-24 sm:right-20  xl:right-28 md:top-6 space-y-2 border shadow bg-white rounded p-2 max-lg:text-xs'>";
+                    //         foreach ($menu as $mn) {
+                    //             echo "<a href='{$mn['href']}/{$row['id']}'  class='{$mn['class']}'>
+                    //              <div class='size-4'>
+                    //                  ";
+                    //             include($mn['icon']);
+                    //             echo " </div>" . $mn['text'] .
+                    //                 "</a>";
+                    //         }
+                    //         echo "</td>";
+                    //         echo '</tr>';
+                    //     }
+                }
+
+                echo '</tbody></table>';
+                // include dirname(__DIR__, 3) . '/views/templates/components/card-mobile/card-data-pelanggaran-santri.php';
+                // renderCardPelanggaranSantri($datas, $link_menu);
             } else {
                 echo '<section class="w-full text-center ">
                 <p class="text-2xl font-semibold">Data Not Found X</p>
             </section>';
             }
             ?>
-        </article> -->
+        </article>
 
     </section>
 </article>

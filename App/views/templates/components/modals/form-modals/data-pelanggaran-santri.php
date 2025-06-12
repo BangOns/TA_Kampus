@@ -1,19 +1,6 @@
 <?php
-$data_kriteria = $data['data-kriteria'];
-$result = [];
-foreach ($data_kriteria as $item) {
-    $key = $item['kriteria'];
-    if (!isset($result[$key])) {
-        $result[$key] = [
-            'kriteria' => $item['kriteria'],
-            'jenis_kriteria' => $item['jenis_kriteria'],
-            'id_kriteria' => $item['id_kriteria'],
-            'items' => []
-        ];
-    }
-    $result[$key]['items'][] = $item;
-}
-$result = array_values($result);
+$data_kriteria = $data['data-input-kriteria'];
+
 ?>
 
 <section class="w-full  mt-4 px-4 space-y-3">
@@ -55,7 +42,7 @@ $result = array_values($result);
             value="<?= $data['detail-pelanggaran-santri']['waktu']  ?? '' ?>"
             class="w-full border px-2 py-1 rounded bg-transparent text-xs sm:text-sm focus:outline-noneselection:text-black hover:cursor-text  focus:ring-0">
     </section>
-    <?php foreach ($result as $key => $item): ?>
+    <?php foreach ($data_kriteria as $key => $item): ?>
         <section class="w-full  space-y-2">
             <label class="text-xs md:text-base "><?= $item['kriteria'] ?><span class="text-red-500">*</span> </label>
             <input type="hidden" name="id_kriteria[]" value="<?= $item['id_kriteria'] ?>">
