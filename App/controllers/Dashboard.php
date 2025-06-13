@@ -145,9 +145,9 @@ class Dashboard extends Controller
             $dataResult = [];
             $resultDataPelanggaranSantri = $this->model('Dashboard_Model')->getData();
             if (isset($resultDataPelanggaranSantri['data'])) {
-                $filtered = array_filter($resultDataPelanggaranSantri['data'], function ($item) use ($id) {
+                $filtered = array_values(array_filter($resultDataPelanggaranSantri['data'], function ($item) use ($id) {
                     return $item['id_reference'] === $id;
-                });
+                }));
                 $data_santri = $this->model('Data_Santri_Model')->getDataById($filtered[0]['id_santri']);
                 $data_pelanggaran = $this->model('Data_Pelanggaran_Model')->getDataById($filtered[0]['id_pelanggaran']);
                 $dataResult = [
@@ -158,7 +158,7 @@ class Dashboard extends Controller
                     'waktu' => $filtered[0]['waktu'],
                     'nama-pelanggaran' => $data_pelanggaran['data']['nama_pelanggaran'],
                 ];
-                foreach ($rslt['sub_kriteria'] as $krt) {
+                foreach ($filtered[0]['sub_kriteria'] as $krt) {
                     $data_subkriteria = $this->model('Data_Kriteria_Model')->getDataSubKriteriaById($krt['id_subkriteria']);
                     $data_kriteria = $this->model('Data_Kriteria_Model')->getDataKriteriaById($data_subkriteria['data']['id_kriteria']);
                     $dataResult['kriteria'][$data_kriteria['data']['kriteria']] = $data_subkriteria['data']['sub_kriteria'];
@@ -211,7 +211,7 @@ class Dashboard extends Controller
     }
     public function editData($id)
     {
-        $result = $this->model('Data_Pelanggaran_Santri_Model')->editPelanggaranSantri($_POST, $id);
+        $result = $this->model('Dashboard_Model')->editDataPenilaian($_POST, $id);
         if ($result['status'] === 200) {
             Flasher::setFlash('Ubah Data Pelanggaran Santri', 'Berhasil', 'success');
 
@@ -224,7 +224,7 @@ class Dashboard extends Controller
     }
     public function deleteData($id)
     {
-        $result = $this->model('Data_Pelanggaran_Santri_Model')->deletePelanggaranSantri($id);
+        $result = $this->model('Dashboard_Model')->deleteDataPenilaian($id);
         if ($result['status'] === 200) {
             Flasher::setFlash('Hapus Data Pelanggaran Santri', 'Berhasil', 'success');
 
