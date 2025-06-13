@@ -1,6 +1,5 @@
 <?php
 date_default_timezone_set('Asia/Jakarta');
-
 $originalDate = $data['detail-pelanggaran-santri']['waktu']; // Contoh tanggal
 $dateTime = new DateTime($originalDate);
 $formattedDate = $dateTime->format('l d F Y');
@@ -10,12 +9,6 @@ $tahun_ajaran = $data['detail-pelanggaran-santri']['tahun-ajaran'];
 $alamat = $data['detail-pelanggaran-santri']['alamat'];
 $nama_pelanggaran = $data['detail-pelanggaran-santri']['nama-pelanggaran'];
 $waktu = $formattedDate;
-// $kategori = $data['detail-pelanggaran-santri']['kategori-pelanggaran'];
-// $frekuensi = $data['detail-pelanggaran-santri']['frekuensi'];
-// $dampak = $data['detail-pelanggaran-santri']['dampak'];
-// $keseriusan = $data['detail-pelanggaran-santri']['keseriusan'];
-// $permohonan = $data['detail-pelanggaran-santri']['permohonan'];
-// $sanksi = $data['detail-pelanggaran-santri']['sanksi'];
 $color_pelanggaran_and_sanksi = [
     "Ringan" => 'text-yellow-500',
     "Sedang" => 'text-orange-400',
@@ -46,30 +39,11 @@ $color_pelanggaran_and_sanksi = [
                     <td class="py-4 pr-4 text-slate-600">Waktu Melakukan</td>
                     <td class=" font-semibold"><?= $waktu ?></td>
                 </tr>
-                <!-- <tr>
-                    <td class="py-4 pr-4 text-slate-600">Kategori Pelanggaran</td>
-                    <td class=" font-semibold <?= $color_pelanggaran_and_sanksi[$kategori] ?>"><?= $kategori ?></td>
-                </tr> -->
-                <!-- <tr>
-                    <td class="py-4 pr-4 text-slate-600">Frekuensi Pelanggaran</td>
-                    <td class=" font-semibold"><?= $frekuensi ?></td>
-                </tr> -->
-                <!-- <tr>
-                    <td class="py-4 pr-4 text-slate-600">Dampak pelanggaran</td>
-                    <td class=" font-semibold"><?= $dampak ?></td>
-                </tr> -->
-                <!-- <tr>
-                    <td class="py-4 pr-4 text-slate-600">Keseriusan Niat</td>
-                    <td class=" font-semibold"><?= $keseriusan ?></td>
-                </tr> -->
-                <!-- <tr>
-                    <td class="py-4 pr-4 text-slate-600">Permohonan Maaf</td>
-                    <td class=" font-semibold"><?= $permohonan ?></td>
-                </tr> -->
-                <!-- <tr>
-                    <td class="py-4 pr-4 text-slate-600">Sanksi</td>
-                    <td class="text-red-500 font-semibold"><?= $sanksi ?></td>
-                </tr> -->
+                <?php foreach ($data['detail-pelanggaran-santri']['kriteria'] as $kriteria => $sub_kriteria) : ?>
+                    <td class="py-4 pr-4 text-slate-600"><?= $kriteria ?></td>
+                    <td class=" font-semibold "><?= $sub_kriteria ?></td>
+                    </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
 

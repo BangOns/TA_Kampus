@@ -113,33 +113,7 @@ class Dashboard extends Controller
 
             $data['data-pelanggar-santri'] = $newData;
         }
-        // if ($resultsPelanggaranSantri['status'] === 200 && !empty($resultsPelanggaranSantri['data'])) {
-        //     usort($resultsPelanggaranSantri['data'], function ($a, $b) {
-        //         return $b['nilai_akhir'] <=> $a['nilai_akhir'];
-        //     });
-        //     foreach ($resultsPelanggaranSantri['data'] as $index => $rslt) {
-        //         $get_sanksi = updateNilaiPelanggaranSantri($rslt['nilai_akhir'], $resultsDataSanksi['data']);
-        //         $data_santri = $this->model('Data_Santri_Model')->getDataById($rslt['id_santri']);
-        //         $data_sanksi = $resultsDataSanksi['data'][$get_sanksi];
-        //         $newData = [
-        //             'No' => $index += 1,
-        //             'id' => $rslt['id_pelanggaran_santri'],
-        //             'Nama Santri' => $data_santri['data']['nama_santri'],
-        //             'pelanggaran-dilakukan' => $rslt['nama_pelanggaran'],
-        //             'jenis' => $data['kriteria_pelanggaran']['jenis_pelanggaran'][$rslt['c1']],
-        //             'frekuensi' => $data['kriteria_pelanggaran']['frekuensi_pelanggaran'][$rslt['c2']],
-        //             'dampak' => $data['kriteria_pelanggaran']['dampak_pelanggaran'][$rslt['c3']],
-        //             'keseriusan' => $data['kriteria_pelanggaran']['keseriusan_niat'][$rslt['c4']],
-        //             'permohonan' => $data['kriteria_pelanggaran']['permohonan_maaf'][$rslt['c5']],
-        //             'Tahun Ajaran' => $data_santri['data']['tahun_ajaran'],
-        //             'Kelas' => $data_santri['data']['kelas'],
-        //             'Waktu' => $rslt['waktu'],
-        //             'Kategori Sanksi' => $data_sanksi['jenis_sanksi'],
 
-        //         ];
-        //         array_push($data['data-pelanggar'], $newData);
-        //     };
-        // }
         // get data for card Summary
         $data['data-card-summary'] = [];
         $data['data-santri'] = [];
@@ -174,7 +148,6 @@ class Dashboard extends Controller
                 $filtered = array_filter($resultDataPelanggaranSantri['data'], function ($item) use ($id) {
                     return $item['id_reference'] === $id;
                 });
-                var_dump($filtered);
                 $data_santri = $this->model('Data_Santri_Model')->getDataById($filtered[0]['id_santri']);
                 $data_pelanggaran = $this->model('Data_Pelanggaran_Model')->getDataById($filtered[0]['id_pelanggaran']);
                 $dataResult = [
@@ -185,6 +158,11 @@ class Dashboard extends Controller
                     'waktu' => $filtered[0]['waktu'],
                     'nama-pelanggaran' => $data_pelanggaran['data']['nama_pelanggaran'],
                 ];
+                foreach ($rslt['sub_kriteria'] as $krt) {
+                    $data_subkriteria = $this->model('Data_Kriteria_Model')->getDataSubKriteriaById($krt['id_subkriteria']);
+                    $data_kriteria = $this->model('Data_Kriteria_Model')->getDataKriteriaById($data_subkriteria['data']['id_kriteria']);
+                    $dataResult['kriteria'][$data_kriteria['data']['kriteria']] = $data_subkriteria['data']['sub_kriteria'];
+                }
             }
             $data['detail-pelanggaran-santri'] = $dataResult;
         }
