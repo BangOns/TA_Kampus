@@ -39,7 +39,7 @@ class Dashboard_Model extends Database
         try {
             $query = "SELECT * FROM $this->table WHERE id_reference = :id_reference ";
             $this->query($query);
-            $this->bind('id_reference', htmlspecialchars(intval($id)));
+            $this->bind('id_reference', htmlspecialchars($id));
             $result = $this->single();
             return Response(200, $result, "Berhasil get  Data Pelanggaran Santri");
         } catch (\Throwable $e) {

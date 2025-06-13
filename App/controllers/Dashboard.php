@@ -99,6 +99,7 @@ class Dashboard extends Controller
                 $data_santri = $this->model('Data_Santri_Model')->getDataById($rslt['id_santri']);
                 $row = [
                     'No' => $index + 1,
+                    'id' => $rslt['id_reference'],
                     'Nama Santri' => $data_santri['data']['nama_santri'],
                 ];
                 foreach ($rslt['sub_kriteria'] as $krt) {
@@ -166,8 +167,28 @@ class Dashboard extends Controller
         }
         // Get data for detail
         $data['detail-pelanggaran-santri'] = [];
+        if ($id) {
+            $dataResult = [];
+            $resultDataPelanggaranSantri = $this->model('Dashboard_Model')->getData();
+            if (isset($resultDataPelanggaranSantri['data'])) {
+                $filtered = array_filter($resultDataPelanggaranSantri['data'], function ($item) use ($id) {
+                    return $item['id_reference'] === $id;
+                });
+                var_dump($filtered);
+                $data_santri = $this->model('Data_Santri_Model')->getDataById($filtered[0]['id_santri']);
+                $data_pelanggaran = $this->model('Data_Pelanggaran_Model')->getDataById($filtered[0]['id_pelanggaran']);
+                $dataResult = [
+                    'nama-santri' => $data_santri['data']['nama_santri'],
+                    'kelas' => $data_santri['data']['kelas'],
+                    'tahun-ajaran' => $data_santri['data']['tahun_ajaran'],
+                    'alamat' => $data_santri['data']['alamat'],
+                    'waktu' => $filtered[0]['waktu'],
+                    'nama-pelanggaran' => $data_pelanggaran['data']['nama_pelanggaran'],
+                ];
+            }
+            $data['detail-pelanggaran-santri'] = $dataResult;
+        }
         // if ($id) {
-        //     $resultDataPelanggaranSantri = $this->model('Data_Pelanggaran_Santri_Model')->getDataById($id);
         //     if ($resultDataPelanggaranSantri['status'] === 200) {
         //         //
         //         $get_sanksi = updateNilaiPelanggaranSantri($resultDataPelanggaranSantri['data']['nilai_akhir'], $resultsDataSanksi['data']);
@@ -238,7 +259,7 @@ class Dashboard extends Controller
     }
     public function getDataAll()
     {
-        $resultsPelanggaranSantri = $this->model('Data_Pelanggaran_Santri_Model')->getDataAll();
+        $resultsPelanggaranSantri = $this->model('Dashboard_Model')->getData();
         $resultsDataSantri = $this->model('Data_Santri_Model')->getDataAll();
         $resultsDataSanksi = $this->model('Data_Sanksi_Model')->getDataAll();
         $resultsDataPelanggaran = $this->model('Data_Pelanggaran_Model')->getDataAll();

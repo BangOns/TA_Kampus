@@ -10,12 +10,12 @@ $tahun_ajaran = $data['detail-pelanggaran-santri']['tahun-ajaran'];
 $alamat = $data['detail-pelanggaran-santri']['alamat'];
 $nama_pelanggaran = $data['detail-pelanggaran-santri']['nama-pelanggaran'];
 $waktu = $formattedDate;
-$kategori = $data['detail-pelanggaran-santri']['kategori-pelanggaran'];
-$frekuensi = $data['detail-pelanggaran-santri']['frekuensi'];
-$dampak = $data['detail-pelanggaran-santri']['dampak'];
-$keseriusan = $data['detail-pelanggaran-santri']['keseriusan'];
-$permohonan = $data['detail-pelanggaran-santri']['permohonan'];
-$sanksi = $data['detail-pelanggaran-santri']['sanksi'];
+// $kategori = $data['detail-pelanggaran-santri']['kategori-pelanggaran'];
+// $frekuensi = $data['detail-pelanggaran-santri']['frekuensi'];
+// $dampak = $data['detail-pelanggaran-santri']['dampak'];
+// $keseriusan = $data['detail-pelanggaran-santri']['keseriusan'];
+// $permohonan = $data['detail-pelanggaran-santri']['permohonan'];
+// $sanksi = $data['detail-pelanggaran-santri']['sanksi'];
 $color_pelanggaran_and_sanksi = [
     "Ringan" => 'text-yellow-500',
     "Sedang" => 'text-orange-400',
@@ -46,43 +46,33 @@ $color_pelanggaran_and_sanksi = [
                     <td class="py-4 pr-4 text-slate-600">Waktu Melakukan</td>
                     <td class=" font-semibold"><?= $waktu ?></td>
                 </tr>
-                <tr>
+                <!-- <tr>
                     <td class="py-4 pr-4 text-slate-600">Kategori Pelanggaran</td>
                     <td class=" font-semibold <?= $color_pelanggaran_and_sanksi[$kategori] ?>"><?= $kategori ?></td>
-                </tr>
-                <tr>
+                </tr> -->
+                <!-- <tr>
                     <td class="py-4 pr-4 text-slate-600">Frekuensi Pelanggaran</td>
                     <td class=" font-semibold"><?= $frekuensi ?></td>
-                </tr>
-                <tr>
+                </tr> -->
+                <!-- <tr>
                     <td class="py-4 pr-4 text-slate-600">Dampak pelanggaran</td>
                     <td class=" font-semibold"><?= $dampak ?></td>
-                </tr>
-                <tr>
+                </tr> -->
+                <!-- <tr>
                     <td class="py-4 pr-4 text-slate-600">Keseriusan Niat</td>
                     <td class=" font-semibold"><?= $keseriusan ?></td>
-                </tr>
-                <tr>
+                </tr> -->
+                <!-- <tr>
                     <td class="py-4 pr-4 text-slate-600">Permohonan Maaf</td>
                     <td class=" font-semibold"><?= $permohonan ?></td>
-                </tr>
-                <tr>
+                </tr> -->
+                <!-- <tr>
                     <td class="py-4 pr-4 text-slate-600">Sanksi</td>
                     <td class="text-red-500 font-semibold"><?= $sanksi ?></td>
-                </tr>
+                </tr> -->
             </tbody>
         </table>
 
     </article>
-    <!-- <article class="w-full">
-        <header class=" text-base md:text-xl font-semibold">
-            <h2>Pelanggaran yang dilakukan :</h2>
-        </header>
-        <ul class=" text-xs md:text-base list-disc pl-5 space-y-3 mt-2">
-            <li>Terlambat</li>
-            <li>Merokok</li>
-            <li>Memakai seragam tidak rapi</li>
-        </ul>
 
-    </article> -->
 </article>
