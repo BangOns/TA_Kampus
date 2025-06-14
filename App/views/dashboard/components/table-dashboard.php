@@ -1,7 +1,6 @@
 <?php
 $datas = $data['data-pelanggar-santri'];
 $data_list = $data['list-table2'];
-var_dump($datas);
 if (isset($_POST["search"])) {
     $datas = array_filter($data['data-pelanggar-santri'], fn($item) => str_starts_with(strtolower($item['Nama Santri']), strtolower($_POST['search'])));
 };
@@ -79,7 +78,8 @@ $link_menu = [
                 foreach ($datas as $index => $row) {
                     echo '<tr class="bg-white">';
                     foreach ($data_list as $indexColumn => $column) {
-                        echo "<td class=' " . ($indexColumn == 0 ? "pl-2 py-3" : "") . ($indexColumn == 1 ? " font-semibold" : "") . "'>" . $row[$column] . '</td>';
+                        $value = isset($row[$column]) ? $row[$column] : 'tidak ada';
+                        echo "<td class='" . ($indexColumn == 0 ? "pl-2 py-3" : "") . ($indexColumn == 1 ? " font-semibold" : "") . "'>" . $value . '</td>';
                     }
                     if ($link_menu) {
                         echo "<td class='pr-1 relative'>
