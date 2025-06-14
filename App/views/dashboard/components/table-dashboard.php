@@ -4,7 +4,6 @@ $data_list = $data['list-table2'];
 if (isset($_POST["search"])) {
     $datas = array_filter($data['data-pelanggar-santri'], fn($item) => str_starts_with(strtolower($item['Nama Santri']), strtolower($_POST['search'])));
 };
-
 $link_menu = [
     [
         'href' => BASEURL . '/dashboard/detail/data-pelanggaran-santri',
@@ -102,8 +101,8 @@ $link_menu = [
                 }
 
                 echo '</tbody></table>';
-                // include dirname(__DIR__, 3) . '/views/templates/components/card-mobile/card-data-pelanggaran-santri.php';
-                // renderCardPelanggaranSantri($datas, $link_menu);
+                include dirname(__DIR__, 3) . '/views/templates/components/card-mobile/card-data-pelanggaran-santri.php';
+                renderCardPelanggaranSantri($datas, $link_menu);
             } else {
                 echo '<section class="w-full text-center ">
                 <p class="text-2xl font-semibold">Data Not Found X</p>

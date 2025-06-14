@@ -44,6 +44,11 @@ $color_pelanggaran_and_sanksi = [
                     <td class=" font-semibold "><?= $sub_kriteria ?></td>
                     </tr>
                 <?php endforeach; ?>
+                <?php foreach ($data['detail-pelanggaran-santri']['sanksi'] as $sanksi => $value) : ?>
+                    <td class="py-4 pr-4 text-slate-600"><?= $sanksi ?></td>
+                    <td class=" font-semibold "><?= $value ?></td>
+                    </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
 

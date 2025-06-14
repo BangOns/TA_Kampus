@@ -102,20 +102,27 @@ class Dashboard extends Controller
                     'No' => $index + 1,
                     'id' => $rslt['id_reference'],
                     'Nama Santri' => $data_santri['data']['nama_santri'],
+                    'kelas' => $data_santri['data']['kelas'],
+                    'tahun-ajaran' => $data_santri['data']['tahun_ajaran'],
                 ];
                 foreach ($rslt['sub_kriteria'] as $krt) {
                     $data_subkriteria = $this->model('Data_Kriteria_Model')->getDataSubKriteriaById($krt['id_subkriteria']);
                     $data_kriteria = $this->model('Data_Kriteria_Model')->getDataKriteriaById($data_subkriteria['data']['id_kriteria']);
                     $row[$data_kriteria['data']['kriteria']] = $data_subkriteria['data']['sub_kriteria'];
+                    $row['kriteria'][$data_kriteria['data']['kriteria']] = $data_subkriteria['data']['sub_kriteria'];
+
                     $getBobot[$data_kriteria['data']['kriteria']] = $data_subkriteria['data']['bobot_subkriteria'];
                 }
                 $nilai_akhir = sumPelanggaranSantriUpdate($resultDataKriteria['data'], $getBobot);
                 $merge_kategori_sanksi = updateNilaiPelanggaranSantri(floatval(number_format($nilai_akhir, 2)), $resultsDataSanksi['data']);
                 $data_sanksi = $resultsDataSanksi['data'][$merge_kategori_sanksi];
                 $row['Kategori Sanksi'] = $data_sanksi['jenis_sanksi'];
+                $row['Nilai Akhir'] = $nilai_akhir;
                 $newData[] = $row;
             }
-
+            usort($newData, function ($a, $b) {
+                return $b['Nilai Akhir'] <=> $a['Nilai Akhir'];
+            });
             $data['data-pelanggar-santri'] = $newData;
         }
 
@@ -167,7 +174,14 @@ class Dashboard extends Controller
                     $data_subkriteria = $this->model('Data_Kriteria_Model')->getDataSubKriteriaById($krt['id_subkriteria']);
                     $data_kriteria = $this->model('Data_Kriteria_Model')->getDataKriteriaById($data_subkriteria['data']['id_kriteria']);
                     $dataResult['kriteria'][$data_kriteria['data']['kriteria']] = $data_subkriteria['data']['sub_kriteria'];
+                    $getBobot[$data_kriteria['data']['kriteria']] = $data_subkriteria['data']['bobot_subkriteria'];
                 }
+                $nilai_akhir = sumPelanggaranSantriUpdate($resultDataKriteria['data'], $getBobot);
+                $merge_kategori_sanksi = updateNilaiPelanggaranSantri(floatval(number_format($nilai_akhir, 2)), $resultsDataSanksi['data']);
+                $data_sanksi = $resultsDataSanksi['data'][$merge_kategori_sanksi];
+                $dataResult['sanksi']['Kategori Sanksi'] = $data_sanksi['jenis_sanksi'];
+                $dataResult['sanksi']['Nilai Akhir'] = $nilai_akhir;
+                $dataResult['sanksi']['Deskripsi'] = $data_sanksi['deskripsi_sanksi'];
             }
             $data['detail-pelanggaran-santri'] = $dataResult;
         }

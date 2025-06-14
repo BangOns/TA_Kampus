@@ -14,7 +14,6 @@ function sumPelanggaranSantri($data)
 
 function sumPelanggaranSantriUpdate($dataAll, $data)
 {
-    // var_dump($data);
     $dataresult = [];
     $counter = [];
 
