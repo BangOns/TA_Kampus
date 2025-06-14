@@ -28,7 +28,7 @@ class Dashboard_Model extends Database
                     'id_subkriteria' => $item['id_subkriteria']
                 ];
             }
-            $result = array_values($result);
+            $result = array_values($result ?? []);
             return Response(200, $result, "Berhasil get data penilaian");
         } catch (\Throwable $th) {
             return Response(404, [], "Gagal get data penilaian");
@@ -92,9 +92,9 @@ class Dashboard_Model extends Database
             $this->query("DELETE FROM $this->table WHERE id_reference = :id_reference");
             $this->bind(':id_reference', $id_reference);
             $this->execute();
-            if (count($id_kriteria) !== count($nilai)) {
-                throw new \Exception("Jumlah kriteria dan nilai tidak sesuai");
-            }
+            // if (count($id_kriteria) !== count($nilai)) {
+            //     throw new \Exception("Jumlah kriteria dan nilai tidak sesuai");
+            // }
 
 
             // Kemudian lakukan INSERT seperti biasa
@@ -142,6 +142,30 @@ class Dashboard_Model extends Database
             $id_reference = htmlspecialchars($id);
             $this->query("DELETE FROM $this->table WHERE id_reference = :id_reference");
             $this->bind(':id_reference', $id_reference);
+            $this->execute();
+            return Response(200, [], "Berhasil Menghapus Data Penilaian");
+        } catch (\Throwable $th) {
+            return Response(404, [], "Gagal Menghapus Data Penilaian " . $th->getMessage() . " ");
+        }
+    }
+    public function deleteDataPenilaianIfKriteia($id)
+    {
+        try {
+            $id_kriteria = htmlspecialchars($id);
+            $this->query("DELETE FROM $this->table WHERE id_kriteria = :id_kriteria");
+            $this->bind(':id_kriteria', $id_kriteria);
+            $this->execute();
+            return Response(200, [], "Berhasil Menghapus Data Penilaian");
+        } catch (\Throwable $th) {
+            return Response(404, [], "Gagal Menghapus Data Penilaian " . $th->getMessage() . " ");
+        }
+    }
+    public function deleteDataPenilaianIfSubKriteria($id)
+    {
+        try {
+            $id_subkriteria = htmlspecialchars($id);
+            $this->query("DELETE FROM $this->table WHERE id_subkriteria = :id_subkriteria");
+            $this->bind(':id_subkriteria', $id_subkriteria);
             $this->execute();
             return Response(200, [], "Berhasil Menghapus Data Penilaian");
         } catch (\Throwable $th) {

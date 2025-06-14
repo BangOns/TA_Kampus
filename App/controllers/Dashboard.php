@@ -104,6 +104,8 @@ class Dashboard extends Controller
                 ];
                 foreach ($rslt['sub_kriteria'] as $krt) {
                     $data_subkriteria = $this->model('Data_Kriteria_Model')->getDataSubKriteriaById($krt['id_subkriteria']);
+                    // echo json_encode($data_subkriteria['data']);
+                    // sumPelanggaranSantriUpdate($data_subkriteria['data']['bobot_subkriteria']);
                     $data_kriteria = $this->model('Data_Kriteria_Model')->getDataKriteriaById($data_subkriteria['data']['id_kriteria']);
                     $row[$data_kriteria['data']['kriteria']] = $data_subkriteria['data']['sub_kriteria'];
                 }

@@ -48,7 +48,47 @@ class Data_Kriteria extends Controller
     public function tambahKriteria()
     {
         $result = $this->model('Data_Kriteria_Model')->AddKriteria($_POST);
+
+
         if ($result['status'] === 200) {
+            $resultDataPelanggaranSantri = $this->model('Dashboard_Model')->getData();
+            $resultKriteriaAll = $this->model('Data_Kriteria_Model')->getDataAllKriteria();
+            if ($resultKriteriaAll['status'] === 200 && count($resultDataPelanggaranSantri['data']) !== 0) {
+                $uniqueIds = array_unique(array_column($resultKriteriaAll['data'], 'id_kriteria'));
+                $dataUpdate = [];
+                foreach ($resultDataPelanggaranSantri['data'] as $item) {
+                    $dataUntukInsert = array_values(array_filter($uniqueIds, function ($id) use ($item) {
+                        $existingIds = array_column($item['kriteria'], 'id_kriteria');
+                        return !in_array($id, $existingIds);
+                    }));
+                    $nilai = [];
+                    foreach ($item['sub_kriteria'] as $key => $value) {
+
+                        $resultKriteriaById = $this->model('Data_Kriteria_Model')->getDataSubKriteriaById($value['id_subkriteria']);
+                        $nilai[] = $value['id_subkriteria'] . '|' . $resultKriteriaById['data']['bobot_subkriteria'];
+                    }
+                    $resultKriteriaById = $this->model('Data_Kriteria_Model')->getDataSubKriteriaByIdKriteria($dataUntukInsert[0]);
+
+                    $nilai[] = $resultKriteriaById['data']['id_subkriteria'] . '|' . $resultKriteriaById['data']['bobot_subkriteria'];
+                    $dataUpdate = [
+                        'id_santri' => $item['id_santri'],
+                        'nama_pelanggaran' => $item['id_pelanggaran'],
+                        'waktu' => $item['waktu'],
+                        'id_kriteria' => array_values(array_unique(array_column($resultKriteriaAll['data'], 'id_kriteria'))),
+                        'nilai' => $nilai,
+                    ];
+                }
+                $resultUpdatedata = $this->model('Dashboard_Model')->editDataPenilaian($dataUpdate, $item['id_reference']);
+                if ($resultUpdatedata['status'] === 200) {
+                    Flasher::setFlash('Tambah Data Kriteria', 'Berhasil', 'success');
+
+                    $this->redirect('/data_kriteria');
+                } else {
+                    Flasher::setFlash('Tambah Data Kriteria', 'Gagal', 'error');
+
+                    $this->redirect('/data_kriteria');
+                }
+            }
             Flasher::setFlash('Tambah Data kriteria', 'Berhasil', 'success');
 
             $this->redirect('/data_kriteria');
@@ -92,13 +132,20 @@ class Data_Kriteria extends Controller
 
     public function deleteKriteriaById($id)
     {
-        $result = $this->model('Data_Kriteria_Model')->deleteKriteria($id);
-        if ($result['status'] === 200) {
-            Flasher::setFlash('Hapus Data Kriteria', 'Berhasil', 'success');
+        $resultDataPenilaian = $this->model('Dashboard_Model')->deleteDataPenilaianIfKriteia($id);
+        if ($resultDataPenilaian['status'] === 200) {
+            $result = $this->model('Data_Kriteria_Model')->deleteKriteria($id);
+            if ($result['status'] === 200) {
+                Flasher::setFlash('Hapus Data Kriteria', 'Berhasil', 'success');
 
-            $this->redirect('/data_kriteria');
+                $this->redirect('/data_kriteria');
+            } else {
+                Flasher::setFlash('Hapus Data Kriteria', 'Gagal', 'error');
+
+                $this->redirect('/data_kriteria');
+            }
         } else {
-            Flasher::setFlash('Hapus Data Kriteria', 'Gagal', 'error');
+            Flasher::setFlash('Ubah Data Kriteria', 'Gagal', 'error');
 
             $this->redirect('/data_kriteria');
         }
@@ -152,13 +199,20 @@ class Data_Kriteria extends Controller
     }
     public function deleteSubKriteriaById($id_subkriteria)
     {
-        $result = $this->model('Data_Kriteria_Model')->deleteSubKriteria($id_subkriteria);
-        if ($result['status'] === 200) {
-            Flasher::setFlash('Tambah Data Sub Kriteria', 'Berhasil', 'success');
+        $resultDataPenilaian = $this->model('Dashboard_Model')->deleteDataPenilaianIfSubKriteria($id_subkriteria);
+        if ($resultDataPenilaian['status'] === 200) {
+            $result = $this->model('Data_Kriteria_Model')->deleteSubKriteria($id_subkriteria);
+            if ($result['status'] === 200) {
+                Flasher::setFlash('Hapus Data Sub Kriteria', 'Berhasil', 'success');
 
-            $this->redirect('/data_kriteria');
+                $this->redirect('/data_kriteria');
+            } else {
+                Flasher::setFlash('Hapus Data Sub Kriteria', 'Gagal', 'error');
+
+                $this->redirect('/data_kriteria');
+            }
         } else {
-            Flasher::setFlash('Hapus Data Kriteria', 'Gagal', 'error');
+            Flasher::setFlash('Hapus Data Sub Kriteria', 'Gagal', 'error');
 
             $this->redirect('/data_kriteria');
         }

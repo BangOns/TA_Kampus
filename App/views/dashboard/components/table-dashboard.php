@@ -1,6 +1,7 @@
 <?php
 $datas = $data['data-pelanggar-santri'];
 $data_list = $data['list-table2'];
+var_dump($datas);
 if (isset($_POST["search"])) {
     $datas = array_filter($data['data-pelanggar-santri'], fn($item) => str_starts_with(strtolower($item['Nama Santri']), strtolower($_POST['search'])));
 };

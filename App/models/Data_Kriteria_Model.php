@@ -126,6 +126,18 @@ LEFT JOIN data_subkriteria
             return Response(404, [], "Gagal get data kriteria");
         }
     }
+    public function getDataSubKriteriaByIdKriteria($id)
+    {
+        try {
+            $query = 'SELECT * FROM ' . $this->table_subkriteria . ' WHERE id_kriteria = :id_kriteria';
+            $this->query($query);
+            $this->bind('id_kriteria', intval($id));
+            $result =  $this->single();
+            return Response(200, $result, "Berhasil get data kriteria");
+        } catch (\Throwable $th) {
+            return Response(404, [], "Gagal get data kriteria");
+        }
+    }
     public function addSubKriteria($data, $id)
     {
         try {

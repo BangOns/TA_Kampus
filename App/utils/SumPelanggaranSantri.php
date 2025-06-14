@@ -12,6 +12,11 @@ function sumPelanggaranSantri($data)
     return $sumNilaiAkhir;
 }
 
+function sumPelanggaranSantriUpdate($data)
+{
+    var_dump($data);
+}
+
 function updateNilaiPelanggaranSantri($nilai_akhir, $data_sanksi)
 {
 
