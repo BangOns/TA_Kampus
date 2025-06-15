@@ -15,6 +15,7 @@ function buttonToggleMenu(menu) {
 }
 function buttonToggleMenuMobile(menu) {
   const menuElement = getElementExist(menu);
+
   if (menuElement.classList.contains("hidden")) {
     menuElement.classList.remove("hidden");
     menuElement.classList.add("flex");

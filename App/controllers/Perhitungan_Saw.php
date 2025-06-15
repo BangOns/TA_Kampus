@@ -71,11 +71,17 @@ class Perhitungan_Saw extends Controller
         }
         // Data Alternatif
         $data['data-alternatif2'] = [];
+        $data['data-alternatif-mobile'] = [];
         if ($resultDataSantriPelanggar['status'] === 200) {
             $newData = [];
+            $newDataMobile = [];
             foreach ($resultDataSantriPelanggar['data'] as $index => $rslt) {
                 $data_santri = $this->model('Data_Santri_Model')->getDataById($rslt['id_santri']);
                 $row = [
+                    'No' => $index + 1,
+                    'Nama Santri' => $data_santri['data']['nama_santri'],
+                ];
+                $row_mobile = [
                     'No' => $index + 1,
                     'Nama Santri' => $data_santri['data']['nama_santri'],
                 ];
@@ -83,18 +89,23 @@ class Perhitungan_Saw extends Controller
                     $data_subkriteria = $this->model('Data_Kriteria_Model')->getDataSubKriteriaById($krt['id_subkriteria']);
                     $data_kriteria = $this->model('Data_Kriteria_Model')->getDataKriteriaById($data_subkriteria['data']['id_kriteria']);
                     $row[$data_kriteria['data']['kriteria']] = $data_subkriteria['data']['sub_kriteria'];
+                    $row_mobile['kriteria'][$data_kriteria['data']['kriteria']] = $data_subkriteria['data']['sub_kriteria'];
                 }
                 $newData[] = $row;
+                $newDataMobile[] = $row_mobile;
             }
 
             $data['data-alternatif2'] = $newData;
+            $data['data-alternatif-mobile'] = $newDataMobile;
         }
 
 
         // Nilai Alternatif 
         $data['data-matriks'] = [];
+        $data['data-matriks-mobile'] = [];
         if ($resultDataSantriPelanggar['status'] === 200) {
             $newData = [];
+            $newDataMoble = [];
             $counter = [];
             foreach ($resultDataSantriPelanggar['data'] as $index => $rslt) {
                 $data_santri = $this->model('Data_Santri_Model')->getDataById($rslt['id_santri']);
@@ -102,25 +113,38 @@ class Perhitungan_Saw extends Controller
                     'No' => $index + 1,
                     'Nama Santri' => $data_santri['data']['nama_santri'],
                 ];
+                $row_mobile = [
+                    'No' => $index + 1,
+                    'Nama Santri' => $data_santri['data']['nama_santri'],
+                ];
                 foreach ($rslt['sub_kriteria'] as $krt) {
                     $data_subkriteria = $this->model('Data_Kriteria_Model')->getDataSubKriteriaById($krt['id_subkriteria']);
                     $data_kriteria = $this->model('Data_Kriteria_Model')->getDataKriteriaById($data_subkriteria['data']['id_kriteria']);
                     $row[$data_kriteria['data']['kriteria']] = sumMatriksKeputusan($data_kriteria['data']['jenis_kriteria'], $data_subkriteria['data']['bobot_subkriteria'], $getLengthKriteria[intval($data_subkriteria['data']['id_kriteria'])]);
+                    $row_mobile['kriteria'][$data_kriteria['data']['kriteria']] = sumMatriksKeputusan($data_kriteria['data']['jenis_kriteria'], $data_subkriteria['data']['bobot_subkriteria'], $getLengthKriteria[intval($data_subkriteria['data']['id_kriteria'])]);
                 }
                 $newData[] = $row;
+                $newDataMoble[] = $row_mobile;
             }
 
             $data['data-matriks'] = $newData;
+            $data['data-matriks-mobile'] = $newDataMoble;
         }
 
 
         // Data Hasil Normalisasi 
         $data['data-normalisasi'] = [];
+        $data['data-normalisasi-mobile'] = [];
         if ($resultDataSantriPelanggar['status'] === 200) {
             $newData = [];
+            $newDataMobile = [];
             foreach ($resultDataSantriPelanggar['data'] as $index => $rslt) {
                 $data_santri = $this->model('Data_Santri_Model')->getDataById($rslt['id_santri']);
                 $row = [
+                    'No' => $index + 1,
+                    'Nama Santri' => $data_santri['data']['nama_santri'],
+                ];
+                $row_mobile = [
                     'No' => $index + 1,
                     'Nama Santri' => $data_santri['data']['nama_santri'],
                 ];
@@ -128,11 +152,14 @@ class Perhitungan_Saw extends Controller
                     $data_subkriteria = $this->model('Data_Kriteria_Model')->getDataSubKriteriaById($krt['id_subkriteria']);
                     $data_kriteria = $this->model('Data_Kriteria_Model')->getDataKriteriaById($data_subkriteria['data']['id_kriteria']);
                     $row[$data_kriteria['data']['kriteria']] = sumNormalisasi($data_kriteria['data']['jenis_kriteria'], $data_subkriteria['data']['bobot_subkriteria'], $data_kriteria['data']['bobot_kriteria'], $getLengthKriteria[intval($data_subkriteria['data']['id_kriteria'])]);
+                    $row_mobile['kriteria'][$data_kriteria['data']['kriteria']] = sumNormalisasi($data_kriteria['data']['jenis_kriteria'], $data_subkriteria['data']['bobot_subkriteria'], $data_kriteria['data']['bobot_kriteria'], $getLengthKriteria[intval($data_subkriteria['data']['id_kriteria'])]);
                 }
                 $newData[] = $row;
+                $newDataMobile[] = $row_mobile;
             }
 
             $data['data-normalisasi'] = $newData;
+            $data['data-normalisasi-mobile'] = $newDataMobile;
         }
 
         $data['type'] = $type;

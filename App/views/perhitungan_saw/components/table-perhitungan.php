@@ -11,8 +11,8 @@
                 include_once __DIR__ . '/render-perhitungan.php';
                 renderTablePerhitungan($data['data-alternatif2'], $data['list-table2']);
                 // Card Pelanggar
-                // include_once __DIR__ . '/views/templates/components/card-mobile/card-data-normalisasi.php';
-                // renderCardDataAlternatif($data['data-alternatif']);
+                include_once dirname(__DIR__, 3) . '/views/templates/components/card-mobile/card-data-normalisasi.php';
+                renderCardDataAlternatif($data['data-alternatif-mobile']);
             } else {
                 echo '<section class="w-full text-center ">
             <p class="text-2xl font-semibold">Data Not Found X</p>
@@ -29,8 +29,8 @@
                 include_once __DIR__ . '/render-perhitungan.php';
                 renderTablePerhitungan($data['data-matriks'], $data['list-table2']);
                 // Card Pelanggar
-                // include_once dirname(__DIR__, 3) . '/views/templates/components/card-mobile/card-data-normalisasi.php';
-                // renderCardDataNilaiAlternatif($data['data-nilai-alternatif']);
+                include_once dirname(__DIR__, 3) . '/views/templates/components/card-mobile/card-data-normalisasi.php';
+                renderCardDataNilaiAlternatif($data['data-matriks-mobile']);
             } else {
                 echo '<section class="w-full text-center ">
             <p class="text-2xl font-semibold">Data Not Found X</p>
@@ -47,8 +47,8 @@
                 include_once __DIR__ . '/render-perhitungan.php';
                 renderTablePerhitungan($data['data-normalisasi'], $data['list-table2']);
                 // Card Pelanggar
-                // include_once dirname(__DIR__, 3) . '/views/templates/components/card-mobile/card-data-normalisasi.php';
-                // renderCardDataNilaiNormalisasi($data['data-nilai-normalisasi']);
+                include_once dirname(__DIR__, 3) . '/views/templates/components/card-mobile/card-data-normalisasi.php';
+                renderCardDataNilaiNormalisasi($data['data-normalisasi-mobile']);
             } else {
                 echo '<section class="w-full text-center ">
             <p class="text-2xl font-semibold">Data Not Found X</p>
