@@ -9,16 +9,7 @@ class Dashboard extends Controller
         }
 
         $data['title'] = 'Dashboard';
-        $data['list-table'] = [
-            'No',
-            'Nama Santri',
-            'jenis',
-            'frekuensi',
-            'dampak',
-            'keseriusan',
-            'permohonan',
-            'Kategori Sanksi'
-        ];
+
 
         $data['type'] = $type;
         $data['action'] = $action;
@@ -55,8 +46,8 @@ class Dashboard extends Controller
         // Get data All
         $resultsPelanggaranSantri = $this->model('Data_Pelanggaran_Santri_Model')->getDataAll();
         $resultsDataSantri = $this->model('Data_Santri_Model')->getDataAll();
-        $resultsDataSanksi = $this->model('Data_Sanksi_Model')->getDataAll();
         $resultsDataPelanggaran = $this->model('Data_Pelanggaran_Model')->getDataAll();
+        $resultsDataSanksi = $this->model('Data_Sanksi_Model')->getDataAll();
         $resultDataKriteria = $this->model('Data_Kriteria_Model')->getDataAllKriteria();
         $resultDataSantriPelanggar = $this->model('Dashboard_Model')->getData();
 
@@ -91,7 +82,6 @@ class Dashboard extends Controller
             $data['data-input-kriteria'] = $dataresultInput;
         }
         $data['list-table2'][] = 'Kategori Sanksi';
-        $data['data-pelanggar'] = [];
         $data['data-pelanggar-santri'] = [];
         if ($resultDataSantriPelanggar['status'] === 200) {
             $newData = [];
@@ -185,30 +175,7 @@ class Dashboard extends Controller
             }
             $data['detail-pelanggaran-santri'] = $dataResult;
         }
-        // if ($id) {
-        //     if ($resultDataPelanggaranSantri['status'] === 200) {
-        //         //
-        //         $get_sanksi = updateNilaiPelanggaranSantri($resultDataPelanggaranSantri['data']['nilai_akhir'], $resultsDataSanksi['data']);
-        //         $data_santri = $this->model('Data_Santri_Model')->getDataById($resultDataPelanggaranSantri['data']['id_santri']);
-        //         $data_sanksi = $resultsDataSanksi['data'][$get_sanksi];
-        //         //
-        //         $data_detail_pelanggaran_santri = [
-        //             'nama-santri' => $data_santri['data']['nama_santri'],
-        //             'kelas' => $data_santri['data']['kelas'],
-        //             'tahun-ajaran' => $data_santri['data']['tahun_ajaran'],
-        //             'alamat' => $data_santri['data']['alamat'],
-        //             'nama-pelanggaran' => $resultDataPelanggaranSantri['data']['nama_pelanggaran'],
-        //             'waktu' => $resultDataPelanggaranSantri['data']['waktu'],
-        //             'kategori-pelanggaran' => $data['kriteria_pelanggaran']['jenis_pelanggaran'][$resultDataPelanggaranSantri['data']['c1']],
-        //             'frekuensi' => $data['kriteria_pelanggaran']['frekuensi_pelanggaran'][$resultDataPelanggaranSantri['data']['c2']],
-        //             'dampak' => $data['kriteria_pelanggaran']['dampak_pelanggaran'][$resultDataPelanggaranSantri['data']['c3']],
-        //             'keseriusan' => $data['kriteria_pelanggaran']['keseriusan_niat'][$resultDataPelanggaranSantri['data']['c4']],
-        //             'permohonan' => $data['kriteria_pelanggaran']['permohonan_maaf'][$resultDataPelanggaranSantri['data']['c5']],
-        //             'sanksi' => $data_sanksi['deskripsi_sanksi'],
-        //         ];
-        //         $data['detail-pelanggaran-santri'] = $data_detail_pelanggaran_santri;
-        //     }
-        // }
+
         $this->view('templates/header', $data);
         $this->view('templates/components/navbar', $data);
         $this->view('dashboard/index', $data);

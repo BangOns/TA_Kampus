@@ -12,6 +12,26 @@ function sumPelanggaranSantri($data)
     return $sumNilaiAkhir;
 }
 
+function sumMatriksKeputusan($type, $bobot, $length)
+{
+    if (strtolower($type) === 'benefit') {
+        return $length / $bobot;
+    } else {
+        return $bobot / $length;
+    }
+}
+function sumNormalisasi($type, $bobot, $bobot_kriteria, $length)
+{
+    $sumMatriks = 0;
+    if (strtolower($type) === 'benefit') {
+        $sumMatriks = $length / $bobot;
+    } else {
+        $sumMatriks = $bobot / $length;
+    }
+
+    return $sumMatriks * floatval(number_format($bobot_kriteria / 10, 3));
+}
+
 function sumPelanggaranSantriUpdate($dataAll, $data)
 {
     $dataresult = [];
@@ -51,9 +71,9 @@ function sumPelanggaranSantriUpdate($dataAll, $data)
     foreach ($dataresult as $item) {
         if (isset($data[$item['kriteria']])) {
             if ($item['jenis_kriteria'] == 'benefit') {
-                $hasil[] = ($item['length_kriteria'] / $data[$item['kriteria']]) * ($item['bobot_kriteria'] / 10);
+                $hasil[] = ($item['length_kriteria'] / $data[$item['kriteria']]) * floatval(number_format($item['bobot_kriteria'] / 10, 3));
             } else {
-                $hasil[] = ($data[$item['kriteria']] / $item['length_kriteria']) * ($item['bobot_kriteria'] / 10);
+                $hasil[] = ($data[$item['kriteria']] / $item['length_kriteria']) * floatval(number_format($item['bobot_kriteria'] / 10, 3));
             }
         }
     }

@@ -10,15 +10,7 @@ class Perhitungan_Saw extends Controller
             header('Location: ' . BASEURL . '/auth');
             exit;
         }
-        $data['list-table'] = [
-            'No',
-            'Nama',
-            'jenis',
-            'frekuensi',
-            'dampak',
-            'keseriusan',
-            'permohonan',
-        ];
+
         $data['kriteria_pelanggaran'] = [
             'jenis_pelanggaran' => [
                 '1' => 'Berat',
@@ -46,80 +38,103 @@ class Perhitungan_Saw extends Controller
                 '3' => 'Tidak ada',
             ],
         ];
-        $resultsPelanggaranSantri = $this->model('Data_Pelanggaran_Santri_Model')->getDataAll();
-        // Data Alternatif
-        $data['data-alternatif'] = [];
-        if ($resultsPelanggaranSantri['status'] === 200 && !empty($resultsPelanggaranSantri['data'])) {
-            foreach ($resultsPelanggaranSantri['data'] as $index => $rslt) {
-
-                $data_santri = $this->model('Data_Santri_Model')->getDataById($rslt['id_santri']);
-                $newData = [
-                    'No' => $index += 1,
-                    'id' => $rslt['id_pelanggaran_santri'],
-                    'Nama' => $data_santri['data']['nama_santri'],
-                    'pelanggaran-dilakukan' => $rslt['nama_pelanggaran'],
-                    'jenis' => $data['kriteria_pelanggaran']['jenis_pelanggaran'][$rslt['c1']],
-                    'frekuensi' => $data['kriteria_pelanggaran']['frekuensi_pelanggaran'][$rslt['c2']],
-                    'dampak' => $data['kriteria_pelanggaran']['dampak_pelanggaran'][$rslt['c3']],
-                    'keseriusan' => $data['kriteria_pelanggaran']['keseriusan_niat'][$rslt['c4']],
-                    'permohonan' => $data['kriteria_pelanggaran']['permohonan_maaf'][$rslt['c5']],
-                    'Tahun Ajaran' => $data_santri['data']['tahun_ajaran'],
-                    'Kelas' => $data_santri['data']['kelas'],
-                    'Waktu' => $rslt['waktu'],
-
-                ];
-                array_push($data['data-alternatif'], $newData);
-            };
+        $data['list-table2'] = ['No', 'Nama Santri'];
+        $resultDataKriteria = $this->model('Data_Kriteria_Model')->getDataAllKriteria();
+        $resultDataSantriPelanggar = $this->model('Dashboard_Model')->getData();
+        $getLengthKriteria = [];
+        if ($resultDataKriteria['status'] === 200) {
+            $result = [];
+            $counter = [];
+            foreach ($resultDataKriteria['data'] as $item) {
+                $key = $item['id_kriteria'];
+                // Hitung berapa kali id_kriteria muncul
+                if (!isset($counter[$key])) {
+                    $counter[$key] = 1;
+                } else {
+                    $counter[$key]++;
+                }
+                if (!isset($result[$key])) {
+                    $result[$key] = [
+                        'kriteria' => $item['kriteria'],
+                        'id_kriteria' => $item['id_kriteria'],
+                    ];
+                }
+            }
+            foreach ($result as $key => &$res) {
+                $getLengthKriteria[$res['id_kriteria']] = $counter[$key];
+            }
+            $dataresult = array_values($result);
+            foreach ($dataresult as $key => $value) {
+                $data['list-table2'][] = $value['kriteria'];
+            }
+            $data['kriteria'] = $dataresult;
         }
+        // Data Alternatif
+        $data['data-alternatif2'] = [];
+        if ($resultDataSantriPelanggar['status'] === 200) {
+            $newData = [];
+            foreach ($resultDataSantriPelanggar['data'] as $index => $rslt) {
+                $data_santri = $this->model('Data_Santri_Model')->getDataById($rslt['id_santri']);
+                $row = [
+                    'No' => $index + 1,
+                    'Nama Santri' => $data_santri['data']['nama_santri'],
+                ];
+                foreach ($rslt['sub_kriteria'] as $krt) {
+                    $data_subkriteria = $this->model('Data_Kriteria_Model')->getDataSubKriteriaById($krt['id_subkriteria']);
+                    $data_kriteria = $this->model('Data_Kriteria_Model')->getDataKriteriaById($data_subkriteria['data']['id_kriteria']);
+                    $row[$data_kriteria['data']['kriteria']] = $data_subkriteria['data']['sub_kriteria'];
+                }
+                $newData[] = $row;
+            }
+
+            $data['data-alternatif2'] = $newData;
+        }
+
 
         // Nilai Alternatif 
-        $data['data-nilai-alternatif'] = [];
-        if ($resultsPelanggaranSantri['status'] === 200 && !empty($resultsPelanggaranSantri['data'])) {
-            foreach ($resultsPelanggaranSantri['data'] as $index => $rslt) {
-
+        $data['data-matriks'] = [];
+        if ($resultDataSantriPelanggar['status'] === 200) {
+            $newData = [];
+            $counter = [];
+            foreach ($resultDataSantriPelanggar['data'] as $index => $rslt) {
                 $data_santri = $this->model('Data_Santri_Model')->getDataById($rslt['id_santri']);
-                $newData = [
-                    'No' => $index += 1,
-                    'id' => $rslt['id_pelanggaran_santri'],
-                    'Nama' => $data_santri['data']['nama_santri'],
-                    'jenis' => round(self::$skala_bobot_cost / $rslt['c1'], 2),
-                    'frekuensi' => round(self::$skala_bobot_cost / $rslt['c2'], 2),
-                    'dampak' => round(self::$skala_bobot_cost / $rslt['c3'], 2),
-                    'keseriusan' => round(self::$skala_bobot_cost / $rslt['c4'], 2),
-                    'permohonan' => round($rslt['c5'] / self::$skala_bobot_benefit, 2),
-
-
+                $row = [
+                    'No' => $index + 1,
+                    'Nama Santri' => $data_santri['data']['nama_santri'],
                 ];
-                array_push($data['data-nilai-alternatif'], $newData);
-            };
+                foreach ($rslt['sub_kriteria'] as $krt) {
+                    $data_subkriteria = $this->model('Data_Kriteria_Model')->getDataSubKriteriaById($krt['id_subkriteria']);
+                    $data_kriteria = $this->model('Data_Kriteria_Model')->getDataKriteriaById($data_subkriteria['data']['id_kriteria']);
+                    $row[$data_kriteria['data']['kriteria']] = sumMatriksKeputusan($data_kriteria['data']['jenis_kriteria'], $data_subkriteria['data']['bobot_subkriteria'], $getLengthKriteria[intval($data_subkriteria['data']['id_kriteria'])]);
+                }
+                $newData[] = $row;
+            }
+
+            $data['data-matriks'] = $newData;
         }
+
 
         // Data Hasil Normalisasi 
-        $data['data-nilai-normalisasi'] = [];
-        $c1 = 0.30;
-        $c2 = 0.25;
-        $c3 = 0.20;
-        $c4 = 0.15;
-        $c5 = 0.10;
-        if ($resultsPelanggaranSantri['status'] === 200 && !empty($resultsPelanggaranSantri['data'])) {
-            foreach ($resultsPelanggaranSantri['data'] as $index => $rslt) {
-
+        $data['data-normalisasi'] = [];
+        if ($resultDataSantriPelanggar['status'] === 200) {
+            $newData = [];
+            foreach ($resultDataSantriPelanggar['data'] as $index => $rslt) {
                 $data_santri = $this->model('Data_Santri_Model')->getDataById($rslt['id_santri']);
-                $newData = [
-                    'No' => $index += 1,
-                    'id' => $rslt['id_pelanggaran_santri'],
-                    'Nama' => $data_santri['data']['nama_santri'],
-                    'pelanggaran-dilakukan' => $rslt['nama_pelanggaran'],
-                    'jenis' =>  round((self::$skala_bobot_cost / ($rslt['c1']) * $c1), 2),
-                    'frekuensi' => round((self::$skala_bobot_cost / ($rslt['c2']) * $c2), 2),
-                    'dampak' => round((self::$skala_bobot_cost / ($rslt['c3']) * $c3), 2),
-                    'keseriusan' => round((self::$skala_bobot_cost / ($rslt['c4']) * $c4), 2),
-                    'permohonan' => round((($rslt['c5'] / 3) * $c5), 2),
-
+                $row = [
+                    'No' => $index + 1,
+                    'Nama Santri' => $data_santri['data']['nama_santri'],
                 ];
-                array_push($data['data-nilai-normalisasi'], $newData);
-            };
+                foreach ($rslt['sub_kriteria'] as $krt) {
+                    $data_subkriteria = $this->model('Data_Kriteria_Model')->getDataSubKriteriaById($krt['id_subkriteria']);
+                    $data_kriteria = $this->model('Data_Kriteria_Model')->getDataKriteriaById($data_subkriteria['data']['id_kriteria']);
+                    $row[$data_kriteria['data']['kriteria']] = sumNormalisasi($data_kriteria['data']['jenis_kriteria'], $data_subkriteria['data']['bobot_subkriteria'], $data_kriteria['data']['bobot_kriteria'], $getLengthKriteria[intval($data_subkriteria['data']['id_kriteria'])]);
+                }
+                $newData[] = $row;
+            }
+
+            $data['data-normalisasi'] = $newData;
         }
+
         $data['type'] = $type;
         $data['action'] = $action;
         $data['id'] = htmlspecialchars($id);

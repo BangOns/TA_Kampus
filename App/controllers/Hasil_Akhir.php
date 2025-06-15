@@ -11,8 +11,8 @@ class Hasil_Akhir extends Controller
         }
         $data['list-table'] = [
             'No',
-            'Nama',
-            'nilai akhir',
+            'Nama Santri',
+            'Nilai Akhir',
             'Kategori Sanksi'
         ];
         $data['kriteria_pelanggaran'] = [
@@ -42,29 +42,67 @@ class Hasil_Akhir extends Controller
                 '3' => 'Meminta Maaf',
             ],
         ];
-        $resultsPelanggaranSantri = $this->model('Data_Pelanggaran_Santri_Model')->getDataAll();
-        // Nilai Alternatif 
-        $data['data-matriks'] = [];
-        $resultsDataSanksi = $this->model('Data_Sanksi_Model')->getDataAll();
-        if ($resultsPelanggaranSantri['status'] === 200 && !empty($resultsPelanggaranSantri['data'])) {
-            usort($resultsPelanggaranSantri['data'], function ($a, $b) {
-                return $b['nilai_akhir'] <=> $a['nilai_akhir'];
-            });
-            foreach ($resultsPelanggaranSantri['data'] as $index => $rslt) {
-                $get_sanksi = updateNilaiPelanggaranSantri($rslt['nilai_akhir'], $resultsDataSanksi['data']);
-                $data_santri = $this->model('Data_Santri_Model')->getDataById($rslt['id_santri']);
-                $data_sanksi = $resultsDataSanksi['data'][$get_sanksi];
 
-                $newData = [
-                    'No' => $index += 1,
-                    'id' => $rslt['id_pelanggaran_santri'],
-                    'Nama' => $data_santri['data']['nama_santri'],
-                    'nilai akhir' => $rslt['nilai_akhir'],
-                    'Kategori Sanksi' => $data_sanksi['jenis_sanksi'],
+        $resultsDataSanksi = $this->model('Data_Sanksi_Model')->getDataAll();
+        $resultDataKriteria = $this->model('Data_Kriteria_Model')->getDataAllKriteria();
+        $resultDataSantriPelanggar = $this->model('Dashboard_Model')->getData();
+        $data['data-hasil-akhir'] = [];
+
+        if ($resultDataSantriPelanggar['status'] === 200) {
+            $newData = [];
+            $getBobot = [];
+            foreach ($resultDataSantriPelanggar['data'] as $index => $rslt) {
+                $data_santri = $this->model('Data_Santri_Model')->getDataById($rslt['id_santri']);
+                $row = [
+                    'No' => $index + 1,
+                    'Nama Santri' => $data_santri['data']['nama_santri'],
                 ];
-                array_push($data['data-matriks'], $newData);
-            };
+                foreach ($rslt['sub_kriteria'] as $krt) {
+                    $data_subkriteria = $this->model('Data_Kriteria_Model')->getDataSubKriteriaById($krt['id_subkriteria']);
+                    $data_kriteria = $this->model('Data_Kriteria_Model')->getDataKriteriaById($data_subkriteria['data']['id_kriteria']);
+                    $row[$data_kriteria['data']['kriteria']] = $data_subkriteria['data']['sub_kriteria'];
+                    $row['kriteria'][$data_kriteria['data']['kriteria']] = $data_subkriteria['data']['sub_kriteria'];
+
+                    $getBobot[$data_kriteria['data']['kriteria']] = $data_subkriteria['data']['bobot_subkriteria'];
+                }
+                $nilai_akhir = sumPelanggaranSantriUpdate($resultDataKriteria['data'], $getBobot);
+                $merge_kategori_sanksi = updateNilaiPelanggaranSantri(floatval(number_format($nilai_akhir, 2)), $resultsDataSanksi['data']);
+                $data_sanksi = $resultsDataSanksi['data'][$merge_kategori_sanksi];
+                $row['Kategori Sanksi'] = $data_sanksi['jenis_sanksi'];
+                $row['Nilai Akhir'] = $nilai_akhir;
+                $newData[] = $row;
+            }
+            usort($newData, function ($a, $b) {
+                return $b['Nilai Akhir'] <=> $a['Nilai Akhir'];
+            });
+            foreach ($newData as $index => &$item) {
+                $item['No'] = $index + 1;
+            }
+            $data['data-hasil-akhir'] = $newData;
         }
+        // $resultsPelanggaranSantri = $this->model('Data_Pelanggaran_Santri_Model')->getDataAll();
+        // Nilai Alternatif 
+        // $data['data-matriks'] = [];
+        // $resultsDataSanksi = $this->model('Data_Sanksi_Model')->getDataAll();
+        // if ($resultsPelanggaranSantri['status'] === 200 && !empty($resultsPelanggaranSantri['data'])) {
+        //     usort($resultsPelanggaranSantri['data'], function ($a, $b) {
+        //         return $b['nilai_akhir'] <=> $a['nilai_akhir'];
+        //     });
+        //     foreach ($resultsPelanggaranSantri['data'] as $index => $rslt) {
+        //         $get_sanksi = updateNilaiPelanggaranSantri($rslt['nilai_akhir'], $resultsDataSanksi['data']);
+        //         $data_santri = $this->model('Data_Santri_Model')->getDataById($rslt['id_santri']);
+        //         $data_sanksi = $resultsDataSanksi['data'][$get_sanksi];
+
+        //         $newData = [
+        //             'No' => $index += 1,
+        //             'id' => $rslt['id_pelanggaran_santri'],
+        //             'Nama' => $data_santri['data']['nama_santri'],
+        //             'nilai akhir' => $rslt['nilai_akhir'],
+        //             'Kategori Sanksi' => $data_sanksi['jenis_sanksi'],
+        //         ];
+        //         array_push($data['data-matriks'], $newData);
+        //     };
+        // }
         $data['type'] = $type;
         $data['action'] = $action;
         $data['id'] = htmlspecialchars($id);

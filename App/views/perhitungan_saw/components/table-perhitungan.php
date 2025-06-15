@@ -7,12 +7,12 @@
                 <h1 class="text-lg">Data Alternatif</h1>
             </header>
             <!-- Table Pelanggar -->
-            <?php if (count($data['data-alternatif']) !== 0) {
-                include dirname(__DIR__, 3) . '/views/templates/components/table-data.php';
-                renderTable($data['data-alternatif'], $data['list-table']);
+            <?php if (count($data['data-alternatif2']) !== 0) {
+                include_once __DIR__ . '/render-perhitungan.php';
+                renderTablePerhitungan($data['data-alternatif2'], $data['list-table2']);
                 // Card Pelanggar
-                include_once dirname(__DIR__, 3) . '/views/templates/components/card-mobile/card-data-normalisasi.php';
-                renderCardDataAlternatif($data['data-alternatif']);
+                // include_once __DIR__ . '/views/templates/components/card-mobile/card-data-normalisasi.php';
+                // renderCardDataAlternatif($data['data-alternatif']);
             } else {
                 echo '<section class="w-full text-center ">
             <p class="text-2xl font-semibold">Data Not Found X</p>
@@ -25,12 +25,12 @@
                 <h1 class="text-lg">Matriks Normalisasi</h1>
             </header>
             <!-- Table Pelanggar -->
-            <?php if (count($data['data-nilai-alternatif']) !== 0) {
-                include_once dirname(__DIR__, 3) . '/views/templates/components/table-data.php';
-                renderTable($data['data-nilai-alternatif'], $data['list-table']);
+            <?php if (count($data['data-matriks']) !== 0) {
+                include_once __DIR__ . '/render-perhitungan.php';
+                renderTablePerhitungan($data['data-matriks'], $data['list-table2']);
                 // Card Pelanggar
-                include_once dirname(__DIR__, 3) . '/views/templates/components/card-mobile/card-data-normalisasi.php';
-                renderCardDataNilaiAlternatif($data['data-nilai-alternatif']);
+                // include_once dirname(__DIR__, 3) . '/views/templates/components/card-mobile/card-data-normalisasi.php';
+                // renderCardDataNilaiAlternatif($data['data-nilai-alternatif']);
             } else {
                 echo '<section class="w-full text-center ">
             <p class="text-2xl font-semibold">Data Not Found X</p>
@@ -43,12 +43,12 @@
                 <h1 class="text-lg">Hasil Normalisasi</h1>
             </header>
             <!-- Table Pelanggar -->
-            <?php if (count($data['data-nilai-normalisasi']) !== 0) {
-                include_once dirname(__DIR__, 3) . '/views/templates/components/table-data.php';
-                renderTable($data['data-nilai-normalisasi'], $data['list-table']);
+            <?php if (count($data['data-normalisasi']) !== 0) {
+                include_once __DIR__ . '/render-perhitungan.php';
+                renderTablePerhitungan($data['data-normalisasi'], $data['list-table2']);
                 // Card Pelanggar
-                include_once dirname(__DIR__, 3) . '/views/templates/components/card-mobile/card-data-normalisasi.php';
-                renderCardDataNilaiNormalisasi($data['data-nilai-normalisasi']);
+                // include_once dirname(__DIR__, 3) . '/views/templates/components/card-mobile/card-data-normalisasi.php';
+                // renderCardDataNilaiNormalisasi($data['data-nilai-normalisasi']);
             } else {
                 echo '<section class="w-full text-center ">
             <p class="text-2xl font-semibold">Data Not Found X</p>
