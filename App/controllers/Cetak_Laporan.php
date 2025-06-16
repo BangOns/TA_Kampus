@@ -187,18 +187,75 @@ class Cetak_Laporan extends Controller
         $data['data-santri'] = [];
         $data['formatDate'] = $this->formatDate;
 
-        $resultsPelanggaranSantri = $this->model('Data_Pelanggaran_Santri_Model')->getDataAll();
-        $resultsDataSantri = $this->model('Data_Santri_Model')->getDataAll();
+        // $resultsPelanggaranSantri = $this->model('Data_Pelanggaran_Santri_Model')->getDataAll();
+        // $resultsDataSantri = $this->model('Data_Santri_Model')->getDataAll();
+        $resultDataKriteria = $this->model('Data_Kriteria_Model')->getDataAllKriteria();
+        $resultDataSantriPelanggar = $this->model('Dashboard_Model')->getData();
+        $resultsDataSanksi = $this->model('Data_Sanksi_Model')->getDataAll();
 
-        if (($resultsPelanggaranSantri['status'] === 200 && !empty($resultsPelanggaranSantri['data']))
-            && ($resultsDataSantri['status'] === 200 && !empty($resultsDataSantri['data']))
-        ) {
-            usort($resultsPelanggaranSantri['data'], function ($a, $b) {
-                return $b['nilai_akhir'] <=> $a['nilai_akhir'];
-            });
-            $data['data-pelanggaran-santri'] = $resultsPelanggaranSantri['data'];
-            $data['data-santri'] = $resultsDataSantri['data'];
+        $data['list-table2'] = ['No', 'Nama Santri', 'Pelanggaran'];
+        if ($resultDataKriteria['status'] === 200) {
+            $result = [];
+            foreach ($resultDataKriteria['data'] as $item) {
+                $key = $item['kriteria'];
+                if (!isset($result[$key])) {
+                    $result[$key] = [
+                        'kriteria' => $item['kriteria'],
+                        'id_kriteria' => $item['id_kriteria'],
+                    ];
+                }
+            }
+            $dataresult = array_values($result);
+            foreach ($dataresult as $key => $value) {
+                $data['list-table2'][] = 'C' . ($key + 1);
+            }
+            $data['kriteria'] = $dataresult;
         }
+        $data['list-table2'][] = 'Kategori Sanksi';
+
+        $data['data-pelanggaran-santri'] = [];
+        if ($resultDataSantriPelanggar['status'] === 200) {
+            $newData = [];
+            $getBobot = [];
+            foreach ($resultDataSantriPelanggar['data'] as $index => $rslt) {
+                $data_santri = $this->model('Data_Santri_Model')->getDataById($rslt['id_santri']);
+                $data_pelanggaran = $this->model('Data_Pelanggaran_Model')->getDataById($rslt['id_pelanggaran']);
+
+                $row = [
+                    'No' => $index + 1,
+                    'Nama Santri' => $data_santri['data']['nama_santri'],
+                    'Pelanggaran' => $data_pelanggaran['data']['nama_pelanggaran'],
+                ];
+                foreach ($rslt['sub_kriteria'] as $index => $krt) {
+                    $data_subkriteria = $this->model('Data_Kriteria_Model')->getDataSubKriteriaById($krt['id_subkriteria']);
+                    $data_kriteria = $this->model('Data_Kriteria_Model')->getDataKriteriaById($data_subkriteria['data']['id_kriteria']);
+                    $row["C" . ($index + 1)] = $data_subkriteria['data']['sub_kriteria'];
+                    // $row['kriteria'][$data_kriteria['data']['kriteria']] = $data_subkriteria['data']['sub_kriteria'];
+
+                    $getBobot[$data_kriteria['data']['kriteria']] = $data_subkriteria['data']['bobot_subkriteria'];
+                }
+                $nilai_akhir = sumPelanggaranSantriUpdate($resultDataKriteria['data'], $getBobot);
+                $merge_kategori_sanksi = updateNilaiPelanggaranSantri(floatval(number_format($nilai_akhir, 2)), $resultsDataSanksi['data']);
+                $data_sanksi = $resultsDataSanksi['data'][$merge_kategori_sanksi];
+                $row['Kategori Sanksi'] = $data_sanksi['jenis_sanksi'];
+                $row['Nilai Akhir'] = $nilai_akhir;
+                $newData[] = $row;
+            }
+            usort($newData, function ($a, $b) {
+                return $b['Nilai Akhir'] <=> $a['Nilai Akhir'];
+            });
+            $data['data-pelanggaran-santri'] = $newData;
+        }
+
+        // if (($resultsPelanggaranSantri['status'] === 200 && !empty($resultsPelanggaranSantri['data']))
+        //     && ($resultsDataSantri['status'] === 200 && !empty($resultsDataSantri['data']))
+        // ) {
+        //     usort($resultsPelanggaranSantri['data'], function ($a, $b) {
+        //         return $b['nilai_akhir'] <=> $a['nilai_akhir'];
+        //     });
+        //     $data['data-pelanggaran-santri'] = $resultsPelanggaranSantri['data'];
+        //     $data['data-santri'] = $resultsDataSantri['data'];
+        // }
         ob_start();
         $data['pengurus_pondok'] = [
             "nama_pengurus" => "Sulaeman Haekal",
@@ -355,9 +412,13 @@ class Cetak_Laporan extends Controller
         // Inisialisasi mPDF
         $mpdf = new Mpdf(
             [
-                'default_font' => 'Arial'
+                'default_font' => 'Arial',
+                'tempDir' => sys_get_temp_dir(),
             ]
         );
+        // Set gambar
+        $mpdf->basepath = realpath(dirname(__DIR__, 3)) . '/public/';
+
         $mpdf->SetFont('Arial');
         // Load HTML ke mPDF
         $mpdf->WriteHTML($html);

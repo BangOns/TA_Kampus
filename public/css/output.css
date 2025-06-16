@@ -867,10 +867,6 @@ video {
   resize: both;
 }
 
-.list-disc {
-  list-style-type: disc;
-}
-
 .flex-row-reverse {
   flex-direction: row-reverse;
 }
@@ -1197,10 +1193,6 @@ video {
 
 .pl-4 {
   padding-left: 1rem;
-}
-
-.pl-5 {
-  padding-left: 1.25rem;
 }
 
 .pr-1 {
