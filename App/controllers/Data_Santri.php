@@ -81,11 +81,18 @@ class Data_Santri extends Controller
     }
     public function deleteData($id)
     {
-        $result = $this->model('Data_Santri_Model')->deleteSantri($id);
-        if ($result['status'] === 200) {
-            Flasher::setFlash('Hapus Data Santri', 'Berhasil', 'success');
+        $resultDataPenilaian = $this->model('Dashboard_Model')->deleteDataPenilaianIfSantri($id);
+        if ($resultDataPenilaian['status'] === 200) {
+            $result = $this->model('Data_Santri_Model')->deleteSantri($id);
+            if ($result['status'] === 200) {
+                Flasher::setFlash('Hapus Data Santri', 'Berhasil', 'success');
 
-            $this->redirect('/data_santri');
+                $this->redirect('/data_santri');
+            } else {
+                Flasher::setFlash('Hapus Data Santri', 'Gagal', 'error');
+
+                $this->redirect('/data_santri');
+            }
         } else {
             Flasher::setFlash('Hapus Data Santri', 'Gagal', 'error');
 

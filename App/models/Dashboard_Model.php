@@ -172,4 +172,16 @@ class Dashboard_Model extends Database
             return Response(404, [], "Gagal Menghapus Data Penilaian " . $th->getMessage() . " ");
         }
     }
+    public function deleteDataPenilaianIfSantri($id)
+    {
+        try {
+            $id_santri = htmlspecialchars($id);
+            $this->query("DELETE FROM $this->table WHERE id_santri = :id_santri");
+            $this->bind(':id_santri', $id_santri);
+            $this->execute();
+            return Response(200, [], "Berhasil Menghapus Data Penilaian");
+        } catch (\Throwable $th) {
+            return Response(404, [], "Gagal Menghapus Data Penilaian " . $th->getMessage() . " ");
+        }
+    }
 }
