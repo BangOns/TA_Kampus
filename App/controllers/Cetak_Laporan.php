@@ -187,8 +187,6 @@ class Cetak_Laporan extends Controller
         $data['data-santri'] = [];
         $data['formatDate'] = $this->formatDate;
 
-        // $resultsPelanggaranSantri = $this->model('Data_Pelanggaran_Santri_Model')->getDataAll();
-        // $resultsDataSantri = $this->model('Data_Santri_Model')->getDataAll();
         $resultDataKriteria = $this->model('Data_Kriteria_Model')->getDataAllKriteria();
         $resultDataSantriPelanggar = $this->model('Dashboard_Model')->getData();
         $resultsDataSanksi = $this->model('Data_Sanksi_Model')->getDataAll();
@@ -230,7 +228,6 @@ class Cetak_Laporan extends Controller
                     $data_subkriteria = $this->model('Data_Kriteria_Model')->getDataSubKriteriaById($krt['id_subkriteria']);
                     $data_kriteria = $this->model('Data_Kriteria_Model')->getDataKriteriaById($data_subkriteria['data']['id_kriteria']);
                     $row["C" . ($index + 1)] = $data_subkriteria['data']['sub_kriteria'];
-                    // $row['kriteria'][$data_kriteria['data']['kriteria']] = $data_subkriteria['data']['sub_kriteria'];
 
                     $getBobot[$data_kriteria['data']['kriteria']] = $data_subkriteria['data']['bobot_subkriteria'];
                 }
@@ -247,15 +244,7 @@ class Cetak_Laporan extends Controller
             $data['data-pelanggaran-santri'] = $newData;
         }
 
-        // if (($resultsPelanggaranSantri['status'] === 200 && !empty($resultsPelanggaranSantri['data']))
-        //     && ($resultsDataSantri['status'] === 200 && !empty($resultsDataSantri['data']))
-        // ) {
-        //     usort($resultsPelanggaranSantri['data'], function ($a, $b) {
-        //         return $b['nilai_akhir'] <=> $a['nilai_akhir'];
-        //     });
-        //     $data['data-pelanggaran-santri'] = $resultsPelanggaranSantri['data'];
-        //     $data['data-santri'] = $resultsDataSantri['data'];
-        // }
+
         ob_start();
         $data['pengurus_pondok'] = [
             "nama_pengurus" => "Sulaeman Haekal",
@@ -274,6 +263,7 @@ class Cetak_Laporan extends Controller
             ]
         );
         $mpdf->SetFont('Arial');
+
         // Load HTML ke mPDF
         $mpdf->WriteHTML($html);
 
@@ -282,118 +272,37 @@ class Cetak_Laporan extends Controller
     }
     public function laporan_data_kriteria()
     {
+
         $data['list-table'] = [
-            'No',
             'Nama',
             'Bobot',
         ];
-        $data['kriteria_pelanggaran'] = [
-            [
-                'nama' => 'jenis_pelanggaran',
-                'items' => [
-                    [
-                        'No' => '1',
-                        'Nama' => 'Berat',
-                        'Bobot' => '1'
-                    ],
-                    [
-                        'No' => '2',
-                        'Nama' => 'Sedang',
-                        'Bobot' => '2'
-                    ],
-                    [
-                        'No' => '3',
-                        'Nama' => 'Ringan',
-                        'Bobot' => '3'
-                    ],
+        $data['kriteria'] = [];
+        $data['sub_kriteria'] = [];
 
-                ]
-            ],
-            [
-                'nama' => 'frekuensi_pelanggaran',
-                'items' => [
-                    [
-                        'No' => '1',
-                        'Nama' => '3 kali >',
-                        'Bobot' => '1'
-                    ],
-                    [
-                        'No' => '2',
-                        'Nama' => '2 kali',
-                        'Bobot' => '2'
-                    ],
-                    [
-                        'No' => '3',
-                        'Nama' => '1kali',
-                        'Bobot' => '3'
-                    ],
+        $resultDataKriteria = $this->model('Data_Kriteria_Model')->getDataAllKriteria();
+        $resultDataSubKriteria = $this->model('Data_Kriteria_Model')->getDataAllSubkriteria();
+        if ($resultDataKriteria['status'] === 200) {
+            $result = [];
+            foreach ($resultDataKriteria['data'] as $item) {
+                $key = $item['kriteria'];
+                if (!isset($result[$key])) {
+                    $result[$key] = [
+                        'kriteria' => $item['kriteria'],
+                        'jenis_kriteria' => $item['jenis_kriteria'],
+                        'id_kriteria' => $item['id_kriteria'],
+                        'items' => []
+                    ];
+                }
+                $result[$key]['items'][] = $item;
+            }
+            $data['kriteria'] = array_values($result);
+        }
+        if ($resultDataSubKriteria['status'] === 200) {
+            $data['sub_kriteria'] = $resultDataSubKriteria['data'];
+        }
 
-                ]
-            ],
-            [
-                'nama' => 'dampak_pelanggaran',
-                'items' => [
-                    [
-                        'No' => '1',
-                        'Nama' => 'Berat',
-                        'Bobot' => '1'
-                    ],
-                    [
-                        'No' => '2',
-                        'Nama' => 'Sedang',
-                        'Bobot' => '2'
-                    ],
-                    [
-                        'No' => '3',
-                        'Nama' => 'Ringan',
-                        'Bobot' => '3'
-                    ],
 
-                ]
-            ],
-            [
-                'nama' => 'keseriusan_niat',
-                'items' => [
-                    [
-                        'No' => '1',
-                        'Nama' => 'Sengaja',
-                        'Bobot' => '1'
-                    ],
-                    [
-                        'No' => '2',
-                        'Nama' => 'Kurang Sengaja',
-                        'Bobot' => '2'
-                    ],
-                    [
-                        'No' => '3',
-                        'Nama' => 'Tidak Sengaja',
-                        'Bobot' => '3'
-                    ],
-
-                ]
-            ],
-            [
-                'nama' => 'permohonan_maaf',
-                'items' => [
-                    [
-                        'No' => '1',
-                        'Nama' => 'Meminta Maaf',
-                        'Bobot' => '1'
-                    ],
-                    [
-                        'No' => '2',
-                        'Nama' => 'Tidak Tulus',
-                        'Bobot' => '2'
-                    ],
-                    [
-                        'No' => '3',
-                        'Nama' => 'Tidak ada',
-                        'Bobot' => '3'
-                    ],
-
-                ],
-            ]
-        ];
         ob_start();
         $data['pengurus_pondok'] = [
             "nama_pengurus" => "Sulaeman Haekal",
@@ -406,18 +315,13 @@ class Cetak_Laporan extends Controller
         $this->view('templates/footer');
         $html = ob_get_clean();
 
-        // Konfigurasi Dompdf
-
 
         // Inisialisasi mPDF
         $mpdf = new Mpdf(
             [
                 'default_font' => 'Arial',
-                'tempDir' => sys_get_temp_dir(),
             ]
         );
-        // Set gambar
-        $mpdf->basepath = realpath(dirname(__DIR__, 3)) . '/public/';
 
         $mpdf->SetFont('Arial');
         // Load HTML ke mPDF

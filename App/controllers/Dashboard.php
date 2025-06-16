@@ -51,7 +51,6 @@ class Dashboard extends Controller
         $resultDataKriteria = $this->model('Data_Kriteria_Model')->getDataAllKriteria();
         $resultDataSantriPelanggar = $this->model('Dashboard_Model')->getData();
 
-        // $data['data-update-pelanggaran-santri'] = $resultDataSantriPelanggar['data'];
         $data['kriteria'] = [];
         $data['data-input-kriteria'] = [];
         $data['list-table2'] = ['No', 'Nama Santri'];

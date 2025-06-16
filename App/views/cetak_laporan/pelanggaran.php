@@ -10,10 +10,14 @@ $formatter = new IntlDateFormatter(
     'EEEE dd MMMM yyyy'
 );
 $tanggal = $formatter->format(new DateTime());
+$path = dirname(__DIR__, 3) . '/public/icons/icons-ash.svg';
+$type = pathinfo($path, PATHINFO_EXTENSION);
+$datas = file_get_contents($path);
+$base64 = 'data:image/' . $type . ';base64,' . base64_encode($datas);
 ?>
 <header style="width: 100%; align-items: center; ">
     <section class="w-[10%] float-left" style="width: 10%; float: left;">
-        <img src="http://localhost/takampus/public/img/icons-logo.png" width="50" height="50" alt="banner-auth">
+        <img src="<?= $base64 ?>" width="90" height="90" alt="banner-auth">
     </section>
     <section class="w-[90%] float-right text-center">
         <h1 class="text-2xl uppercase font-bold ">

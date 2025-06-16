@@ -1,6 +1,15 @@
+<?php
+
+$data_table_kriteria = $data['kriteria'];
+$path = dirname(__DIR__, 3) . '/public/icons/icons-ash.svg';
+$type = pathinfo($path, PATHINFO_EXTENSION);
+$img_logo = file_get_contents($path);
+$base64 = 'data:image/' . $type . ';base64,' . base64_encode($img_logo);
+?>
 <header style="width: 100%; align-items: center; ">
     <section class="w-[10%] float-left" style="width: 10%; float: left;">
-        <img src="http://localhost/takampus/public/img/icons-logo.png" width="50" height="50" alt="banner-auth">
+        <img src="<?= $base64 ?>" width="90" height="90" alt="banner-auth">
+
     </section>
     <section class="w-[90%] float-right text-center">
         <h1 class="text-2xl uppercase font-bold ">
@@ -18,34 +27,47 @@
         <h1 style="font-weight: 800;">
             <?= ucwords(preg_replace("/[-_]/", " ", $data["title"]));  ?></h1>
     </header>
-    <?php foreach ($data['kriteria_pelanggaran'] as $key => $value) : ?>
-        <article class="mt-1">
-            <h1
-                class=" text-start  text-lg font-semibold">
-                <?= ucwords(preg_replace("/[-_]/", " ", $value["nama"]));  ?>
+    <?php foreach ($data_table_kriteria as $key => $value): ?>
+        <section class="w-full  my-4 max-md:gap-2">
+            <h1 class=" text-left font-semibold">
+                <?= ucwords(preg_replace("/[-_]/", " ", $value["kriteria"])) ?> - (<?= ucwords(preg_replace("/[-_]/", " ", $value["jenis_kriteria"])) ?>)
             </h1>
-            <table border="1" width="100%" cellspacing="0" cellpadding="5" class="mt-2">
+        </section>
 
-                <thead>
+
+        <?php if ($value['items'][0]['id_subkriteria'] === null): ?>
+            <section class="w-full  text-center ">
+                <p class="text-2xl font-semibold">Data Not Found X</p>
+            </section>
+        <?php else: ?>
+            <table border="1" width="100%" cellspacing="0" cellpadding="5">
+                <thead class="text-black ">
                     <tr>
-                        <th>No</th>
-                        <th>Nama</th>
-                        <th>Bobot</th>
+                        <?php foreach ($data['list-table'] as $columnIndex => $value_column): ?>
+                            <th class="text-start <?= $columnIndex == 0 ? 'pl-2 py-2' : '' ?> font-semibold">
+                                <?= $value_column ?>
+                            </th>
+                        <?php endforeach; ?>
                     </tr>
                 </thead>
-                <tbody>
-                    <?php foreach ($value['items'] as $index => $item) : ?>
-                        <tr>
-                            <td><?= $index += 1 ?></td>
-                            <td><?= $item['Nama']; ?></td>
-                            <td><?= $item['Bobot']; ?></td>
+                <tbody class="divide-y divide-gray-200">
+                    <?php foreach ($value['items'] as $index => $row): ?>
+                        <tr style="background-color: #fff;">
+                            <?php foreach ($data['list-table'] as $indexColumn => $column): ?>
+                                <td class="<?= $indexColumn == 0 ? 'pl-2 py-3' : '' ?>">
+                                    <?= $row[$column] ?>
+                                </td>
+                            <?php endforeach; ?>
+
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
-        <?php endforeach; ?>
+        <?php endif; ?>
+    <?php endforeach; ?>
 
-        </article>
+
+    </article>
 </section>
 <footer
     class="w-full mt-5 float-right">

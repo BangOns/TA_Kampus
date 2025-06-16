@@ -80,29 +80,7 @@ class Hasil_Akhir extends Controller
             }
             $data['data-hasil-akhir'] = $newData;
         }
-        // $resultsPelanggaranSantri = $this->model('Data_Pelanggaran_Santri_Model')->getDataAll();
-        // Nilai Alternatif 
-        // $data['data-matriks'] = [];
-        // $resultsDataSanksi = $this->model('Data_Sanksi_Model')->getDataAll();
-        // if ($resultsPelanggaranSantri['status'] === 200 && !empty($resultsPelanggaranSantri['data'])) {
-        //     usort($resultsPelanggaranSantri['data'], function ($a, $b) {
-        //         return $b['nilai_akhir'] <=> $a['nilai_akhir'];
-        //     });
-        //     foreach ($resultsPelanggaranSantri['data'] as $index => $rslt) {
-        //         $get_sanksi = updateNilaiPelanggaranSantri($rslt['nilai_akhir'], $resultsDataSanksi['data']);
-        //         $data_santri = $this->model('Data_Santri_Model')->getDataById($rslt['id_santri']);
-        //         $data_sanksi = $resultsDataSanksi['data'][$get_sanksi];
 
-        //         $newData = [
-        //             'No' => $index += 1,
-        //             'id' => $rslt['id_pelanggaran_santri'],
-        //             'Nama' => $data_santri['data']['nama_santri'],
-        //             'nilai akhir' => $rslt['nilai_akhir'],
-        //             'Kategori Sanksi' => $data_sanksi['jenis_sanksi'],
-        //         ];
-        //         array_push($data['data-matriks'], $newData);
-        //     };
-        // }
         $data['type'] = $type;
         $data['action'] = $action;
         $data['id'] = htmlspecialchars($id);
